@@ -11,5 +11,15 @@
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\""
   },
   "author": "",
-  "license": "ISC"
+  "license": "ISC",
+  "dependencies": {
+    "body-parser": "^1.18.3",
+    "concurrently": "^3.6.0",
+    "cookie-session": "^2.0.0-beta.3",
+    "express": "^4.16.3",
+    "passport": "^0.4.0",
+    "passport-google-oauth20": "^1.0.0",
+    "path-parser": "^4.1.1",
+    "sendgrid": "^5.2.3"
+  }
 }
