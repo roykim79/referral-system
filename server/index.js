@@ -19,6 +19,7 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
+// COMMENT TEST
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   // like our main.js file, or main.css file!
