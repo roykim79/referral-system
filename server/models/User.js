@@ -5,7 +5,10 @@ const UserSchema = new mongoose.Schema({
   username: { type: String, lowercase: true, unique: true },
   hash: String,
   salt: String,
-  
+  organization: [{type: Schema.Types.ObjectId, ref: 'Organization'}],
+  role: { type: String, default: 'user' },
+  dateJoin: { type: Date, default: Date.now },
+  lastActive: { type: Date, default: Date.now }
 });
 
 UserSchema.methods.setPassword = function (password) {

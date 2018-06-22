@@ -26,5 +26,5 @@ module.exports = app => {
     // POST /login, if success redirect to /dashboard, if failed redirect to /landing
     app.post('api/login', passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/landing' }));
 
-        
+    
 }
