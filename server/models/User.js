@@ -1,14 +1,17 @@
 const mongoose = require('mongoose');
+const { Schema } = mongoose;
 const crypto = require('crypto');
 
-const UserSchema = new mongoose.Schema({
+const UserSchema = new Schema({
   username: { type: String, lowercase: true, unique: true },
   hash: String,
   salt: String,
-  organization: [{type: Schema.Types.ObjectId, ref: 'Organization'}],
+  email: { type: String, default: null },
+  organization: {type: Schema.Types.ObjectId, ref: 'Organization'},
   role: { type: String, default: 'user' },
   dateJoin: { type: Date, default: Date.now },
-  lastActive: { type: Date, default: Date.now }
+  lastActive: { type: Date, default: Date.now },
+  status: {type: String, default: 'pending' }
 });
 
 UserSchema.methods.setPassword = function (password) {
