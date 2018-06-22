@@ -1,5 +1,5 @@
 const passport = require('passport')
-const GoogleStrategy = require('passport-google-oauth20').Strategy
+const GoogleStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
 const keys = require('../config/keys')
 
@@ -21,10 +21,17 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-module.exports = app => {
-    
-    // POST /login, if success redirect to /dashboard, if failed redirect to /landing
-    app.post('api/login', passport.authenticate('local', { successRedirect: '/dashboard', failureRedirect: '/landing' }));
-
-    
-}
+passport.use('login', new LocalStrategy(
+  function(username, password, done) {
+    User.findOne({ username: username }, function (err, user) {
+      if (err) { return done(err); }
+      if (!user) {
+        return done(null, false, { message: 'Incorrect username/password.' });
+      }
+      if (!user.validPassword(password)) {
+        return done(null, false, { message: 'Incorrect username/password.' });
+      }
+      return done(null, user);
+    });
+  }
+));
