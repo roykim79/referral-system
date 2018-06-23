@@ -11,7 +11,7 @@ module.exports = app => {
         lastName: request.body.lastName,
         email: request.body.email,
         // organization: request.body.organization,
-        status: "success"        
+        status: "success" ,     
       })
 
       user.setPassword(request.body.password);
