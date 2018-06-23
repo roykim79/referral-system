@@ -25,7 +25,7 @@ module.exports = app => {
             if(error) {
                 return response.status(400).send("The organization was not found");
             }
-            response.send(user)
+            response.send(user.organization)
         })
     })
 
