@@ -7,12 +7,40 @@ const User = require('../models/User')
 //get api/tags
 
 module.exports = app => {
-    // gets organization info
-    app.get('/api/my_organization', (request, response) => {
-        response.send(request.organization)
+    // gets user by user id
+    app.get('/api/user/:user', (request, response) => {
+        User.findById({_id: request.params.user})
+        .exec((error, user) => {
+            if (error) {
+                return response.status(400).send("User not found");
+            }
+            response.send(user)
+        })
     })
 
-    // sends/updates organization info
+    // get organization by user id
+    app.get('/api/:user/organization', (request, response) => {
+        User.findById({_id: request.params.user})
+        .exec((error, user) => {
+            if(error) {
+                return response.status(400).send("The organization was not found");
+            }
+            response.send(user.organization)
+        })
+    })
+
+    // get organization by organization id
+    app.get('/api/organization/:organization', (request, response) => {
+        Organization.findById({_id: request.params.organization})
+        .exec((error, organization) => {
+            if(error) {
+                return response.status(400).send("The organization was not found");
+            }
+            response.send(organization)
+        })
+    })
+
+    // creates organization with a user as admin. 
     app.post('/api/create_org', (request, response) => {
         if (request.body && request.body.password) {
             let newOrganization = new Organization({
@@ -49,7 +77,7 @@ module.exports = app => {
 
             response.send({newOrganization, user}) 
         }   else {
-            return response.status(400).send("Unable to create organization, please try again.");
+            return response.status(400).send("Unable to create organization, please fill out required fields.");
         }
     })
 }
