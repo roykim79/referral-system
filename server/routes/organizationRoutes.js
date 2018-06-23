@@ -1,6 +1,7 @@
 const passport = require('passport');
 const Organization = require('../models/Organization');
 const User = require('../models/User')
+const Tags = require('../models/Tags');
 //for the tags. formatted into array of objects. {id:tag, text:tag}
 //tags auto populate
 //query database that are all unique
@@ -43,39 +44,63 @@ module.exports = app => {
     // creates organization with a user as admin. 
     app.post('/api/create_org', (request, response) => {
         if (request.body && request.body.password) {
-            let newOrganization = new Organization({
-                organizationName: request.body.organizationName,
-                description: request.body.description,
-                website: request.body.website,
-                email: request.body.organizationEmail,
-                phone: request.body.organizationPhone,
-                address: request.body.address,
-                tags: request.body.tags
-            })
+            let tempTags = [];
 
-            let user = new User({
-                username: request.body.username,
-                firstName: request.body.firstName,
-                lastName: request.body.lastName,
-                email: request.body.email,
-                organization: newOrganization.id,
-                status: "success",
-                role: "admin"        
-            })
+            if (Array.isArray(request.body.tags) && request.body.tags.length != 0 ) {
+                request.body.tags.forEach((tag) => {
+                    Tags.findOne({name: tag}, (err, result) => {
+                        if(err) throw err;
+                        if(result.id) {
+                            tempTags.push(result.id)
+                        } else {
+                            let newTag = new Tags({
+                                name: tag
+                            })
+    
+                            newTag.save((err) => {
+                                if (err) throw err
+                            });
+    
+                            tempTags.push(newTag.id);
+                        }
+    
+                    })
+                })
 
-            newOrganization.members.push(user.id);
-        
-            user.setPassword(request.body.password);
-        
-            user.save((err)=>{
-                if(err) throw err;
-            });
-
-            newOrganization.save((err) => {
-                if (err) throw err
-            })  
-
-            response.send({newOrganization, user}) 
+                let newOrganization = new Organization({
+                    organizationName: request.body.organizationName,
+                    description: request.body.description,
+                    website: request.body.website,
+                    email: request.body.organizationEmail,
+                    phone: request.body.organizationPhone,
+                    address: request.body.address,
+                    tags: tempTags
+                })
+    
+                let user = new User({
+                    username: request.body.username,
+                    firstName: request.body.firstName,
+                    lastName: request.body.lastName,
+                    email: request.body.email,
+                    organization: newOrganization.id,
+                    status: "success",
+                    role: "admin"        
+                })
+    
+                newOrganization.members.push(user.id);
+            
+                user.setPassword(request.body.password);
+            
+                user.save((err)=>{
+                    if(err) throw err;
+                });
+    
+                newOrganization.save((err) => {
+                    if (err) throw err
+                })  
+    
+                response.send({newOrganization, user}) 
+            }
         }   else {
             return response.status(400).send("Unable to create organization, please fill out required fields.");
         }
