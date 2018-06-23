@@ -9,16 +9,37 @@ const User = require('../models/User')
 module.exports = app => {
     // gets user by user id
     app.get('/api/user/:user', (request, response) => {
-            User.findById({_id: request.params.user})
-            .exec((error, user) => {
-                if (error) {
-                    return response.status(400).send("User not found");
-                }
-                response.send(user)
-            })
+        User.findById({_id: request.params.user})
+        .exec((error, user) => {
+            if (error) {
+                return response.status(400).send("User not found");
+            }
+            response.send(user)
+        })
     })
 
-    app.get('/api/organization/:organization')
+    // get organization by user id
+    app.get('/api/:user/organization', (request, response) => {
+        User.findById({_id: request.params.user})
+        .exec((error, user) => {
+            if(error) {
+                return response.status(400).send("The organization was not found");
+            }
+            response.send(user)
+        })
+    })
+
+    // get organization by organization id
+    app.get('/api/organization/:organization', (request, response) => {
+        Organization.findById({_id: request.params.organization})
+        .exec((error, organization) => {
+            if(error) {
+                return response.status(400).send("The organization was not found");
+            }
+            response.send(organization)
+        })
+    })
+
     // creates organization with a user as admin. 
     app.post('/api/create_org', (request, response) => {
         if (request.body && request.body.password) {
