@@ -3,7 +3,7 @@ const Organization = require('../models/Organization');
 const User = require('../models/User');
 
 module.exports = app => {
-    // sends/updates organization info
+    // create fake org and admin user
     app.get('/api/fake-data', (request, response) => {
             let newOrganization = new Organization({
                 organizationName: 'TestOrganization',
