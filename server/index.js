@@ -10,6 +10,12 @@ mongoose.connect(keys.mongoURI)
 const app = express()
 app.use(bodyParser.json());
 
+// ------ fake data generator, only works in dev mode ----- //
+if (process.env.NODE_ENV !== 'production'){
+  require('./routes/fakeloginRoute')(app);
+}
+
+
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,
