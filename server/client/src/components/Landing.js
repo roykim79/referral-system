@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import ROOT_URL from '../actions'
+import {ROOT_URL} from '../actions'
 
 class Landing extends Component{
     constructor(props){
@@ -30,3 +30,5 @@ class Landing extends Component{
         );
     }
 }
+
+export default Landing;
