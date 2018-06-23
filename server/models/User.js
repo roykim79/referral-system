@@ -10,7 +10,7 @@ const UserSchema = new Schema({
   salt: String,
   email: { type: String, required: true },
   phone: { type: Number },
-//   organization: { type: Schema.Types.ObjectId, ref: 'Organization', required: true},
+  organization: { type: Schema.Types.ObjectId, ref: 'Organization', required: true},
   role: { type: String, default: 'user' },
   dateJoin: { type: Date, default: Date.now },
   lastActive: { type: Date, default: Date.now },
