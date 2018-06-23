@@ -1,6 +1,6 @@
 import axios from 'axios';
 import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME } from './types';
-const ROOT_URL = 'http://localhost:5000'
+export const ROOT_URL = 'http://localhost:5000'
 //fetch current logged in user
 export const fetchUser = () => {
     let response = axios.get(`${ROOT_URL}/api/current_user`);
