@@ -9,7 +9,7 @@ const UserSchema = new Schema({
   hash: String,
   salt: String,
   email: { type: String, required: true },
-  phone: { type: String },
+  phone: { type: String, default: null },
   organization: { type: Schema.Types.ObjectId, ref: 'Organization', required: true},
   role: { type: String, default: 'user' },
   dateJoin: { type: Date, default: Date.now },
