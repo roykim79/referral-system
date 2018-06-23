@@ -3,11 +3,13 @@ const { Schema } = mongoose;
 const crypto = require('crypto');
 
 const UserSchema = new Schema({
-  username: { type: String, lowercase: true, unique: true },
+  username: { type: String, lowercase: true, unique: true, required: true },
+  firstName: { type: String, lowercase: true, required: true },
+  lastName: { type: String, lowercase: true, required: true },
   hash: String,
   salt: String,
-  email: { type: String, default: null },
-  organization: {type: Schema.Types.ObjectId, ref: 'Organization'},
+  email: { type: String, required: true },
+  organization: { type: Schema.Types.ObjectId, ref: 'Organization', required: true},
   role: { type: String, default: 'user' },
   dateJoin: { type: Date, default: Date.now },
   lastActive: { type: Date, default: Date.now },
