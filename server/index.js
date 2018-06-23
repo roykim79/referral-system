@@ -33,6 +33,7 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 require('./routes/userRoutes')(app);
+require('./routes/organizationRoutes')(app);
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT);

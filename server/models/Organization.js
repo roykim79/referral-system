@@ -13,6 +13,6 @@ const organizationSchema = new Schema({
     members: [{type: Schema.Types.ObjectId, ref: 'User'}]
 });
 
-module.exports = {
-    Organization: mongoose.model("Organization", organizationSchema)
-};
+const Organization = mongoose.model("Organization", organizationSchema)
+
+module.exports  = Organization;
