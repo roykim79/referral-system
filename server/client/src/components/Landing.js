@@ -24,7 +24,7 @@ class Landing extends Component{
                 <form>
                     <input onChange={(event) => {this.setState({username: event.target.value})}} type="text"/>
                     <input type="password" onChange={(event) => {this.setState({password: event.target.value})}}/>
-                    <button type='button' onClick={() => {this.props.submitLogin(this.state.username, this.state.password)}}>Submit</button>
+                    <button type='button' onClick={() => {this.submitLogin(this.state.username, this.state.password)}}>Submit</button>
                 </form>
             </div>
         );
