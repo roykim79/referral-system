@@ -19,7 +19,6 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-// COMMENT TEST
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   // like our main.js file, or main.css file!
@@ -33,5 +32,8 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+require('./routes/userRoutes')(app);
+
 const PORT = process.env.PORT || 5000
-app.listen(PORT)
+app.listen(PORT);
+console.log(`Server running, listening to port ${PORT}`)
