@@ -5,10 +5,18 @@ const passport = require('passport')
 const keys = require('./config/keys')
 const bodyParser = require('body-parser');
 
+require('./services/passport')
+
 mongoose.connect(keys.mongoURI)
 
 const app = express()
 app.use(bodyParser.json());
+
+// ------ fake data generator, only works in dev mode ----- //
+if (process.env.NODE_ENV !== 'production'){
+  require('./routes/fakeloginRoute')(app);
+}
+
 
 app.use(
   cookieSession({
@@ -32,6 +40,7 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);
 require('./routes/organizationRoutes')(app);
 

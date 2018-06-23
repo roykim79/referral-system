@@ -1,15 +1,15 @@
 const passport = require('passport')
-const GoogleStrategy = require('passport-local').Strategy
+const LocalStrategy = require('passport-local').Strategy
 const mongoose = require('mongoose')
 const keys = require('../config/keys')
 
-const User = mongoose.model('users')
+const User = require('../models/User');
 
 passport.serializeUser((user, done) => {
   done(null, user.id)
 })
 
-// --------------------- Testing purposes, will remove when feature implemented --------------- //
+//--------------------- Testing purposes, will remove when feature implemented --------------- //
 // passport.deserializeUser((id, done) => {
 //   console.log(id)
 //   done(null, id)

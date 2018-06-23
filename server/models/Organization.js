@@ -6,7 +6,7 @@ const organizationSchema = new Schema({
     description: { type: String, required: true },
     website: { type: String, default: null },
     email: { type: String, required: true },
-    phone: { type: Number, required: true },
+    phone: { type: String, required: true },
     address: { type: String, default: null },
     logo: { type: String, default: null },
     dateCreated: { type: Date, default: Date.now },

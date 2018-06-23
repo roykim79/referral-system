@@ -1,5 +1,6 @@
-const passport = require('passport')
-const User = require('../models/User')
+const passport = require('passport');
+const User = require('../models/User');
+const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
  // create user, if user
@@ -11,7 +12,7 @@ module.exports = app => {
         lastName: request.body.lastName,
         email: request.body.email,
         // organization: request.body.organization,
-        status: "success"        
+        status: "success" ,     
       })
 
       user.setPassword(request.body.password);
@@ -25,4 +26,8 @@ module.exports = app => {
         return response.status(400).send("Unable to create user, please check if the required info is entered.")
     }
   })
+
+//   app.put('/api/update_me', requireLogin , (request, response) => {
+
+//   })
 }
