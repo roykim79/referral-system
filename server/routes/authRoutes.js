@@ -8,10 +8,17 @@ module.exports = app => {
     failureRedirect: '/landing'
   }));
 
+  // just to check if cookie is working.
   app.get('/api/current_user', (req, res) => {
     res.send(req.user)
   })
 
+  // log out request, nullify cookie session, requires user to present credential next time.
+  app.get('/api/logout', (req, res) => {
+    req.session = null;
+    req.logout();
+    res.redirect('/landing');
+  });
 
 }
 
