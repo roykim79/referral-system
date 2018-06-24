@@ -1,11 +1,15 @@
 const passport = require('passport');
-const Organization = require('../models/Organization');
-const User = require('../models/User');
+const Organizations = require('../models/Organization');
+const Users = require('../models/User');
 const Tags = require('../models/Tags');
+const mongoose = require('mongoose')
 
 module.exports = app => {
     // create fake org and admin user
     app.get('/api/fake-data', (request, response) => {
+        Users.collection.drop();
+        Organizations.collection.drop();
+        Tags.collection.drop();
 
         let tagsArray = ["School", "Code", "Javascript"];
         let tagIds = [];
@@ -18,7 +22,7 @@ module.exports = app => {
             tagIds.push(newTag.id);
         })
 
-        let newOrganization = new Organization({
+        let newOrganization = new Organizations({
             organizationName: 'TestOrganization',
             description: "Cohort 2 Rocks",
             website: "projectShift.io",
@@ -28,7 +32,7 @@ module.exports = app => {
             tags: tagIds
         })
 
-        let user = new User({
+        let user = new Users({
             username: "adminUser",
             firstName: "Aaron",
             lastName: "Hayslip",
