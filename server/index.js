@@ -17,7 +17,6 @@ if (process.env.NODE_ENV !== 'production'){
   require('./routes/fakeloginRoute')(app);
 }
 
-
 app.use(
   cookieSession({
     maxAge: 30 * 24 * 60 * 60 * 1000,

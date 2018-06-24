@@ -11,7 +11,7 @@ const organizationSchema = new Schema({
     logo: { type: String, default: null },
     dateCreated: { type: Date, default: Date.now },
     members: [{type: Schema.Types.ObjectId, ref: 'User'}],
-    tags: [{type: Schema.Types.ObjectId, ref: 'Tags', required: true}]
+    tags: [{type: Schema.Types.ObjectId, ref: 'Tags'}]
 });
 
 const Organization = mongoose.model("Organization", organizationSchema)

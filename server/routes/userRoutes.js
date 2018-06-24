@@ -28,6 +28,8 @@ module.exports = app => {
   })
 
   app.put('/api/update_me', requireLogin , (request, response) => {
-
+    if(request.body){
+        
+    }
   })
 }
