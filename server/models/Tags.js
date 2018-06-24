@@ -3,7 +3,6 @@ const Schema = mongoose.Schema;
 
 const tagsSchema = new Schema({
     text: { type: String, lowercase: true, required: true },
-    organization: [{ type: Schema.Types.ObjectId, ref: 'Organization', default:[] }]
 })
 
 const Tags = mongoose.model("Tags", tagsSchema)
