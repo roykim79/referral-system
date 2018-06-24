@@ -18,7 +18,7 @@ module.exports = app => {
 
         tagsArray.forEach(tag => {
             let newTag = new Tags({
-                name: tag
+                text: tag
             })
             newTag.save()
             tagIds.push(newTag.id);
@@ -65,6 +65,6 @@ module.exports = app => {
             Organizations: organizationNamesArray,
             Usernames: userNameArray,
             Password: "password"
-        }) 
+        })
     })
 }
