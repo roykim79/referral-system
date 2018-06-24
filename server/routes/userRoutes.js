@@ -3,7 +3,7 @@ const User = require('../models/User');
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
- // create user, if user
+ // create user
   app.post('/api/create_user', (request, response) => {
     if(request.body && request.body.password) {
       let user = new User({
@@ -12,7 +12,7 @@ module.exports = app => {
         lastName: request.body.lastName,
         email: request.body.email,
         organization: request.body.organization,
-        status: "success" ,     
+        status: "active"
       })
 
       user.setPassword(request.body.password);
@@ -27,9 +27,17 @@ module.exports = app => {
     }
   })
 
-  app.put('/api/update_me', requireLogin , (request, response) => {
-    if(request.body){
-        
+  // Update user profile.
+  app.put('/api/update_user', requireLogin , (request, response) => {
+    if(request.body){    
+        request.body.map(key => {
+            if(request.user.hasOwnProperty(key)){
+                request.user[key] = key.value
+            }
+        })
+        return response.send(request.user);
+    } else {
+        return response.status(400).send('Nothing to be updated');
     }
   })
 }

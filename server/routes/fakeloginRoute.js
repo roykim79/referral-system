@@ -12,48 +12,59 @@ module.exports = app => {
         Tags.collection.drop();
 
         let tagsArray = ["School", "Code", "Javascript"];
+        let organizationNamesArray = ["OrganizationA","OrganizationB","OrganizationC"];
+        let userNameArray = ["userA", "userB", "userC"];
         let tagIds = [];
 
         tagsArray.forEach(tag => {
             let newTag = new Tags({
-                name: tag
+                text: tag
             })
             newTag.save()
             tagIds.push(newTag.id);
         })
 
-        let newOrganization = new Organizations({
-            organizationName: 'TestOrganization',
-            description: "Cohort 2 Rocks",
-            website: "projectShift.io",
-            email: "aaron@projectshift.io",
-            phone: "(919)123-4567",
-            address: "112 broad way st",
-            tags: tagIds
-        })
-
-        let user = new Users({
-            username: "adminUser",
-            firstName: "Aaron",
-            lastName: "Hayslip",
-            email: "aaron@projectshift.io",
-            organization: newOrganization.id,
-            status: "success",
-            role: "admin"        
-        })
-
-        newOrganization.admins.push(user.id);
+        for(i = 0; i < 3; i++){
+            let newOrganization = new Organizations({
+                organizationName: organizationNamesArray[i],
+                description: "Cohort 2 Rocks",
+                website: "projectShift.io",
+                email: "aaron@projectshift.io",
+                phone: "(919)123-4567",
+                address: "112 broad way st",
+                tags: tagIds,
+                logo: "https://99designs-start-attachments.imgix.net/alchemy-pictures/2016%2F02%2F22%2F04%2F24%2F31%2Fb7bd820a-ecc0-4170-8f4e-3db2e73b0f4a%2F550250_artsigma.png?auto=format&ch=Width%2CDPR&w=250&h=250"
+            })
     
-        user.setPassword("password");
+            let user = new Users({
+                username: userNameArray[i],
+                firstName: "Aaron",
+                lastName: "Hayslip",
+                email: "aaron@projectshift.io",
+                organization: newOrganization.id,
+                status: "active",
+                pphone: "(919)123-4567"   
+            })
     
-        user.save((err)=>{
-            if(err) throw err;
-        });
+            newOrganization.admins.push(user.id);
+        
+            user.setPassword("password");
+        
+            user.save((err)=>{
+                if(err) throw err;
+            });
+    
+            newOrganization.save((err) => {
+                if (err) throw err
+            }) 
+        }
+         
 
-        newOrganization.save((err) => {
-            if (err) throw err
-        })  
-
-        response.send({newOrganization, user}) 
+        response.send({
+            Tags: tagsArray,
+            Organizations: organizationNamesArray,
+            Usernames: userNameArray,
+            Password: "password"
+        })
     })
 }
