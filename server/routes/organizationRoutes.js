@@ -2,6 +2,7 @@ const passport = require('passport');
 const Organization = require('../models/Organization');
 const User = require('../models/User');
 const Tags = require('../models/Tags');
+const requireLogin = require('../middlewares/requireLogin');
 //for the tags. formatted into array of objects. {id:tag, text:tag}
 //tags auto populate
 //query database that are all unique
@@ -41,15 +42,15 @@ module.exports = app => {
         })
     })
 
-    // creates organization with a user as admin. 
-    app.post('/api/create_org', async (request, response) => {
-        if (request.body && request.body.password) {
+    // First, it finds all the tags id, if doesnt exist, create new tags
+    app.post('/api/create_org', requireLogin, async (request, response) => {
+        if (request.body) {
             
             if(!Array.isArray(request.body.tags) && request.body.tags.length == 0 ) {
                 return response.status(400).send("Tags not entered correctly.")
             }
 
-            let tagList = await Promise.all(request.body.tags.map(async tag => {
+            let tagList = await Promise.all(request.body.tags.map( tag => {
                 return Tags.findOne({name: tag}).then(result => {
                     
                     if(result){
@@ -73,23 +74,8 @@ module.exports = app => {
                 address: request.body.address
             })
 
-            let user = new User({
-                username: request.body.username,
-                firstName: request.body.firstName,
-                lastName: request.body.lastName,
-                email: request.body.email,
-                organization: newOrganization.id,
-                status: "success",
-                role: "admin"        
-            })
-            user.setPassword(request.body.password);
-
-            newOrganization.members.push(user.id);
+            newOrganization.admins.push(req.user);
             newOrganization.tags = tagList;
-        
-            user.save((err)=>{
-                if(err) throw err;
-            });
 
             newOrganization.save((err) => {
                 if (err) throw err
