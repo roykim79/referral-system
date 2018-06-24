@@ -1,6 +1,6 @@
 const passport = require('passport');
 const Organization = require('../models/Organization');
-const User = require('../models/User')
+const User = require('../models/User');
 const Tags = require('../models/Tags');
 //for the tags. formatted into array of objects. {id:tag, text:tag}
 //tags auto populate
@@ -42,65 +42,60 @@ module.exports = app => {
     })
 
     // creates organization with a user as admin. 
-    app.post('/api/create_org', (request, response) => {
+    app.post('/api/create_org', async (request, response) => {
         if (request.body && request.body.password) {
-            let tempTags = [];
-
-            if (Array.isArray(request.body.tags) && request.body.tags.length != 0 ) {
-                request.body.tags.forEach((tag) => {
-                    Tags.findOne({name: tag}, (err, result) => {
-                        if(err) throw err;
-                        if(result.id) {
-                            tempTags.push(result.id)
-                        } else {
-                            let newTag = new Tags({
-                                name: tag
-                            })
-    
-                            newTag.save((err) => {
-                                if (err) throw err
-                            });
-    
-                            tempTags.push(newTag.id);
-                        }
-    
-                    })
-                })
-
-                let newOrganization = new Organization({
-                    organizationName: request.body.organizationName,
-                    description: request.body.description,
-                    website: request.body.website,
-                    email: request.body.organizationEmail,
-                    phone: request.body.organizationPhone,
-                    address: request.body.address,
-                    tags: tempTags
-                })
-    
-                let user = new User({
-                    username: request.body.username,
-                    firstName: request.body.firstName,
-                    lastName: request.body.lastName,
-                    email: request.body.email,
-                    organization: newOrganization.id,
-                    status: "success",
-                    role: "admin"        
-                })
-    
-                newOrganization.members.push(user.id);
             
-                user.setPassword(request.body.password);
-            
-                user.save((err)=>{
-                    if(err) throw err;
-                });
-    
-                newOrganization.save((err) => {
-                    if (err) throw err
-                })  
-    
-                response.send({newOrganization, user}) 
+            if(!Array.isArray(request.body.tags) && request.body.tags.length == 0 ) {
+                return response.status(400).send("Tags not entered correctly.")
             }
+
+            let tagList = await Promise.all(request.body.tags.map(async tag => {
+                return Tags.findOne({name: tag}).then(result => {
+                    
+                    if(result){
+                        return result.id
+                    } else {
+                        let newTag = new Tags({
+                            name: tag
+                        })
+                        newTag.save()
+                        return newTag.id
+                    }
+                })
+            }));
+
+            let newOrganization = new Organization({
+                organizationName: request.body.organizationName,
+                description: request.body.description,
+                website: request.body.website,
+                email: request.body.organizationEmail,
+                phone: request.body.organizationPhone,
+                address: request.body.address
+            })
+
+            let user = new User({
+                username: request.body.username,
+                firstName: request.body.firstName,
+                lastName: request.body.lastName,
+                email: request.body.email,
+                organization: newOrganization.id,
+                status: "success",
+                role: "admin"        
+            })
+            user.setPassword(request.body.password);
+
+            newOrganization.members.push(user.id);
+            newOrganization.tags = tagList;
+        
+            user.save((err)=>{
+                if(err) throw err;
+            });
+
+            newOrganization.save((err) => {
+                if (err) throw err
+            })
+
+            response.send({newOrganization, user}) 
         }   else {
             return response.status(400).send("Unable to create organization, please fill out required fields.");
         }
@@ -109,21 +104,3 @@ module.exports = app => {
     // app.put('/api/organizations', (request, response) => {
     //     response.send(req)
     // })
-
-    
-
-
-
-
-
-
-
-// organizationName: { type: String, lowercase: true, unique: true, required: true },
-//     description: { type: String, required: true },
-//     website: { type: String, default: null },
-//     email: { type: String, required: true },
-//     phone: { type: Number, required: true },
-//     address: { type: String, default: null },
-//     logo: { type: String, default: null },
-//     dateCreated: { type: Date, default: Date.now },
-//     members: [{type: Schema.Types.ObjectId, ref: 'User'}]
