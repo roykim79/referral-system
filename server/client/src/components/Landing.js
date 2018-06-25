@@ -13,7 +13,12 @@ class Landing extends Component{
     }
 
     submitLogin = () => {
-        axios.post(`${ROOT_URL}/api/login`, this.state);
+        //This will be once logins are supported and creating an account
+        // axios.post(`${ROOT_URL}/api/login`, this.state);
+
+        //This is the test fake login, username and password not important
+        let response = axios.get('.api/fake-login')
+        console.log(response);
     }
 
     render() {
