@@ -1,0 +1,124 @@
+@import "@material/textfield/mdc-text-field";
+@import "@material/button/mdc-button";
+@import "@material/drawer/mdc-drawer";
+@import "@material/list/mdc-list";
+@import "@material/image-list/mdc-image-list";
+@import "@material/top-app-bar/mdc-top-app-bar";
+@import "@material/layout-grid/mdc-layout-grid";
+
+
+.username,
+.password {
+  display: block;
+  width: 300px;
+  margin: 40px auto;
+}
+
+.mdc-text-field__input{
+  padding-left:16px!important;
+  margin-top:6px!important;
+}
+
+.input-text{
+
+}
+
+.button-container {
+  display: flex;
+  justify-content: flex-end;
+  width: 300px;
+  margin: auto;
+}
+
+.button-container button {
+  margin: 3px;
+}
+
+html, body {
+  height: 100%;
+}
+
+body {
+  font-family: 'Roboto';
+  margin: 0;
+  padding-top: 0.1px; // Prevent header h1 margin from pushing body down
+}
+
+// Login page styles
+
+.landing-logo {
+  text-align: center;
+  margin: auto;
+}
+
+.app-nav-header {
+  @include mdc-top-app-bar-fill-color(white)
+}
+
+.side-drawer{
+  width: 200px;
+}
+
+.action-margin{
+  margin-right: 5px;
+  width: auto;
+  display: inline-block;
+  color: black!important
+}
+
+.text-black{
+  color: black!important
+}
+
+.product-list {
+  margin-top: 70px;
+  @include mdc-image-list-standard-columns(4);
+
+  overflow: auto;
+}
+
+.pt-h{
+  padding-top: 75px;
+}
+
+.mb-h{
+  margin-bottom: 75px;
+}
+
+.shrine-logo {
+  padding-top: 80px;
+  fill: currentColor;
+}
+
+.side-nav-shrine-logo{
+  fill: currentColor;
+}
+
+.ml-1{
+  margin-left: 10px;
+}
+
+.shrine-logo-drawer {
+  width: 60px;
+  padding-top: 10px;
+  margin-left: 70px;
+  fill: currentColor;
+  z-index: 1;
+  position:relative
+}
+
+.shrine-title {
+  align-self: center;
+  margin: 5px auto;
+}
+
+.move-back{
+  z-index: -1;
+  margin-bottom: 50px
+}
+
+// Home page styles
+
+.home {
+
+}

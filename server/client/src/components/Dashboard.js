@@ -7,37 +7,100 @@ const RECEIVED = 'received';
 const SENT = 'sent';
 
 
+
 class Dashboard extends Component {
     constructor(props) {
         super(props)
 
+        //give component a state that holds the filter information for the react table
         this.state = {
             currentFilter: null
         }
     }
     componentDidMount = () => {
+      // fetch user and referrals from the server when component mounts
 
         //fetch received referrals by default
         this.props.fetchUser();
         this.props.fetchReferrals(RECEIVED);
+
     }
     render(){
         return (
-            <div> 
-                <button onClick={() => this.props.fetchReferrals(SENT)}>Sent</button>
-                <button onClick={() => this.props.fetchReferrals(RECEIVED)}>Received</button>
+            <div>
 
-                <button onClick={() => this.setState({currentFilter: null})} className={this.state.currentFilter === null ? 'active': ''} >All</button>
-                <button onClick={() => this.setState({currentFilter: 'pending'})} className={this.state.currentFilter === 'pending' ? 'active': ''} >Pending</button>
-                <button onClick={() => this.setState({currentFilter: 'accepted'})} className={this.state.currentFilter === 'accepted' ? 'active': ''} >Accepted</button>
-                <button onClick={() => this.setState({currentFilter: 'rejected'})} className={this.state.currentFilter === 'rejected' ? 'active': ''} >Rejected</button>
-                
+              <body className="home">
 
-            <div>This will be where the filter buttons will go </div>
-            <div>onClick they will set state which should be passed into referralList component to filter</div>
-            <ReferralList status={this.state.currentFilter} />
+                <section id="layout-grid-in-fluid-container pt-h">
+                  <div className="demo-grid mdc-layout-grid">
+                    <div className="mdc-layout-grid__inner">
+
+                      <div className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-3">
+                        <nav className="shrine-drawer mdc-drawer mdc-drawer--permanent side-drawer">
+                          <h2 className="shrine-title">REFERRAL</h2>
+                          <h2 className="shrine-title">SYSTEM</h2>
+
+                          <button className="mdc-button mdc-button--raised next">
+                            Create Referral
+                          </button>
+
+                          <div className="mdc-drawer__content">
+                            <nav className="mdc-list">
+
+                              <a className="mdc-list-item"
+                                onClick={() => this.props.fetchReferrals(RECEIVED)}>
+                                Received
+                              </a>
+
+                              <a className="mdc-list-item"
+                                onClick={() => this.props.fetchReferrals(SENT)}>
+                                Outgoing
+                              </a>
+
+                            </nav>
+                          </div>
+                        </nav>
+                      </div>
+
+                      <div className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-9">
+                        <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                          <button type="button" className={this.state.currentFilter === null ? 'mdc-button mdc-button--raised': 'mdc-button'}
+                            onClick={() => this.setState({currentFilter: null})} >
+                            All
+                          </button>
+                          <button className={this.state.currentFilter === 'pending' ? 'mdc-button mdc-button--raised': 'mdc-button'}
+                            onClick={() => this.setState({currentFilter: 'pending'})}>
+                            Pending
+                          </button>
+                          <button className={this.state.currentFilter === 'accepted' ? 'mdc-button mdc-button--raised': 'mdc-button'}
+                            onClick={() => this.setState({currentFilter: 'accepted'})}>
+                            Accepted
+                          </button>
+                          <button className={this.state.currentFilter === 'contacted' ? 'mdc-button mdc-button--raised': 'mdc-button'}
+                            onClick={() => this.setState({currentFilter: 'contacted'})}>
+                            Contacted
+                          </button>
+                          <button className={this.state.currentFilter === 'completed' ? 'mdc-button mdc-button--raised': 'mdc-button'}
+                            onClick={() => this.setState({currentFilter: 'completed'})}>
+                            Completed
+                          </button>
+                          <button className={this.state.currentFilter === 'rejected' ? 'mdc-button mdc-button--raised': 'mdc-button'}
+                            onClick={() => this.setState({currentFilter: 'rejected'})}>
+                            Rejected
+                          </button>
+                        </div>
+                        <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
+                          <ReferralList status={this.state.currentFilter} />
+                        </div>
+                      </div>
+                      <div className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-2"></div>
+
+                    </div>
+                  </div>
+                </section>
+              </body>
             </div>
-            
+
         )
     }
 }
