@@ -30,7 +30,7 @@ module.exports = app => {
             })
         }));
 
-        for(counter = 0; counter < 2; counter++){
+        for(i = 0; i < 2; i++){
             let newReferral = new Referrals({
                 client_name: clientNames[i],
                 client_phone: "(919)999-9999",
@@ -40,7 +40,7 @@ module.exports = app => {
                 receiving_organization: organizationObject[i+1].id,
                 referring_user: userObject[i].id,
                 posting_user: userObject[i].id,
-                notes:[{text:`hi from ${userObject[i].firstName}`, posting_user:userObject[i].id}]
+                notes:[{text:`hi from ${userObject[i].firstName}`, posting_user: userObject[i].firstName}]
             })
 
             newReferral.save();
