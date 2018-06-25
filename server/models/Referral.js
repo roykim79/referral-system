@@ -26,7 +26,7 @@ const ReferralSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    notes: [{
+    tasks: [{
         date: {
             type: Date,
             default: Date.now
