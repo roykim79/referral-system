@@ -2,8 +2,6 @@ import React, {Component} from 'react';
 import { BrowserRouter, Route } from 'react-router-dom';
 import { connect } from 'react-redux';
 import Dashboard from './Dashboard';
-import {fetchUser} from '../actions'
-import { bindActionCreators } from 'redux';
 import Landing from './Landing'
 import OrganizationInfo from './OrganizationInfo';
 import NewReferral from './NewReferral';
@@ -12,9 +10,7 @@ import Header from './Header';
 
 class App extends Component {
 
-    componentDidMount(){
-        this.props.fetchUser();
-    }
+
     render(){
     return (
     <div>
@@ -32,7 +28,5 @@ class App extends Component {
   )}
 };
 
- const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({fetchUser}, dispatch)
- }
-export default connect(null, mapDispatchToProps)(App);
+
+export default App;
