@@ -46,6 +46,7 @@ require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);
 require('./routes/organizationRoutes')(app);
 require('./routes/tagRoutes')(app);
+require('./routes/referralRoutes')(app);
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT);
