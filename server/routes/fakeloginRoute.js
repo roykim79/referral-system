@@ -45,7 +45,6 @@ module.exports = app => {
                 lastName: "Hayslip",
                 email: "aaron@projectshift.io",
                 organization: newOrganization.id,
-                status: "active",
                 phone: "(919)123-4567"   
             })
     

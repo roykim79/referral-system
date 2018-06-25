@@ -4,6 +4,7 @@ const cookieSession = require('cookie-session')
 const passport = require('passport')
 const keys = require('./config/keys')
 const bodyParser = require('body-parser');
+const cors = require("cors");
 
 require('./services/passport')
 
@@ -11,12 +12,6 @@ mongoose.connect(keys.mongoURI)
 
 const app = express()
 app.use(bodyParser.json());
-
-// ------ fake data generator, only works in dev mode ----- //
-if (process.env.NODE_ENV !== 'production'){
-  require('./routes/fakeLoginRoute')(app);
-  require('./routes/fakeReferralsRoute')(app);
-}
 
 app.use(
   cookieSession({
@@ -26,6 +21,7 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cors());
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
@@ -38,6 +34,12 @@ if (process.env.NODE_ENV === 'production') {
   app.get('*', (req, res) => {
     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
   });
+}
+
+// ------ fake data generator, only works in dev mode ----- //
+if (process.env.NODE_ENV !== 'production'){
+  require('./routes/fakeLoginRoute')(app);
+  require('./routes/fakeReferralsRoute')(app);
 }
 
 require('./routes/authRoutes')(app);
