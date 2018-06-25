@@ -14,9 +14,18 @@ const ReferralSchema = new Schema({
         type: String,
         default: "Pending"
     },
-    referring_organization: Schema.Types.ObjectId,
-    receiving_organization: Schema.Types.ObjectId,
-    referring_user: Schema.Types.ObjectId,
+    referring_organization: {
+        type: Schema.Types.ObjectId,
+        ref: "Organization"
+    },
+    receiving_organization: {
+        type: Schema.Types.ObjectId,
+        ref: "Organization"
+    },
+    referring_user: {
+        type: Schema.Types.ObjectId,
+        ref: "User"
+    },
     notes: [{
         date: {
             type: Date,
