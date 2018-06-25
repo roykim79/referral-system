@@ -529,7 +529,7 @@ class ReferralList extends Component {
         } else {
             data = this.props.referrals;
         }
-        return <ReactTable 
+        return <ReactTable
                     getTrProps={(state, rowInfo, column) => {
                         return {
                             onClick: (e) => {
@@ -541,13 +541,14 @@ class ReferralList extends Component {
                     columns={columns}
         />
     }
-    
+
     render() {
-        return this.renderTable()
+
+      return this.renderTable()
     }
 }
 
 const mapStateToProps = ({referrals}) => {
     return {referrals}
 }
-export default connect(mapStateToProps)(withRouter(ReferralList)); 
+export default connect(mapStateToProps)(withRouter(ReferralList));

@@ -7,6 +7,7 @@ const RECEIVED = 'received';
 const SENT = 'sent';
 
 
+
 class Dashboard extends Component {
     constructor(props) {
         super(props)
@@ -20,10 +21,11 @@ class Dashboard extends Component {
         //fetch received referrals by default
         this.props.fetchUser();
         this.props.fetchReferrals(RECEIVED);
+
     }
     render(){
         return (
-            <div> 
+            <div>
                 <button onClick={() => this.props.fetchReferrals(SENT)}>Sent</button>
                 <button onClick={() => this.props.fetchReferrals(RECEIVED)}>Received</button>
 
@@ -31,13 +33,13 @@ class Dashboard extends Component {
                 <button onClick={() => this.setState({currentFilter: 'pending'})} className={this.state.currentFilter === 'pending' ? 'active': ''} >Pending</button>
                 <button onClick={() => this.setState({currentFilter: 'accepted'})} className={this.state.currentFilter === 'accepted' ? 'active': ''} >Accepted</button>
                 <button onClick={() => this.setState({currentFilter: 'rejected'})} className={this.state.currentFilter === 'rejected' ? 'active': ''} >Rejected</button>
-                
+
 
             <div>This will be where the filter buttons will go </div>
             <div>onClick they will set state which should be passed into referralList component to filter</div>
             <ReferralList status={this.state.currentFilter} />
             </div>
-            
+
         )
     }
 }
