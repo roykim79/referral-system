@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import ReferralList from './ReferralList';
-import {fetchReferrals} from '../actions';
+import {fetchReferrals, fetchUser} from '../actions';
 import {connect} from 'react-redux';
 const RECEIVED = 'received';
 const SENT = 'sent';
@@ -18,8 +18,10 @@ class Dashboard extends Component {
     }
     componentDidMount = () => {
 
-        fetch received referrals by default
-        this.props.fetchReferrals(RECEIVED)
+        //fetch received referrals by default
+        this.props.fetchUser();
+        this.props.fetchReferrals(RECEIVED);
+
     }
     render(){
         return (
@@ -43,7 +45,7 @@ class Dashboard extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({fetchReferrals}, dispatch)
+    return bindActionCreators({fetchReferrals, fetchUser}, dispatch)
 }
 
 export default connect(null, mapDispatchToProps)(Dashboard);

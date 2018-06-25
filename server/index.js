@@ -11,6 +11,7 @@ require('./services/passport')
 mongoose.connect(keys.mongoURI)
 
 const app = express()
+app.use(cors());
 app.use(bodyParser.json());
 
 app.use(
@@ -21,7 +22,6 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
-app.use(cors());
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
@@ -47,6 +47,10 @@ require('./routes/userRoutes')(app);
 require('./routes/organizationRoutes')(app);
 require('./routes/tagRoutes')(app);
 require('./routes/referralRoutes')(app);
+
+app.get('*', (req, res) => {
+  res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+});
 
 const PORT = process.env.PORT || 5000
 app.listen(PORT);

@@ -10,3 +10,17 @@ body {
   overflow: scroll;
   width: 50%;
 }
+
+.header {
+  border: 1px solid #aaa;
+  border-top: none;
+  padding: 10px;
+}
+.header h1 {
+  display: inline-block
+}
+
+.header-logout {
+  float: right;
+}
+
