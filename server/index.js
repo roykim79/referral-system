@@ -4,6 +4,7 @@ const cookieSession = require('cookie-session')
 const passport = require('passport')
 const keys = require('./config/keys')
 const bodyParser = require('body-parser');
+const cors = require("cors")
 
 require('./services/passport')
 
@@ -26,6 +27,7 @@ app.use(
 )
 app.use(passport.initialize())
 app.use(passport.session())
+app.use(cors())
 
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
