@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 import axios from 'axios';
-import {ROOT_URL} from '../actions'
+
 
 class Landing extends Component{
     constructor(props){
@@ -14,11 +14,7 @@ class Landing extends Component{
 
     submitLogin = () => {
         //This will be once logins are supported and creating an account
-        // axios.post(`${ROOT_URL}/api/login`, this.state);
-
-        //This is the test fake login, username and password not important
-        let response = axios.get('.api/fake-login')
-        console.log(response);
+        axios.post(`/api/login`, this.state);
     }
 
     render() {
