@@ -21,7 +21,11 @@ passport.deserializeUser((id, done) => {
   });
 });
 
-passport.use('login', new LocalStrategy(
+passport.use('login', new LocalStrategy({
+    passReqToCallback: true,
+    proxy: true,
+    session: true
+  },
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
       if (err) { return done(err); }
