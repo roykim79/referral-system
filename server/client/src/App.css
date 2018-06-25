@@ -2598,7 +2598,7 @@ a.mdc-list-item {
 
 .mdc-text-field__input {
   padding-left: 16px !important;
-  margin-top: 4px !important; }
+  margin-top: 6px !important; }
 
 .button-container {
   display: flex;
@@ -2617,7 +2617,7 @@ body {
   margin: 0;
   padding-top: 0.1px; }
 
-.header {
+.landing-logo {
   text-align: center;
   margin: auto; }
 

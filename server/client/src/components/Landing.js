@@ -30,7 +30,7 @@ class Landing extends Component{
             <div>
                 <h2> Welcome to Referral System. Please change this text to something meaningful.</h2>
 
-                <section className="header">
+                <section className="landing-logo">
 
                     <img className="shrine-logo" src={logo}/>
 
