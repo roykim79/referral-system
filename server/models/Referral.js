@@ -23,7 +23,7 @@ const ReferralSchema = new Schema({
             default: Date.now
         },
         text: String,
-        posting_user: Schema.Types.ObjectId
+        posting_user: String
     }]
 })
 
