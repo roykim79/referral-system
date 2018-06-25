@@ -1,7 +1,6 @@
 import React, {Component} from 'react';
 //for browse org button use https://github.com/reactjs/react-modal to load and open a model. 
 
-
 class NewReferral extends Component {
     render(){
         return (
@@ -13,3 +12,4 @@ class NewReferral extends Component {
 }
 
 export default NewReferral;
+
