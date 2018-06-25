@@ -16,6 +16,7 @@ const referralSchema = new Schema({
     },
     referring_organization: Schema.Types.ObjectId,
     receiving_organization: Schema.Types.ObjectId,
+    referring_user: Schema.Types.ObjectId,
     notes: [{
         date: {
             type: Date,
@@ -26,4 +27,4 @@ const referralSchema = new Schema({
     }]
 })
 
-module.exports = mongoose.model(referralSchema, "Referral");
+module.exports = mongoose.model("Referral", ReferralSchema);
