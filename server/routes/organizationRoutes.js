@@ -9,6 +9,21 @@ const requireLogin = require('../middlewares/requireLogin');
 //get api/tags
 
 module.exports = app => {
+      
+    // Takes in information from req.body and updates the organization info.
+    app.put('/api/my_organization', (request, response) => {
+        if (request.body) {
+            // request.body.map(key => {
+            //     if(request.organization.hasOwnProperty(key)) {
+            //         request.organization[key] = key.vallue
+            //     }
+            // })
+            console.log(request.user)
+            return response.send(request.user);
+        } else {
+            return response.status(400).send('Nothing to be updated');
+        }
+    })
 
     // get organization by user id
     app.get('/api/:user/organization', (request, response) => {
