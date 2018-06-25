@@ -45,15 +45,37 @@ module.exports = app => {
         referral.client_phone = req.body.client_phone;
         referral.client_email = req.body.client_email;
         referral.description = req.body.description;
-        referring_organization = req.body.user.organization;
+        referring_organization = req.user.organization;
         referral.receiving_organization = req.body.receiving_organization;
-        referral.referring_user = req.body.user._id;
+        referral.referring_user = req.user._id;
 
         referral.save((err) => {
             if(err){
                 console.log(err);
             } else {
                 res.send(referral);
+            }
+        })
+    })
+
+    //adds a note to a specified referral
+    app.post("/api/referrals/:referralId/notes", (req, res) => {
+        Referral.findbyId(req.params.referralId, (err, referral) => {
+            if(err) {
+                console.log(err)
+            } else {
+                let name = req.user.firstName + " " + req.user.lastName;
+                referral.notes.push({
+                    posting_user: name,
+                    text: req.body.text
+                });
+                referral.save((err) => {
+                    if(err) {
+                        console.log(err);
+                    } else {
+                        res.send(referral);
+                    }
+                })
             }
         })
     })
