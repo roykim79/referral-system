@@ -8,21 +8,20 @@ class ReferralList extends Component {
         super(props)
     }
     renderTable = () => {
-        let fakeData = [{status: 'pending', id:'landing', referring_organization : {organizationName: 'testOrg'}}]
         let columns = [{Header: 'Organization', accessor: 'referring_organization.organizationName'},{Header: 'status', accessor: 'status'}]
         let data;
         if(this.props.status !== null){
-            data = fakeData.filter((referral) => {
+            data = this.props.referrals.filter((referral) => {
                 return referral.status == this.props.status;
             })
         } else {
-            data = fakeData;
+            data = this.props.referrals;
         }
         return <ReactTable 
                     getTrProps={(state, rowInfo, column) => {
                         return {
                             onClick: (e) => {
-                                this.props.history.push(`/${rowInfo.original.id}`)
+                                this.props.history.push(`/referrals/${rowInfo.original.id}`)
                             }
                         }
                     }}
