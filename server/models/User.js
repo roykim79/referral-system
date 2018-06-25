@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const UserSchema = new Schema({
   username: { type: String, lowercase: true, unique: true, required: true },
-  name: { type: String, lowercase: true, required: true },
+  firstName: { type: String, lowercase: true, required: true },
   lastName: { type: String, lowercase: true, required: true },
   hash: String,
   salt: String,
@@ -13,7 +13,6 @@ const UserSchema = new Schema({
   organization: { type: Schema.Types.ObjectId, ref: 'Organization', required: true},
   dateJoin: { type: Date, default: Date.now },
   lastActive: { type: Date, default: Date.now },
-  status: {type: String, default: 'pending' },
   roles: {type: String, default: 'user'}
 });
 
