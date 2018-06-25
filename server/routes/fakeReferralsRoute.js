@@ -6,21 +6,48 @@ const mongoose = require('mongoose');
 
 module.exports = app => {
     // create fake referrals
-    app.get('/api/fake-referrals', (request, response) => {
-        Referrals.collection.drop();
+    app.get('/api/fake-referrals', async (request, response) => {
+        // Referrals.collection.drop();
 
-        let organizationNames = ["OrganizationA","OrganizationB","OrganizationC"];
-        let user = ["userA","userB","userC"];
-        let client = ["Roy", "Jeff", "Ilona"];
-        let organizationIds = [];
-        let userIds = [];
+        let organizationNames = ["organizationa","organizationb","organizationc"];
+        let usernames = ["userA","userB","userC"];
+        let clientNames = ["Roy", "Jeff", "Ilona"];
+        let referralArray = [];
 
-        organizationNames.forEach(organization => {
-            Organizations.find({organizationName: organization}).exec((err, result) => {
-                
+        let organizationObject = await Promise.all(organizationNames.map( organization => {
+            return Organizations.findOne({organizationName: organization}).then(result => {
+                if(result){
+                    return result
+                } 
             })
-        })
+        }));
 
-        return response.send(organizationIds);
+        let userObject = await Promise.all(usernames.map( user => {
+            return Users.findOne({username: user}).then(result => {
+                if(result){
+                    return result
+                } 
+            })
+        }));
+
+        for(i = 0; i < 2; i++){
+            let newReferral = new Referrals({
+                client_name: clientNames[i],
+                client_phone: "(919)999-9999",
+                client_email: "random@example.com",
+                decription: `Important from ${organizationObject[i].organizationName}`,
+                referring_organization: organizationObject[i].id,
+                receiving_organization: organizationObject[i+1].id,
+                referring_user: userObject[i].id,
+                posting_user: userObject[i].id,
+                notes:[{text:`hi from ${userObject[i].firstName}`, posting_user: userObject[i].firstName}]
+            })
+
+            newReferral.save();
+            referralArray.push(newReferral);
+        }
+
+
+        return response.send(referralArray);
     })
 }
