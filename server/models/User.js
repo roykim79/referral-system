@@ -4,7 +4,7 @@ const crypto = require('crypto');
 
 const UserSchema = new Schema({
   username: { type: String, lowercase: true, unique: true, required: true },
-  firstName: { type: String, lowercase: true, required: true },
+  name: { type: String, lowercase: true, required: true },
   lastName: { type: String, lowercase: true, required: true },
   hash: String,
   salt: String,
