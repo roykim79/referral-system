@@ -10,7 +10,6 @@ const organizationSchema = new Schema({
     address: { type: String, default: null },
     logo: { type: String, default: null },
     dateCreated: { type: Date, default: Date.now },
-    admins: [{type: Schema.Types.ObjectId, ref: 'User'}],
     members: [{type: Schema.Types.ObjectId, ref: 'User'}],
     tags: [{type: Schema.Types.ObjectId, ref: 'Tags'}]
 });

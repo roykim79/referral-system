@@ -2,7 +2,7 @@ const passport = require('passport');
 const Organizations = require('../models/Organization');
 const Users = require('../models/User');
 const Tags = require('../models/Tags');
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
 
 module.exports = app => {
     // create fake org and admin user
@@ -10,6 +10,7 @@ module.exports = app => {
         Users.collection.drop();
         Organizations.collection.drop();
         Tags.collection.drop();
+        
 
         let tagsArray = ["School", "Code", "Javascript"];
         let organizationNamesArray = ["OrganizationA","OrganizationB","OrganizationC"];
@@ -43,10 +44,10 @@ module.exports = app => {
                 email: "aaron@projectshift.io",
                 organization: newOrganization.id,
                 status: "active",
-                pphone: "(919)123-4567"   
+                phone: "(919)123-4567"   
             })
     
-            newOrganization.admins.push(user.id);
+            newOrganization.members.push(user.id);
         
             user.setPassword("password");
         
