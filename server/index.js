@@ -14,7 +14,8 @@ app.use(bodyParser.json());
 
 // ------ fake data generator, only works in dev mode ----- //
 if (process.env.NODE_ENV !== 'production'){
-  require('./routes/fakeloginRoute')(app);
+  require('./routes/fakeLoginRoute')(app);
+  require('./routes/fakeReferralsRoute')(app);
 }
 
 app.use(
