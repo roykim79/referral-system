@@ -5,10 +5,18 @@ const passport = require('passport')
 const keys = require('./config/keys')
 const bodyParser = require('body-parser');
 
+require('./services/passport')
+
 mongoose.connect(keys.mongoURI)
 
 const app = express()
 app.use(bodyParser.json());
+
+// ------ fake data generator, only works in dev mode ----- //
+if (process.env.NODE_ENV !== 'production'){
+  require('./routes/fakeLoginRoute')(app);
+  require('./routes/fakeReferralsRoute')(app);
+}
 
 app.use(
   cookieSession({
@@ -19,7 +27,6 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-// COMMENT TEST
 if (process.env.NODE_ENV === 'production') {
   // Express will serve up production assets
   // like our main.js file, or main.css file!
@@ -33,5 +40,11 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
+require('./routes/authRoutes')(app);
+require('./routes/userRoutes')(app);
+require('./routes/organizationRoutes')(app);
+require('./routes/tagRoutes')(app);
+
 const PORT = process.env.PORT || 5000
-app.listen(PORT)
+app.listen(PORT);
+console.log(`Server running, listening to port ${PORT}`)

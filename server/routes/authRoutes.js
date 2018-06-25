@@ -1,28 +1,24 @@
+const passport = require('passport')
+const User = require('../models/User')
+
 module.exports = app => {
-  app.get(
-    '/auth/google',
-    passport.authenticate('google', {
-      scope: ['profile', 'email']
-    })
-  )
+  // if login success redirect to /dashboard, if fail redirect to /landing
+  app.post('/api/login', passport.authenticate('login', {
+    successRedirect: '/dashboard',
+    failureRedirect: '/landing'
+  }));
 
-  app.get(
-    '/auth/google/callback',
-    passport.authenticate('google'),
-    (req, res) => {
-      res.redirect('/dashboard');
-    }
-  );
-
+  // just to check if cookie is working.
   app.get('/api/current_user', (req, res) => {
     res.send(req.user)
   })
 
+  // log out request, nullify cookie session, requires user to present credential next time.
   app.get('/api/logout', (req, res) => {
+    req.session = null;
     req.logout();
-    res.redirect('/');
+    res.redirect('/landing');
   });
 
-  
 }
 
