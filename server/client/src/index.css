@@ -4,3 +4,9 @@ body {
   font-family: sans-serif;
 }
 
+.referral-notes-content {
+  border: 1px solid #aaa;
+  height: 50vh;
+  overflow: scroll;
+  width: 50%;
+}

@@ -1,7 +1,7 @@
 const passport = require('passport');
 const Organizations = require('../models/Organization');
 const Users = require('../models/User');
-const Referrals = require('../models/referral');
+const Referral = require('../models/Referral');
 const mongoose = require('mongoose');
 
 module.exports = app => {
@@ -31,16 +31,16 @@ module.exports = app => {
         }));
 
         for(i = 0; i < 2; i++){
-            let newReferral = new Referrals({
+            let newReferral = new Referral({
                 client_name: clientNames[i],
                 client_phone: "(919)999-9999",
                 client_email: "random@example.com",
-                decription: `Important from ${organizationObject[i].organizationName}`,
+                description: `Important from ${organizationObject[i].organizationName}`,
                 referring_organization: organizationObject[i].id,
                 receiving_organization: organizationObject[i+1].id,
                 referring_user: userObject[i].id,
                 posting_user: userObject[i].id,
-                notes:[{text:`hi from ${userObject[i].firstName}`, posting_user: userObject[i].firstName}]
+                notes:[{text:`hi from ${userObject[i].firstName}`, posting_user:userObject[i].id}]
             })
 
             newReferral.save();
