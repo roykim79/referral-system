@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const Schema = mongoose.Schema;
 
-const referralSchema = new Schema({
+const ReferralSchema = new Schema({
     client_name: String,
     client_phone: String,
     client_email: String,
