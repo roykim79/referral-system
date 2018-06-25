@@ -12,16 +12,20 @@ module.exports = app => {
       
     // Takes in information from req.body and updates the organization info.
     app.put('/api/my_organization', requireLogin, (request, response) => {
-        Organization.find({}).exec((error, organization) => {
+        Organization.findOne({_id: request.user.organization.toHexString()})
+        .exec((error, organization) => {
 
             if (request.body) {
-                request.body.map(key => {
-                    if(request.organization.hasOwnProperty(key)) {
-                        request.organization[key] = key.value
+
+                let keys = Object.keys(request.body)
+
+                keys.forEach(key => {
+                    if(organization[key] != null){
+                        organization[key] = request.body[key]
                     }
                 })
-                console.log(request.user)
-                return response.send(request.user.organization);
+                organization.save()
+                return response.send(organization);
             } else {
                 return response.status(400).send('Nothing to be updated');
             }
