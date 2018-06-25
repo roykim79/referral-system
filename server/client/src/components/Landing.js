@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import logo from '../RS-logo.png'
+import {usernameField, passwordField} from '../utils/inputField.js'
 
-import {MDCTextField} from '@material/textfield';
+
 
 class Landing extends Component{
     constructor(props){
@@ -15,8 +16,8 @@ class Landing extends Component{
     }
 
     componentDidMount(){
-      const username = new MDCTextField(document.querySelector('.username'));
-      const password = new MDCTextField(document.querySelector('.password'));
+      const username = usernameField()
+      const password = passwordField()
     }
 
     submitLogin = () => {
