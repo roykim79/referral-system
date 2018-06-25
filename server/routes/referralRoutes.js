@@ -3,7 +3,6 @@ const Referral = require("../models/Referral");
 module.exports = app => {
     //Called by the dashboard. Gets all the referrals sent by the user's organization. The organization ID is sent in the request. Grouping by status will happen on the front end.
     app.get("/api/referrals/sent", (req, res) => {
-        let orgId = req.user.organization.toHexString();
         Referral.find({ referring_organization: req.user.organization.toHexString() }).
         populate("referring_organization").
         populate("receiving_organization").
@@ -19,7 +18,7 @@ module.exports = app => {
 
     //Called by the dashboard. Gets all referrals recieved by the user's organization. The organization ID is sent in the request. Grouping by status will happen on the front end.
     app.get("/api/referrals/received", (req, res) => {
-        Referral.find({receiving_organization: req.user.organization}).
+        Referral.find({receiving_organization: req.user.organization.toHexString()}).
             populate("referring_organization").
             populate("receiving_organization").
             populate("referring_user").
