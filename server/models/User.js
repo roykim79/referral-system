@@ -11,8 +11,8 @@ const UserSchema = new Schema({
   email: { type: String, required: true },
   phone: { type: String, default: null },
   organization: { type: Schema.Types.ObjectId, ref: 'Organization', required: true},
-  dateJoin: { type: Date, default: Date.now },
-  lastActive: { type: Date, default: Date.now },
+  dateJoin: { type: Date, default: new Date() },
+  lastActive: { type: Date, default: new Date() },
   roles: {type: String, default: 'user'}
 });
 
