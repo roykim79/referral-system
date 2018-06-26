@@ -17,14 +17,7 @@ class Dashboard extends Component {
             currentFilter: null
         }
     }
-    componentDidMount = () => {
-      // fetch user and referrals from the server when component mounts
 
-        //fetch received referrals by default
-        this.props.fetchUser();
-        this.props.fetchReferrals(RECEIVED);
-
-    }
     render(){
         return (
             <div>

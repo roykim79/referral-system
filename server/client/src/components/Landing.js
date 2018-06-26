@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import logo from '../RS-logo.png'
+import {withRouter} from 'react-router-dom';
+import {fetchUser} from '../actions'
 import {usernameField, passwordField} from '../utils/inputField.js'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 
 
@@ -15,14 +19,22 @@ class Landing extends Component{
         }
     }
 
-    componentDidMount(){
+    componentDidMount = async() => {
+      await this.props.fetchUser()
+      if(this.props.auth) {
+        this.props.history.push('/dashboard')
+      } 
       const username = usernameField()
       const password = passwordField()
+
     }
 
-    submitLogin = () => {
+    submitLogin = async() => {
         //This will be once logins are supported and creating an account
-        axios.post(`/api/login`, this.state);
+        let response = await axios.post(`/api/login`, this.state);
+        if (response) {
+          this.props.history.push('/dashboard')
+        }
     }
 
     render() {
@@ -39,7 +51,7 @@ class Landing extends Component{
                 </section>
 
 
-                <form action="home.html">
+                <form onSubmit={() => {this.submitLogin(this.state.username, this.state.password)}}>
 
                   <div className="mdc-text-field mdc-text-field--box username">
                     <label className="mdc-floating-label" for="username-input">Username</label>
@@ -53,7 +65,7 @@ class Landing extends Component{
                   <div className="mdc-text-field mdc-text-field--box password">
                     <label className="mdc-floating-label" for="password-input">Password</label>
                     <input onChange={(event) => {this.setState({password: event.target.value})}}
-                      type="password" className="mdc-text-field__input" id="password-input" name="password" required minlength="8"/>
+                      type="password" className="mdc-text-field__input" id="password-input" name="password" required minLength="8"/>
                     <div className="mdc-line-ripple"></div>
                   </div>
 
@@ -61,7 +73,7 @@ class Landing extends Component{
 
 
                   <div className="button-container">
-                    <button onClick={() => {this.submitLogin(this.state.username, this.state.password)}} className="mdc-button mdc-button--raised next">
+                    <button type='Submit' className="mdc-button mdc-button--raised next">
                       Login
                     </button>
                   </div>
@@ -74,4 +86,10 @@ class Landing extends Component{
     }
 }
 
-export default Landing;
+const mapDispatchToProps = (dispatch) => {
+return bindActionCreators({fetchUser}, dispatch)
+}
+const mapStateToProps = ({auth}) => {
+  return {auth}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Landing));
