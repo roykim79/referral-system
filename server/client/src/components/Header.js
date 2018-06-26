@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
+import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import axios from 'axios';
-import logo from '../RS-logo.png'
+import logo from '../RS-logo.png';
 
 class LoginHeader extends React.Component {
   render() {
@@ -13,7 +15,7 @@ class OtherHeader extends React.Component {
 
   // }
 
-  logoutUser() {
+  logOut = () => {
     axios.get(`/api/logout`);
     this.props.history.push('/');
   }
@@ -36,7 +38,7 @@ class OtherHeader extends React.Component {
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end app-nav-header" role="toolbar">
             <a href="#" className="material-icons mdc-top-app-bar__action-item action-margin">My Organization</a>
             <a href="#" className="material-icons mdc-top-app-bar__action-item action-margin">Settings</a>
-            <a onClick={() => {this.logoutUser()}} href="#" className="material-icons mdc-top-app-bar__action-item action-margin">Logout</a>
+            <a onClick={this.logOut} className="material-icons mdc-top-app-bar__action-item action-margin">Logout</a>
           </section>
         </div>
       </header>
@@ -47,8 +49,12 @@ class OtherHeader extends React.Component {
 
 class Header extends Component {
   render() {
-    return isLoggedIn() ? <OtherHeader /> : <LoginHeader />
+    return this.props.auth ? <OtherHeader /> : <LoginHeader />
   }
 }
 
-export default Header;
+const mapStateToProps = ({auth}) => {
+  return {auth};
+}
+
+export default connect(mapStateToProps)(withRouter(Header));
