@@ -6,7 +6,7 @@ const ReferralSchema = new Schema({
     client_phone: String,
     client_email: String,
     description: String,
-    datecreated: {
+    dateCreated: {
         type: Date,
         default: Date.now
     },
@@ -34,7 +34,7 @@ const ReferralSchema = new Schema({
     tasks: [{
         date: {
             type: Date,
-            default: new Date()
+            default: Date.now
         },
         text: String,
         posting_user: String

@@ -25,6 +25,7 @@ class Referral extends Component {
       )
     } else {
     let referral = this.props.referralDetail;
+    console.log(referral)
     debugger;
     return (
       <div>
@@ -60,10 +61,9 @@ class Referral extends Component {
             <h2>tasks</h2>
             <div className="referral-notes-content">
             {referral.tasks.map((note) => {
-              debugger;
               return (
                 <div>
-              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.value).format('MMMM Do YYYY, h:mm:ss a')}</span> </div>
+              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.date).format("LLLL")}</span> </div>
                 <hr/>
                 </div>
                 ) 
