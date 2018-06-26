@@ -22,9 +22,13 @@ passport.deserializeUser((id, done) => {
 });
 
 passport.use('login', new LocalStrategy(
+  {
+  callbackURL: '/',
+  proxy: true
+  },
   function(username, password, done) {
     User.findOne({ username: username }, function (err, user) {
-      if (err) { return done(err); }
+      // if (err) { return done(err); }
       if (!user) {
         return done(null, false, { message: 'Incorrect username/password.' });
       }

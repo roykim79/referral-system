@@ -9,14 +9,26 @@ const requireLogin = require('../middlewares/requireLogin');
 //get api/tags
 
 module.exports = app => {
-    // gets user by user id
-    app.get('/api/user/:user', (request, response) => {
-        User.findById({_id: request.params.user})
-        .exec((error, user) => {
-            if (error) {
-                return response.status(400).send("User not found");
+      
+    // Takes in information from req.body and updates the organization info.
+    app.put('/api/my_organization', requireLogin, (request, response) => {
+        Organization.findOne({_id: request.user.organization.toHexString()})
+        .exec((error, organization) => {
+
+            if (request.body) {
+
+                let keys = Object.keys(request.body)
+
+                keys.forEach(key => {
+                    if(organization[key] != null){
+                        organization[key] = request.body[key]
+                    }
+                })
+                organization.save()
+                return response.send(organization);
+            } else {
+                return response.status(400).send('Nothing to be updated');
             }
-            response.send(user)
         })
     })
 
@@ -30,13 +42,12 @@ module.exports = app => {
             response.send(user.organization)
         })
     })
-
-    // get organization by organization id
-    app.get('/api/organization/:organization', (request, response) => {
-        Organization.findById({_id: request.params.organization})
-        .exec((error, organization) => {
-            if(error) {
-                return response.status(400).send("The organization was not found");
+    
+    // gets all organizations and returns the organization name and id
+    app.get('/api/organizations/all', (request, response) => {
+        Organization.find({}, {organizationName: 1}, ).exec((error, organization) => {
+            if (error) {
+                return response.status(400).send("Organization not found, please try again");
             }
             response.send(organization)
         })
@@ -86,6 +97,63 @@ module.exports = app => {
             return response.status(400).send("Unable to create organization, please fill out required fields.");
         }
     })
+
+
+    //THESE BOTTOM ROUTES ARE JUST TESTS FOR ME. JUST 
+    //EXTRA ROUTES FOR TESTING AND PRACTICE
+       // gets user by user id
+       app.get('/api/user/:user', (request, response) => {
+        User.findById({_id: request.params.user})
+        .exec((error, user) => {
+            if (error) {
+                return response.status(400).send("User not found");
+            }
+            response.send(user)
+        })
+    })
+
+    // gets all users
+    app.get('/api/users', (request, response) => {
+        User.find({}).exec((error, users) => {
+            if (error) {
+                return response.status(400).send("User not found");
+            }
+            response.send(users)
+        })
+    })
+
+    // gets organization by organization id
+    app.get('/api/organization/:organization', (request, response) => {
+        Organization.findById({_id: request.params.organization})
+        .exec((error, organization) => {
+            if(error) {
+                return response.status(400).send("The organization was not found");
+            }
+            response.send(organization)
+        })
+    })
+
+    // get organization by organization id
+    app.get('/api/organizations/:organization_id', (request, response) => {
+        Organization.findById({_id: request.params.organization_id})
+        .exec((error, organization) => {
+            if(error) {
+                return response.status(400).send("The organization was not found");
+            }
+            response.send(organization.id)
+        })
+    })
+
+    // finds all organizations
+    app.get('/api/organizations', (request, response) => {
+        Organization.find({}).exec((error, organization) => {
+            if (error) {
+                return response.status(400).send("Organization not found");
+            }
+            response.send(organization)
+        })
+    })
+
 }
     // app.put('/api/organizations', (request, response) => {
     //     response.send(req)

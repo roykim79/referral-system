@@ -16,6 +16,8 @@ module.exports = app => {
         let organizationNamesArray = ["OrganizationA","OrganizationB","OrganizationC"];
         let userNameArray = ["userA", "userB", "userC"];
         let tagIds = [];
+        let sampleOrg;
+        let sampleUser;
 
         tagsArray.forEach(tag => {
             let newTag = new Tags({
@@ -43,7 +45,6 @@ module.exports = app => {
                 lastName: "Hayslip",
                 email: "aaron@projectshift.io",
                 organization: newOrganization.id,
-                status: "active",
                 phone: "(919)123-4567"   
             })
     
@@ -58,6 +59,11 @@ module.exports = app => {
             newOrganization.save((err) => {
                 if (err) throw err
             }) 
+
+            if(i == 2){
+                sampleOrg = newOrganization;
+                sampleUser = user;
+            }
         }
          
 
@@ -65,7 +71,8 @@ module.exports = app => {
             Tags: tagsArray,
             Organizations: organizationNamesArray,
             Usernames: userNameArray,
-            Password: "password"
-        })
+            Password: "password",
+            sampleOrganization: sampleOrg, 
+            sampleUser: sampleUser})
     })
 }
