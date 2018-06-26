@@ -2,17 +2,24 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {fetchReferrals} from '../actions'
 import { bindActionCreators } from 'redux';
+import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 
 class Referral extends Component {
-  constructor (props) {
+  constructor(props) {
     super(props)
+
+    this.state = {
+      text : ''
+    }
+  }
+  submitNote = () => {
+    axios.post(`/api/referrals/${this.props.match.params.referralId}/notes`, this.state)
   }
   
   render() {
-    debugger;
     var referral = this.props.referrals.find((referral) => {
-      return referral._id = this.props.match.params.id
+      return referral._id = this.props.match.params.referralId
     })
     if(!referral) {
       return (<div onClick={() => {this.props.history.push('/dashboard')}}> Sorry! Something went wrong, please click here to head back </div>)
@@ -48,10 +55,19 @@ class Referral extends Component {
             Email: {referral.referring_user.email}
           </div>
           <div className="referral-notes">
-            <h2>Notes</h2>
-            <div className="referral-notes-content"></div>
-            <div className="referral-notes-input"><input type="text"/></div>
-            <div className="referral-notes-save"><button>Save</button></div>
+            <h2>tasks</h2>
+            <div className="referral-notes-content">
+            {referral.tasks.map((note) => {
+              return (
+                <div>
+              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {note.date}</span> </div>
+                <hr/>
+                </div>
+                ) 
+
+            })}</div>
+            <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
+            <div className="referral-notes-save"><button onClick={() => {this.submitNote()}}>Save</button></div>
 
           </div>
 
