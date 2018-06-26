@@ -9,6 +9,28 @@ const requireLogin = require('../middlewares/requireLogin');
 //get api/tags
 
 module.exports = app => {
+      
+    // Takes in information from req.body and updates the organization info.
+    app.put('/api/my_organization', requireLogin, (request, response) => {
+        Organization.findOne({_id: request.user.organization.toHexString()})
+        .exec((error, organization) => {
+
+            if (request.body) {
+
+                let keys = Object.keys(request.body)
+
+                keys.forEach(key => {
+                    if(organization[key] != null){
+                        organization[key] = request.body[key]
+                    }
+                })
+                organization.save()
+                return response.send(organization);
+            } else {
+                return response.status(400).send('Nothing to be updated');
+            }
+        })
+    })
 
     // get organization by user id
     app.get('/api/:user/organization', (request, response) => {
@@ -89,6 +111,7 @@ module.exports = app => {
             response.send(user)
         })
     })
+
     // gets all users
     app.get('/api/users', (request, response) => {
         User.find({}).exec((error, users) => {
@@ -110,8 +133,6 @@ module.exports = app => {
         })
     })
 
-
-
     // get organization by organization id
     app.get('/api/organizations/:organization_id', (request, response) => {
         Organization.findById({_id: request.params.organization_id})
@@ -120,6 +141,16 @@ module.exports = app => {
                 return response.status(400).send("The organization was not found");
             }
             response.send(organization.id)
+        })
+    })
+
+    // finds all organizations
+    app.get('/api/organizations', (request, response) => {
+        Organization.find({}).exec((error, organization) => {
+            if (error) {
+                return response.status(400).send("Organization not found");
+            }
+            response.send(organization)
         })
     })
 
