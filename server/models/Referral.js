@@ -34,7 +34,7 @@ const ReferralSchema = new Schema({
     tasks: [{
         date: {
             type: Date,
-            default: Date.now
+            default: new Date()
         },
         text: String,
         posting_user: String
