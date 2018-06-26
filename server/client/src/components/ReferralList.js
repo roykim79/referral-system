@@ -4,6 +4,7 @@ import {fetchReferrals} from '../actions'
 import {connect} from 'react-redux';
 import {Link, withRouter} from 'react-router-dom';
 import { bindActionCreators } from 'redux';
+const moment = require('moment');
 const RECEIVED = 'received';
 const SENT = 'sent';
 
@@ -20,7 +21,7 @@ class ReferralList extends Component {
         if(!this.props.referrals) {
             return (<div>Loading... </div>)
         }
-        let columns = [{Header: 'Organization', accessor: 'referring_organization.organizationName'},{Header: 'Name', accessor: 'referring_user.firstName'},{Header: 'Client', accessor: 'client_name'}, {Header: 'Date', accessor: 'created'}, {Header: 'Status', accessor: 'status'}]
+        let columns = [{Header: 'Organization', accessor: 'referring_organization.organizationName'},{Header: 'Name', accessor: 'referring_user.firstName'},{Header: 'Client', accessor: 'client_name'}, {Header: 'Date', accessor: 'created', Cell: props => <span> {moment(props.value).format('MMMM Do YYYY, h:mm:ss a')} </span>}, {Header: 'Status', accessor: 'status'}]
         let data;
         if(this.props.status !== null){
             data = this.props.referrals.filter((referral) => {
