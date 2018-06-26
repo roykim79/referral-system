@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import {fetchReferrals} from '../actions'
 import { bindActionCreators } from 'redux';
+import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 
 class Referral extends Component {
@@ -12,10 +13,11 @@ class Referral extends Component {
       text : ''
     }
   }
-
+  submitNote = () => {
+    axios.post(`/api/referrals/${this.props.match.params.referralId}/notes`, this.state)
+  }
   
   render() {
-    debugger;
     var referral = this.props.referrals.find((referral) => {
       return referral._id = this.props.match.params.referralId
     })
@@ -65,7 +67,7 @@ class Referral extends Component {
 
             })}</div>
             <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
-            <div className="referral-notes-save"><button>Save</button></div>
+            <div className="referral-notes-save"><button onClick={() => {this.submitNote()}}>Save</button></div>
 
           </div>
 
