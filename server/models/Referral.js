@@ -12,7 +12,7 @@ const ReferralSchema = new Schema({
     },
     status: {
         type: String,
-        default: "Pending",
+        default: "pending",
         lowercase: true
     },
     referring_organization: {

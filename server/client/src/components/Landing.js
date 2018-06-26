@@ -20,13 +20,13 @@ class Landing extends Component{
       const password = passwordField()
     }
 
-    submitLogin = () => {
+    submitLogin = (e) => {
         //This will be once logins are supported and creating an account
+        e.preventDefault();
         axios.post(`/api/login`, this.state);
     }
 
     render() {
-      console.log(this.state)
         return (
             <div>
                 <h2> Welcome to Referral System. Please change this text to something meaningful.</h2>
@@ -39,7 +39,7 @@ class Landing extends Component{
                 </section>
 
 
-                <form action="home.html">
+                <form onSubmit={this.submitLogin}>
 
                   <div className="mdc-text-field mdc-text-field--box username">
                     <label className="mdc-floating-label" for="username-input">Username</label>
@@ -61,7 +61,7 @@ class Landing extends Component{
 
 
                   <div className="button-container">
-                    <button onClick={() => {this.submitLogin(this.state.username, this.state.password)}} className="mdc-button mdc-button--raised next">
+                    <button types="submit" className="mdc-button mdc-button--raised next">
                       Login
                     </button>
                   </div>
