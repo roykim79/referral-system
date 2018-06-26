@@ -22,7 +22,7 @@ class ReferralList extends Component {
         if(!this.props.referrals) {
             return (<div>Loading... </div>)
         }
-        let columns = [{Header: 'Organization', accessor: 'referring_organization.organizationName'},{Header: 'Name', accessor: 'referring_user.firstName'},{Header: 'Client', accessor: 'client_name'}, {Header: 'Date', accessor: 'created', Cell: props => <span> {moment(props.value).format('MMMM Do YYYY, h:mm:ss a')} </span>}, {Header: 'Status', accessor: 'status'}]
+        let columns = [{Header: 'Organization', accessor: 'referring_organization.organizationName'},{Header: 'Name', accessor: 'referring_user.firstName'},{Header: 'Client', accessor: 'client_name'}, {Header: 'Date', accessor: 'dateCreated', Cell: props => <span> {moment(props.value).format('MMMM Do YYYY, h:mm:ss a')} </span>}, {Header: 'Status', accessor: 'status'}]
         let data;
         if(this.props.status !== null){
             data = this.props.referrals.filter((referral) => {
@@ -46,8 +46,7 @@ class ReferralList extends Component {
 
     render() {
 
-      return (<div>Table</div>)
-      // this.renderTable()
+      return this.renderTable()
     }
 }
 

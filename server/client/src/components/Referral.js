@@ -14,15 +14,17 @@ class Referral extends Component {
       text : ''
     }
   }
-
+  componentWillMount = async() => {
+    await this.props.fetchDetail(this.props.match.params.referralId)
+  }
  
   render() {
-    if(!this.props.detail) {
+    if(!this.props.referralDetail) {
       return (
       <div onClick={() => {this.props.history.push('/dashboard')}}> Loading....</div>
       )
-    }
-    let referral = this.props.detail;
+    } else {
+    let referral = this.props.referralDetail;
     return (
       <div>
         <div className="referral-header">
@@ -75,7 +77,7 @@ class Referral extends Component {
 
 
       </div>
-    )
+    )}
   }
 }
 
@@ -84,7 +86,7 @@ class Referral extends Component {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({fetchReferrals, submitNote, fetchDetail}, dispatch);
 }
-function mapStateToProps({referrals, detail}) {
-  return {referrals, detail}
+function mapStateToProps({referrals, referralDetail}) {
+  return {referrals, referralDetail}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Referral));
