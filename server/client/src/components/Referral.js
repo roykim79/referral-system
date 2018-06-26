@@ -61,7 +61,7 @@ class Referral extends Component {
             {referral.tasks.map((note) => {
               return (
                 <div>
-              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.value).format('MMMM Do YYYY, h:mm:ss a')}</span> </div>
+              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.value).format("LLLL")}</span> </div>
                 <hr/>
                 </div>
                 ) 
