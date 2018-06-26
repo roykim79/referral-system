@@ -1,7 +1,11 @@
 import React, {Component} from 'react';
 import axios from 'axios';
 import logo from '../RS-logo.png'
+import {withRouter} from 'react-router-dom';
+import {fetchUser} from '../actions'
 import {usernameField, passwordField} from '../utils/inputField.js'
+import { bindActionCreators } from 'redux';
+import { connect } from 'react-redux';
 
 
 
@@ -15,15 +19,22 @@ class Landing extends Component{
         }
     }
 
-    componentDidMount(){
-      const username = usernameField()
-      const password = passwordField()
-    }
+    componentDidMount = async() => {
+      await this.props.fetchUser()
+      if(this.props.auth) {
+        this.props.history.push('/dashboard')
+      } else {
+        let  username = usernameField()
+        let  password = passwordField()
+    }}
 
-    submitLogin = (e) => {
+    submitLogin = async(e) => {
         //This will be once logins are supported and creating an account
         e.preventDefault();
-        axios.post(`/api/login`, this.state);
+        let response =  await axios.post(`/api/login`, this.state);
+        if (response) {
+          this.props.history.push('/dashboard');
+        }
     }
 
     render() {
@@ -53,7 +64,7 @@ class Landing extends Component{
                   <div className="mdc-text-field mdc-text-field--box password">
                     <label className="mdc-floating-label" for="password-input">Password</label>
                     <input onChange={(event) => {this.setState({password: event.target.value})}}
-                      type="password" className="mdc-text-field__input" id="password-input" name="password" required minlength="8"/>
+                      type="password" className="mdc-text-field__input" id="password-input" name="password" required minLength="8"/>
                     <div className="mdc-line-ripple"></div>
                   </div>
 
@@ -74,4 +85,10 @@ class Landing extends Component{
     }
 }
 
-export default Landing;
+const mapDispatchToProps = (dispatch) => {
+return bindActionCreators({fetchUser}, dispatch)
+}
+const mapStateToProps = ({auth}) => {
+  return {auth}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Landing));

@@ -18,13 +18,11 @@ class Dashboard extends Component {
         }
     }
     componentDidMount = () => {
-      // fetch user and referrals from the server when component mounts
+        if(!this.props.auth) {
+          this.props.history.push('/')
+        }
+    } 
 
-        //fetch received referrals by default
-        this.props.fetchUser();
-        this.props.fetchReferrals(RECEIVED);
-
-    }
     render(){
         return (
             <div>
@@ -108,5 +106,8 @@ class Dashboard extends Component {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({fetchReferrals, fetchUser}, dispatch)
 }
+const mapStateToProps = ({auth}) => {
+  return {auth};
+}
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
