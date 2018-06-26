@@ -34,6 +34,10 @@ const ReferralSchema = new Schema({
         },
         text: String,
         posting_user: String
+    }],
+    custom_fields: [{
+        label: String,
+        value: String
     }]
 })
 

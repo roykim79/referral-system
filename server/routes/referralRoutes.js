@@ -110,5 +110,16 @@ module.exports = app => {
             }
         })
     })
+
+    //gets a single referral by id
+    app.get("/api/referrals/:referralId", (req, res) => {
+        Referral.findById(req.params.referralId, (err, data) => {
+            if(err){
+                console.log(err);
+                res.end();
+            }
+            res.send(data);
+        })
+    })
     
 }

@@ -14,9 +14,11 @@
   margin: 40px auto;
 }
 
+
+
+
 .mdc-text-field__input{
   padding-left:16px!important;
-  margin-top:6px!important;
 }
 
 .input-text{
@@ -25,12 +27,23 @@
 
 .button-container {
   display: flex;
+  // justify-content: flex-end;
+  width: 300px;
+  // margin: auto;
+}
+
+.button-container button {
+  margin: 3px;
+}
+
+.login-button-container {
+  display: flex;
   justify-content: flex-end;
   width: 300px;
   margin: auto;
 }
 
-.button-container button {
+.login-button-container button {
   margin: 3px;
 }
 
@@ -52,7 +65,8 @@ body {
 }
 
 .app-nav-header {
-  @include mdc-top-app-bar-fill-color(white)
+  // @include mdc-top-app-bar-fill-color(white)
+  height:70px
 }
 
 .side-drawer{
@@ -94,6 +108,7 @@ body {
   fill: currentColor;
 }
 
+
 .ml-1{
   margin-left: 10px;
 }
@@ -115,10 +130,4 @@ body {
 .move-back{
   z-index: -1;
   margin-bottom: 50px
-}
-
-// Home page styles
-
-.home {
-
 }

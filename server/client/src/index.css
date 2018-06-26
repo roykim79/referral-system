@@ -4,11 +4,29 @@ body {
   font-family: sans-serif;
 }
 
+
+.mdc-text-field__input.form-input-referral{
+  width:400px!important
+}
+
+.mdc-text-field--textarea .mdc-text-field__label{
+  background-color: rgba(233,171,88,0)!important;
+}
+
+.mdc-floating-label {
+  pointer-events: none;
+}
+
 .referral-notes-content {
   border: 1px solid #aaa;
   height: 50vh;
   overflow: scroll;
   width: 50%;
+}
+
+.add-referral-header {
+  padding: 10px;
+  border-bottom: 1px solid #aaa;
 }
 
 .header {
@@ -24,3 +42,68 @@ body {
   float: right;
 }
 
+.cell-border{
+  border: solid 1px blue
+}
+
+.right{
+  float:right;
+  display: inline-block;
+}
+
+* {box-sizing: border-box;}
+.wrapper {
+  margin: 0 auto;
+}
+
+.wrapper > div {
+  /* border: 2px solid rgb(233,171,88); */
+  border-radius: 5px;
+  /* background-color: rgba(233,171,88,.2); */
+}
+
+.wrapper {
+  display: grid;
+  grid-template-columns: repeat(11, 1fr);
+  grid-gap: 0px;
+  grid-auto-rows: minmax(80px, auto);
+}
+.grid-header {
+  grid-column: 1/12;
+  grid-row: 1;
+}
+.body {
+  grid-column: 1 / 12;
+  grid-row: 2;
+}
+.section-organization {
+  display: inline-block;
+  grid-column: 4 / 10;
+  grid-row: 1;
+}
+
+.wrapper > section {
+  /* border: 2px solid rgb(50,171,222); */
+  border-radius: 5px;
+  /* background-color: rgba(50,171,222,.2); */
+}
+
+.section-client {
+  grid-column: 4 / 10;
+  grid-row: 2;
+}
+
+.find{
+  margin-left: 10px!important;
+  margin-bottom:20px!important;
+}
+
+.grid-1-1{
+  grid-column: 1/12;
+  grid-row: 1;
+}
+
+.disabled{
+  pointer-events:none;
+  /* background-color: rgba(50,50,50,.2); */
+}
