@@ -20,14 +20,15 @@ class Landing extends Component{
     }
 
     componentDidMount = async() => {
+      let username;
+      let password;
       await this.props.fetchUser()
       if(this.props.auth) {
         this.props.history.push('/dashboard')
-      } 
-      const username = usernameField()
-      const password = passwordField()
-
-    }
+      } else {
+        username = usernameField()
+        password = passwordField()
+    }}
 
     submitLogin = async(e) => {
         //This will be once logins are supported and creating an account
