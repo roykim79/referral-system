@@ -4,6 +4,7 @@ import {fetchReferrals} from '../actions'
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
+const moment = require('moment');
 
 class Referral extends Component {
   constructor(props) {
@@ -60,7 +61,7 @@ class Referral extends Component {
             {referral.tasks.map((note) => {
               return (
                 <div>
-              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {note.date}</span> </div>
+              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.value).format('MMMM Do YYYY, h:mm:ss a')}</span> </div>
                 <hr/>
                 </div>
                 ) 
