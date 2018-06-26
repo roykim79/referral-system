@@ -106,5 +106,8 @@ class Dashboard extends Component {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({fetchReferrals, fetchUser}, dispatch)
 }
+const mapStateToProps = ({auth}) => {
+  return {auth};
+}
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);
