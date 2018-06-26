@@ -19,10 +19,10 @@ class Landing extends Component{
         }
     }
 
-    componentDidMount = async() => {
+    componentDidMount = () => {
       let username;
       let password;
-      await this.props.fetchUser()
+      this.props.fetchUser()
       if(this.props.auth) {
         this.props.history.push('/dashboard')
       } else {
