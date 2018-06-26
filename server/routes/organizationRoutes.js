@@ -26,6 +26,7 @@ module.exports = app => {
     //The organization ID will be in req.body.user.organization
     app.get('/api/my_organization', requireLogin, (request, response) => {
         Organization.findOne({_id: request.user.organization.toHexString()})
+        .populate('tags')
         .exec((error, organization) => {
             if(error) {
                 return response.status(400).send("The organization was not found");
@@ -69,7 +70,7 @@ module.exports = app => {
         })
     })
     
-    // gets all organizations and returns the organization name and id- ALSO tags and logos
+    // gets all organizations and returns the organization name, ID, tags, logos
     app.get('/api/organizations/all', (request, response) => {
         Organization.find({}, {organizationName: 1, tags: 1, logo: 1} ).exec((error, organization) => {
             if (error) {
