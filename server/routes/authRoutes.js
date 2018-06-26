@@ -3,7 +3,9 @@ const User = require('../models/User')
 
 module.exports = app => {
   // if login success redirect to /dashboard, if fail redirect to /landing
-  app.post('/api/login', passport.authenticate('login', { successFlash: 'Welcome!' }));
+  app.post('/api/login', passport.authenticate('login', { successFlash: 'Welcome!' },(req,res) => {
+    res.send("true")
+  }));
 
 
   // just to check if cookie is working.
