@@ -22,12 +22,11 @@ class Landing extends Component{
 
     submitLogin = (e) => {
         //This will be once logins are supported and creating an account
-        e.preventDefault()
+        e.preventDefault();
         axios.post(`/api/login`, this.state);
     }
 
     render() {
-      console.log(this.state)
         return (
             <div>
                 <h2> Welcome to Referral System. Please change this text to something meaningful.</h2>
