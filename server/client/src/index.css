@@ -78,9 +78,75 @@ body {
 }
 .section-organization {
   display: inline-block;
-  grid-column: 4 / 10;
+  grid-column: 4 / 12;
   grid-row: 1;
 }
+
+.section-organization > div {
+  display: inline-block;
+}
+
+.row{
+  display: inline-block;
+}
+
+.exit-window{
+  position: absolute;
+  top: 2px;
+  right: 2px;
+  cursor: pointer;
+}
+
+/* @media (min-width:870px) { */
+  .organization-modal {
+    position: absolute;
+    top: 100px;
+    border: solid 1px black;
+    background-color: white;
+    left: calc(50% - 220px);
+    width: 435px;
+    height:80%;
+    padding:25px;
+  }
+/* } */
+@media only screen and  (max-width:869px) {
+  .organization-modal {
+    border: solid 1px black;
+    background-color: white;
+    position: absolute;
+    top: 100px;
+    left: calc(50% - 220px);
+    width: 440px;
+    height:80%;
+    padding:25px;
+  }
+}
+@media only screen and  (max-width:440px) {
+  .organization-modal {
+    border: solid 1px black;
+    background-color: white;;
+    position: absolute;
+    top: 100px;
+    left:calc(50% - 140px);
+    width: 280px;
+    height:80%;
+    padding:10px;
+  }
+  .mdc-text-field__input.form-input-referral{
+    width:260px!important;
+  }
+}
+
+/* .organization-modal{
+  border: solid 1px black;
+  background-color: white;
+  position: absolute;
+  top: 100px;
+  margin: auto;
+  width: 450px;
+  height:80%;
+  padding:25px;
+} */
 
 .wrapper > section {
   /* border: 2px solid rgb(50,171,222); */
@@ -94,8 +160,9 @@ body {
 }
 
 .find{
-  margin-left: 10px!important;
-  margin-bottom:20px!important;
+  position: relative;
+  top: -32px;
+  left: 10px;
 }
 
 .grid-1-1{

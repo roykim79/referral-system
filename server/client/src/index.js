@@ -6,7 +6,7 @@ import promise from "redux-promise";
 import App from "./components/App";
 import reducers from './reducers/index'
 
-
+import 'material-components-web/dist/material-components-web.min.css';
 import 'react-table/react-table.css'
 import './index.css'
 import './App.css'

@@ -45,8 +45,7 @@ class ReferralList extends Component {
 
     render() {
 
-      return (<div>Table</div>)
-      // this.renderTable()
+      return this.renderTable()
     }
 }
 
