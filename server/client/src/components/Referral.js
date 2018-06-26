@@ -1,24 +1,31 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import {fetchReferrals} from '../actions'
 import { bindActionCreators } from 'redux';
+import {withRouter} from 'react-router-dom';
 
 class Referral extends Component {
   constructor (props) {
     super(props)
-
-    // var referral = getReferral(props.match.params.id);
   }
   
   render() {
+    debugger;
+    var referral = this.props.referrals.find((referral) => {
+      return referral._id = this.props.match.params.id
+    })
+    if(!referral) {
+      return (<div onClick={() => {this.props.history.push('/dashboard')}}> Sorry! Something went wrong, please click here to head back </div>)
+    }
     return (
       <div>
         <div className="referral-header">
           <div className="back-button">
-            <a href="/">Back</a>
+            <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
           </div>
-          <div className="title">referral.client_name Referral<br/>From referral.organization</div>
+          <div className="title">{referral.client_name} Referral<br/>From {referral.referring_organization.organizationName}</div>
           <div className="referral-status">
-            Status: referral.status
+            Status: {referral.status}
             <span><button>Reject</button></span>
             <span><button>Accept</button></span>
           </div>
@@ -28,17 +35,17 @@ class Referral extends Component {
         <div className="referral-details">
           <div className="client-info">
             <h2>Client</h2>
-            Name: referral.client_name <br/>
-            Phone Number: referral.client_phone <br/>
-            Email: referral.client_email <br/>
-            Description: referral.description
+            Name: {referral.client_name} <br/>
+            Phone Number: {referral.client_phone} <br/>
+            Email: {referral.client_email} <br/>
+            Description: {referral.description}
           </div>
           <div className="member-info">
             <h2>Member</h2>
-            First Name: referral.referring_user.firstName <br/>
-            Last Name: referral.referring_user.lastName <br/>
-            Phone Number: referral.referring_user.phone <br/>
-            email: referral.referring_user.email
+            First Name: {referral.referring_user.firstName} <br/>
+            Last Name: {referral.referring_user.lastName} <br/>
+            Phone Number: {referral.referring_user.phone} <br/>
+            Email: {referral.referring_user.email}
           </div>
           <div className="referral-notes">
             <h2>Notes</h2>
@@ -58,9 +65,10 @@ class Referral extends Component {
 
 
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({getReferral}, dispatch);
-// }
-
-// export default connect(null, mapDispatchToProps)(Referral);
-export default Referral;
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({fetchReferrals}, dispatch);
+}
+function mapStateToProps({referrals}) {
+  return {referrals}
+}
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Referral));
