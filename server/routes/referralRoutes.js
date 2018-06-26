@@ -3,6 +3,7 @@ const Referral = require("../models/Referral");
 module.exports = app => {
     //Called by the dashboard. Gets all the referrals sent by the user's organization. The organization ID is sent in the request. Grouping by status will happen on the front end.
     app.get("/api/referrals/sent", (req, res) => {
+        //toHexString is because the browser was doing weird things
         Referral.find({ referring_organization: req.user.organization.toHexString() }).
         populate("referring_organization").
         populate("receiving_organization").
@@ -10,6 +11,7 @@ module.exports = app => {
         exec((err, data) => {
             if(err){
                 console.log(err);
+                res.end();
             }
             res.send(data);
         })
@@ -17,14 +19,18 @@ module.exports = app => {
     })
 
     //Called by the dashboard. Gets all referrals recieved by the user's organization. The organization ID is sent in the request. Grouping by status will happen on the front end.
+
     app.get("/api/referrals/received", (req, res) => {
+      //toHexString because the browser was doing weird things
         Referral.find({receiving_organization: req.user.organization.toHexString()}).
+
             populate("referring_organization").
             populate("receiving_organization").
             populate("referring_user").
             exec((err, data) => {
                 if(err){
                     console.log(err);
+                    res.end();
                 }
                 res.send(data);
             })
@@ -53,6 +59,7 @@ module.exports = app => {
         referral.save((err) => {
             if(err){
                 console.log(err);
+                res.end()
             } else {
                 res.send(referral);
             }
@@ -61,9 +68,10 @@ module.exports = app => {
 
     //adds a note to a specified referral
     app.post("/api/referrals/:referralId/notes", (req, res) => {
-        Referral.findbyId(req.params.referralId, (err, referral) => {
+        Referral.findById(req.params.referralId, (err, referral) => {
             if(err) {
                 console.log(err)
+                res.end();
             } else {
                 let name = req.user.firstName + " " + req.user.lastName;
                 referral.notes.push({
@@ -73,6 +81,28 @@ module.exports = app => {
                 referral.save((err) => {
                     if(err) {
                         console.log(err);
+                        res.end();
+                    } else {
+                        res.send(referral);
+                    }
+                })
+            }
+        })
+    })
+
+    //updates the status of a given referral. The new status should come in the query url
+    app.put("/api/referrals/:referralId", (req, res) => {
+        Referral.findById(req.params.referralId, (err, referral) => {
+            if(err){
+                console.log(err);
+                res.end();
+            }
+            else {
+                referral.status=req.query.status;
+                referral.save((err) => {
+                    if(err){
+                        console.log(err);
+                        res.end();
                     } else {
                         res.send(referral);
                     }
