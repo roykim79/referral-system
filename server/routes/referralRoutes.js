@@ -74,6 +74,7 @@ module.exports = app => {
                 res.end();
             } else {
                 let name = req.user.firstName + " " + req.user.lastName;
+                referral.dateUpdated = new Date();
                 referral.tasks.push({
                     posting_user: name,
                     text: req.body.text
@@ -98,6 +99,7 @@ module.exports = app => {
                 res.end();
             }
             else {
+                referral.dateUpdated = new Date();
                 referral.status=req.query.status;
                 referral.save((err) => {
                     if(err){

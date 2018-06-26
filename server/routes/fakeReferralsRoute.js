@@ -7,7 +7,7 @@ const mongoose = require('mongoose');
 module.exports = app => {
   // create fake referrals
   app.get('/api/fake-referrals', async (request, response) => {
-    // Referrals.collection.drop();
+    Referrals.collection.drop();
 
     let organizationNames = ["organizationa", "organizationb", "organizationc"];
     let usernames = ["userA", "userB", "userC"];
