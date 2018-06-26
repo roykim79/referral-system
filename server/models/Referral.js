@@ -6,7 +6,11 @@ const ReferralSchema = new Schema({
     client_phone: String,
     client_email: String,
     description: String,
-    created: {
+    datecreated: {
+        type: Date,
+        default: Date.now
+    },
+    dateUpdated: {
         type: Date,
         default: Date.now
     },
