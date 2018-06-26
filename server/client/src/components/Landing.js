@@ -61,7 +61,7 @@ class Landing extends Component{
 
 
 
-                  <div className="button-container">
+                  <div className="login-button-container">
                     <button types="submit" className="mdc-button mdc-button--raised next">
                       Login
                     </button>
