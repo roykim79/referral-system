@@ -74,7 +74,7 @@ module.exports = app => {
                 res.end();
             } else {
                 let name = req.user.firstName + " " + req.user.lastName;
-                referral.notes.push({
+                referral.tasks.push({
                     posting_user: name,
                     text: req.body.text
                 });
