@@ -33,7 +33,7 @@ class ReferralList extends Component {
                     getTrProps={(state, rowInfo, column) => {
                         return {
                             onClick: (e) => {
-                                this.props.history.push(`/referrals/${rowInfo.original._id}`)
+                                this.props.history.push(`/referral/${rowInfo.original._id}`)
                             }
                         }
                     }}

@@ -5,14 +5,11 @@ import { bindActionCreators } from 'redux';
 import {withRouter} from 'react-router-dom';
 
 class Referral extends Component {
-  constructor (props) {
-    super(props)
-  }
   
   render() {
     debugger;
     var referral = this.props.referrals.find((referral) => {
-      return referral._id = this.props.match.params.id
+      return referral._id = this.props.match.params.referralId
     })
     if(!referral) {
       return (<div onClick={() => {this.props.history.push('/dashboard')}}> Sorry! Something went wrong, please click here to head back </div>)
