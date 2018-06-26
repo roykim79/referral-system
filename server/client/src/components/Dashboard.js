@@ -17,6 +17,11 @@ class Dashboard extends Component {
             currentFilter: null
         }
     }
+    componentDidMount = () => {
+        if(!this.props.auth) {
+          this.props.history.push('/')
+        }
+    } 
 
     render(){
         return (
