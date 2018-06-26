@@ -14,9 +14,8 @@ class ReferralList extends Component {
     constructor(props) {
         super(props)
     }
-    componentWillMount = async () => {
-        await this.props.fetchReferrals(RECEIVED);
-        console.log(this.props.referrals)
+    componentWillMount = () => {
+        this.props.fetchReferrals(RECEIVED);
     }
     renderTable = () => {
         if(!this.props.referrals) {

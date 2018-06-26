@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchReferrals} from '../actions'
+import {fetchReferrals, submitNote, fetchDetail} from '../actions'
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
@@ -14,17 +14,19 @@ class Referral extends Component {
       text : ''
     }
   }
-  submitNote = () => {
-    axios.post(`/api/referrals/${this.props.match.params.referralId}/notes`, this.state)
+  componentWillMount = async() => {
+    await this.props.fetchDetail(this.props.match.params.referralId)
   }
-  
+ 
   render() {
-    var referral = this.props.referrals.find((referral) => {
-      return referral._id = this.props.match.params.referralId
-    })
-    if(!referral) {
-      return (<div onClick={() => {this.props.history.push('/dashboard')}}> Sorry! Something went wrong, please click here to head back </div>)
-    }
+    if(!this.props.referralDetail) {
+      return (
+      <div onClick={() => {this.props.history.push('/dashboard')}}> Loading....</div>
+      )
+    } else {
+    let referral = this.props.referralDetail;
+    console.log(referral)
+    debugger;
     return (
       <div>
         <div className="referral-header">
@@ -61,14 +63,14 @@ class Referral extends Component {
             {referral.tasks.map((note) => {
               return (
                 <div>
-              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.value).format("LLLL")}</span> </div>
+              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.date).format("LLLL")}</span> </div>
                 <hr/>
                 </div>
                 ) 
 
             })}</div>
             <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
-            <div className="referral-notes-save"><button onClick={() => {this.submitNote()}}>Save</button></div>
+            <div className="referral-notes-save"><button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button></div>
 
           </div>
 
@@ -76,16 +78,16 @@ class Referral extends Component {
 
 
       </div>
-    )
+    )}
   }
 }
 
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchReferrals}, dispatch);
+  return bindActionCreators({fetchReferrals, submitNote, fetchDetail}, dispatch);
 }
-function mapStateToProps({referrals}) {
-  return {referrals}
+function mapStateToProps({referrals, referralDetail}) {
+  return {referrals, referralDetail}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Referral));
