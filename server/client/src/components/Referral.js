@@ -11,13 +11,39 @@ class Referral extends Component {
     super(props)
 
     this.state = {
-      text : ''
+      accepted : false,
+      text : '',
     }
   }
+
   componentWillMount = async() => {
     await this.props.fetchDetail(this.props.match.params.referralId)
   }
- 
+
+  renderStatus(){
+    if(this.state.accepted){
+      return(
+        <div className="progress-container">
+          <ul className="progressbar">
+              <li className="complete">Accepted</li>
+              <li className="complete">Contacted</li>
+              <li className="active">Completed</li>
+          </ul>
+        </div>
+      )
+    } else {
+      return(
+        <div className="progress-container">
+          <button
+            onClick={(e)=>this.setState({accepted:true})}>Accept</button>
+          <button>Reject</button>
+        </div>
+      )
+
+    }
+
+  }
+
   render() {
     if(!this.props.referralDetail) {
       return (
@@ -25,9 +51,20 @@ class Referral extends Component {
       )
     } else {
     let referral = this.props.referralDetail;
-    debugger;
     return (
       <div>
+        <div className="wrapper">
+          <div className="grid-1-1">
+            {this.renderStatus()}
+          </div>
+          <div className="body">
+            <div className="wrapper">
+            </div>
+          </div>
+        </div>
+
+
+
         <div className="referral-header">
           <div className="back-button">
             <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
@@ -35,11 +72,10 @@ class Referral extends Component {
           <div className="title">{referral.client_name} Referral<br/>From {referral.referring_organization.organizationName}</div>
           <div className="referral-status">
             Status: {referral.status}
-            <span><button>Reject</button></span>
-            <span><button>Accept</button></span>
+
           </div>
         </div>
-        
+
 
         <div className="referral-details">
           <div className="client-info">
@@ -60,13 +96,12 @@ class Referral extends Component {
             <h2>tasks</h2>
             <div className="referral-notes-content">
             {referral.tasks.map((note) => {
-              debugger;
               return (
                 <div>
               <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.value).format('MMMM Do YYYY, h:mm:ss a')}</span> </div>
                 <hr/>
                 </div>
-                ) 
+                )
 
             })}</div>
             <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
