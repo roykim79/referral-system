@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME } from './types';
+import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME, SUBMIT_NOTE, FETCH_DETAIL } from './types';
 //fetch current logged in user
 export const fetchUser = () => {
     let response = axios.get(`/api/current_user`);
@@ -41,4 +41,15 @@ export const fetchAllOrgs = () => {
     let response = axios.get(`/api/organizations/all`);
 
     return {type: FETCH_ORGS_NAME, payload: response}
+}
+export const submitNote = (referralId, note) => {
+    let response = axios.post(`/api/referrals/${referralId}/notes`, note);
+
+    return {type: SUBMIT_NOTE, payload: response}
+}
+
+export const fetchDetail = (referralId) => {
+    let response = axios.get(`/api/referrals/${referralId}`);
+
+    return {type: FETCH_DETAIL, payload: response}
 }

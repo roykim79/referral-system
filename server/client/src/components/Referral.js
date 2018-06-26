@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchReferrals} from '../actions'
+import {fetchReferrals, submitNote, fetchDetail} from '../actions'
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
@@ -13,17 +13,15 @@ class Referral extends Component {
       text : ''
     }
   }
-  submitNote = () => {
-    axios.post(`/api/referrals/${this.props.match.params.referralId}/notes`, this.state)
-  }
-  
+
+ 
   render() {
-    var referral = this.props.referrals.find((referral) => {
-      return referral._id = this.props.match.params.referralId
-    })
-    if(!referral) {
-      return (<div onClick={() => {this.props.history.push('/dashboard')}}> Sorry! Something went wrong, please click here to head back </div>)
+    if(!this.props.detail) {
+      return (
+      <div onClick={() => {this.props.history.push('/dashboard')}}> Loading....</div>
+      )
     }
+    let referral = this.props.detail;
     return (
       <div>
         <div className="referral-header">
@@ -58,6 +56,7 @@ class Referral extends Component {
             <h2>tasks</h2>
             <div className="referral-notes-content">
             {referral.tasks.map((note) => {
+              debugger;
               return (
                 <div>
               <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {note.date}</span> </div>
@@ -67,7 +66,7 @@ class Referral extends Component {
 
             })}</div>
             <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
-            <div className="referral-notes-save"><button onClick={() => {this.submitNote()}}>Save</button></div>
+            <div className="referral-notes-save"><button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button></div>
 
           </div>
 
@@ -82,9 +81,9 @@ class Referral extends Component {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchReferrals}, dispatch);
+  return bindActionCreators({fetchReferrals, submitNote, fetchDetail}, dispatch);
 }
-function mapStateToProps({referrals}) {
-  return {referrals}
+function mapStateToProps({referrals, detail}) {
+  return {referrals, detail}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Referral));

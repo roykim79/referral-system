@@ -11,8 +11,8 @@ class LoginHeader extends React.Component {
 }
 
 class OtherHeader extends React.Component {
-  logOut = () => {
-    axios.get(`/api/logout`);
+  logOut = async() => {
+    await axios.get(`/api/logout`);
   }
 
   render() {
