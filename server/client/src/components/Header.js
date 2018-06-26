@@ -2,7 +2,13 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import logo from '../RS-logo.png'
 
-class Header extends Component {
+class LoginHeader extends React.Component {
+  render() {
+    return <div></div>
+  }
+}
+
+class OtherHeader extends React.Component {
   // constructor() {
 
   // }
@@ -35,6 +41,12 @@ class Header extends Component {
       </header>
       </div>
     )
+  }
+}
+
+class Header extends Component {
+  render() {
+    return isLoggedIn() ? <OtherHeader /> : <LoginHeader />
   }
 }
 
