@@ -13,7 +13,7 @@ module.exports = app => {
     let usernames = ["userA", "userB", "userC"];
     let clientNames = ["Roy", "Jeff", "Ilona"];
     let referralArray = [];
-    let statusArray = ["pending", "accepted", "contacted", "rejected"]
+    let statusArray = ["pending", "accepted", "contacted", "rejected", "completed"]
 
     let organizationObject = await Promise.all(organizationNames.map(organization => {
       return Organizations.findOne({ organizationName: organization }).then(result => {
@@ -43,7 +43,7 @@ module.exports = app => {
           referring_user: userObject[i].id,
           posting_user: userObject[i].id,
           notes: [{ text: `hi from ${userObject[i].firstName}`, posting_user: userObject[i].id }],
-          status: statusArray[Math.floor(Math.random() * Math.floor(4))]
+          status: statusArray[Math.floor(Math.random() * Math.floor(5))]
         })
   
         newReferral.save();
