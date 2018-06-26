@@ -17,8 +17,8 @@ class App extends Component {
       <BrowserRouter>
         <div>
           <Header />
-          <Route exact path="/" component={Dashboard} />
-          <Route path="/landing" component={Landing} />
+          <Route exact path="/" component={Landing} />
+          <Route path="/dashboard" component={Dashboard} />
           <Route path="/my-org" component={OrganizationInfo} />
           <Route path='/new-referral' component={NewReferral}  />
           <Route path='/referral/:referralId' component={Referral} />

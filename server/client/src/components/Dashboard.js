@@ -14,17 +14,22 @@ class Dashboard extends Component {
 
         //give component a state that holds the filter information for the react table
         this.state = {
-            currentFilter: null
+            currentFilter: null,
+            currentView: RECEIVED
         }
+
+        this.interval = setInterval(() => this.props.fetchReferrals(this.state.currentView), 15000);
     }
     componentDidMount = () => {
-      // fetch user and referrals from the server when component mounts
+        if(!this.props.auth) {
+          this.props.history.push('/')
+        }
+    } 
 
-        //fetch received referrals by default
-        this.props.fetchUser();
-        this.props.fetchReferrals(RECEIVED);
-
+    componentWillUnmount() {
+      clearInterval(this.interval);
     }
+
     render(){
         return (
             <div>
@@ -48,12 +53,12 @@ class Dashboard extends Component {
                             <nav className="mdc-list">
 
                               <a className="mdc-list-item"
-                                onClick={() => this.props.fetchReferrals(RECEIVED)}>
+                                onClick={() => {this.props.fetchReferrals(RECEIVED); this.setState({currentView: RECEIVED})}}>
                                 Received
                               </a>
 
                               <a className="mdc-list-item"
-                                onClick={() => this.props.fetchReferrals(SENT)}>
+                                onClick={() => {this.props.fetchReferrals(SENT); this.setState({currentView: SENT})}}>
                                 Outgoing
                               </a>
 
@@ -108,5 +113,8 @@ class Dashboard extends Component {
 const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({fetchReferrals, fetchUser}, dispatch)
 }
+const mapStateToProps = ({auth}) => {
+  return {auth};
+}
 
-export default connect(null, mapDispatchToProps)(Dashboard);
+export default connect(mapStateToProps, mapDispatchToProps)(Dashboard);

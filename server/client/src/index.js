@@ -10,6 +10,7 @@ import reducers from './reducers/index'
 import 'react-table/react-table.css'
 import './index.css'
 import './App.css'
+import 'material-icons'
 
 
 

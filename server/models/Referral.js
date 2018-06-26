@@ -12,7 +12,7 @@ const ReferralSchema = new Schema({
     },
     status: {
         type: String,
-        default: "Pending",
+        default: "pending",
         lowercase: true
     },
     referring_organization: {
@@ -27,7 +27,7 @@ const ReferralSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: "User"
     },
-    notes: [{
+    tasks: [{
         date: {
             type: Date,
             default: Date.now
