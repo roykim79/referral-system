@@ -11,23 +11,11 @@ class LoginHeader extends React.Component {
 }
 
 class OtherHeader extends React.Component {
-  // constructor() {
-
-  // }
-
   logOut = () => {
     axios.get(`/api/logout`);
-    this.props.history.push('/');
   }
 
   render() {
-    // if (!userLoggedIn) {
-    //   return (
-    //     <div className="header">
-    //       <h1>Referral System</h1>
-    //     </div>
-    //   )
-    // }
     return (
       <div className="mb-h">
       <header className="mdc-top-app-bar mdc-top-app-bar--short app-nav-header ">
@@ -38,7 +26,7 @@ class OtherHeader extends React.Component {
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end app-nav-header" role="toolbar">
             <a href="#" className="material-icons mdc-top-app-bar__action-item action-margin">My Organization</a>
             <a href="#" className="material-icons mdc-top-app-bar__action-item action-margin">Settings</a>
-            <a onClick={this.logOut} className="material-icons mdc-top-app-bar__action-item action-margin">Logout</a>
+            <a onClick={this.logOut} href="/" className="material-icons mdc-top-app-bar__action-item action-margin">Logout</a>
           </section>
         </div>
       </header>
