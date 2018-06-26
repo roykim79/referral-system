@@ -5,6 +5,14 @@ import { bindActionCreators } from 'redux';
 import {withRouter} from 'react-router-dom';
 
 class Referral extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      text : ''
+    }
+  }
+
   
   render() {
     debugger;
@@ -45,9 +53,18 @@ class Referral extends Component {
             Email: {referral.referring_user.email}
           </div>
           <div className="referral-notes">
-            <h2>Notes</h2>
-            <div className="referral-notes-content"></div>
-            <div className="referral-notes-input"><input type="text"/></div>
+            <h2>tasks</h2>
+            <div className="referral-notes-content">
+            {referral.tasks.map((note) => {
+              return (
+                <div>
+              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {note.date}</span> </div>
+                <hr/>
+                </div>
+                ) 
+
+            })}</div>
+            <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
             <div className="referral-notes-save"><button>Save</button></div>
 
           </div>
