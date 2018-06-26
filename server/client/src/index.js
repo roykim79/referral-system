@@ -6,7 +6,10 @@ import promise from "redux-promise";
 import App from "./components/App";
 import reducers from './reducers/index'
 
+
+import 'react-table/react-table.css'
 import './index.css'
+import './App.css'
 
 
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);

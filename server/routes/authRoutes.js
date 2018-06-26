@@ -3,10 +3,11 @@ const User = require('../models/User')
 
 module.exports = app => {
   // if login success redirect to /dashboard, if fail redirect to /landing
-  app.post('/api/login', passport.authenticate('login', {
-    successRedirect: '/dashboard',
-    failureRedirect: '/landing'
-  }));
+  app.post('/api/login', passport.authenticate('login', { session: true }),
+    function(req, res) {
+      res.json({ id: req.user.id, username: req.user.username });
+  });
+
 
   // just to check if cookie is working.
   app.get('/api/current_user', (req, res) => {
@@ -17,7 +18,7 @@ module.exports = app => {
   app.get('/api/logout', (req, res) => {
     req.session = null;
     req.logout();
-    res.redirect('/landing');
+    res.redirect('/');
   });
 
 }
