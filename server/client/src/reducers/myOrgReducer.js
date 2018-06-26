@@ -1,10 +1,10 @@
-import { FETCH_REFERRALS } from "../actions/types";
+import { MY_ORG } from "../actions/types";
 
 export default function(state = null, action) {
     switch (action.type) {
-        case FETCH_REFERRALS:
+        case MY_ORG:
             return action.payload.data || null;
-        default:
+      default:
         return state;
     }
   }
