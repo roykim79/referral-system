@@ -9,12 +9,37 @@ const requireLogin = require('../middlewares/requireLogin');
 //get api/tags
 
 module.exports = app => {
-      
+
+    //Get tag from query URL. when tag id is searched. The organizations associated
+    //with the tag are returned
+    app.get('/api/organizations_tag', (request, response) => {
+        Organization.find({tags: request.query.tag})
+        .exec((error, organization) => {
+            if (error) {
+                return response.status(400).send("The tag was not found");
+            }
+            response.send(organization)
+        })
+    })
+    
+    //Gets information about the logged in user's organization. 
+    //The organization ID will be in req.body.user.organization
+    app.get('/api/my_organization', requireLogin, (request, response) => {
+        Organization.findOne({_id: request.user.organization.toHexString()})
+        .exec((error, organization) => {
+            if(error) {
+                return response.status(400).send("The organization was not found");
+            }
+            response.send(organization)
+        })
+    })
+
     // Takes in information from req.body and updates the organization info.
+    //NOTE!!! Update tage hasn't been implemented yet. Everything else can be updated
     app.put('/api/my_organization', requireLogin, (request, response) => {
         Organization.findOne({_id: request.user.organization.toHexString()})
         .exec((error, organization) => {
-
+            
             if (request.body) {
 
                 let keys = Object.keys(request.body)
@@ -122,7 +147,7 @@ module.exports = app => {
         })
     })
 
-    // gets organization by organization id
+    // gets organization by organization id. Returns all info for organization
     app.get('/api/organization/:organization', (request, response) => {
         Organization.findById({_id: request.params.organization})
         .exec((error, organization) => {
@@ -133,7 +158,7 @@ module.exports = app => {
         })
     })
 
-    // get organization by organization id
+    // get organization by organization id- Returns only the organization ID
     app.get('/api/organizations/:organization_id', (request, response) => {
         Organization.findById({_id: request.params.organization_id})
         .exec((error, organization) => {
@@ -155,6 +180,3 @@ module.exports = app => {
     })
 
 }
-    // app.put('/api/organizations', (request, response) => {
-    //     response.send(req)
-    // })
