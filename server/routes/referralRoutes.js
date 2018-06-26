@@ -113,7 +113,10 @@ module.exports = app => {
 
     //gets a single referral by id
     app.get("/api/referrals/:referralId", (req, res) => {
-        Referral.findById(req.params.referralId, (err, data) => {
+        Referral.findById(req.params.referralId).populate("referring_organization")
+        .populate("receiving_organization")
+        .populate("referring_user")
+        .exec( (err, data) => {
             if(err){
                 console.log(err);
                 res.end();
