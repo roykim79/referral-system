@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
-import logo from '../RS-logo.png';
+import logo from '../RS-logo-white.png'
 
 class LoginHeader extends React.Component {
   render() {

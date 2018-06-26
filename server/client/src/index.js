@@ -13,6 +13,7 @@ import './App.css'
 import 'material-icons'
 
 
+
 const createStoreWithMiddleware = applyMiddleware(promise)(createStore);
 
 ReactDOM.render(
