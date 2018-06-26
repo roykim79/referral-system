@@ -15,10 +15,18 @@
     "webpack-dev-server": "^2.4.3"
   },
   "dependencies": {
+    "@material/button": "^0.36.1",
+    "@material/drawer": "^0.36.1",
+    "@material/image-list": "^0.35.0",
+    "@material/layout-grid": "^0.34.0",
+    "@material/list": "^0.36.0",
+    "@material/textfield": "^0.36.1",
+    "@material/top-app-bar": "^0.36.1",
     "axios": "^0.18.0",
     "bootstrap": "^4.1.1",
     "material-icons": "^0.2.3",
     "materialize-css": "^1.0.0-rc.2",
+    "moment": "^2.22.2",
     "react": "^16.4.1",
     "react-bootstrap": "^0.32.1",
     "react-dom": "^16.4.1",
@@ -29,14 +37,7 @@
     "react-tag-input": "^5.0.2",
     "redux": "^4.0.0",
     "redux-form": "^7.4.2",
-    "redux-promise": "^0.6.0",
-    "@material/button": "^0.36.1",
-    "@material/drawer": "^0.36.1",
-    "@material/image-list": "^0.35.0",
-    "@material/layout-grid": "^0.34.0",
-    "@material/list": "^0.36.0",
-    "@material/textfield": "^0.36.1",
-    "@material/top-app-bar": "^0.36.1"
+    "redux-promise": "^0.6.0"
   },
   "scripts": {
     "build-css": "node-sass-chokidar --include-path ./src --include-path ./node_modules src/ -o src/",
