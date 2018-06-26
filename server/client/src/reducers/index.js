@@ -5,6 +5,7 @@ import tagsReducer from './tagsReducer';
 import organizationReducer from './organizationReducer';
 import allOrgsReducer from './allOrgsReducer';
 import detailReducer from './detailReducer';
+import myOrgReducer from './myOrgReducer';
 
 export default combineReducers({
     auth: authReducer,
@@ -12,5 +13,6 @@ export default combineReducers({
     tags: tagsReducer,
     organizationSearchResults: organizationReducer,
     allOrgNames: allOrgsReducer,
-    referralDetail: detailReducer
+    referralDetail: detailReducer,
+    myOrg: myOrgReducer
 });

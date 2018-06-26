@@ -25,6 +25,7 @@ class Referral extends Component {
       )
     } else {
     let referral = this.props.referralDetail;
+    debugger;
     return (
       <div>
         <div className="referral-header">

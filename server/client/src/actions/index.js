@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME, SUBMIT_NOTE, FETCH_DETAIL } from './types';
+import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME, SUBMIT_NOTE, FETCH_DETAIL, MY_ORG } from './types';
 //fetch current logged in user
 export const fetchUser = () => {
     let response = axios.get(`/api/current_user`);
@@ -52,4 +52,10 @@ export const fetchDetail = (referralId) => {
     let response = axios.get(`/api/referrals/${referralId}`);
 
     return {type: FETCH_DETAIL, payload: response}
+}
+
+export const fetchMyOrg = () => {
+    let response = axios.get('/api/my_organization');
+
+    return {type: MY_ORG, payload: response};
 }
