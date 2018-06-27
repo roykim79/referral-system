@@ -70,12 +70,9 @@ module.exports = app => {
         })
     })
     
-
-    // gets all organizations and returns the organization name, id, and logo
+    // gets all organizations and returns the organization name, ID, tags, logos
     app.get('/api/organizations/all', (request, response) => {
-        Organization.find({}, {organizationName: 1, logo: 1, tags: 1} )
-        .populate("tags")
-        .exec((error, organization) => {
+        Organization.find({}, {organizationName: 1, tags: 1, logo: 1} ).exec((error, organization) => {
             if (error) {
                 return response.status(400).send("Organization not found, please try again");
             }

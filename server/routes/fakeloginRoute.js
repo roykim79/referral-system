@@ -21,7 +21,8 @@ module.exports = app => {
 
         tagsArray.forEach(tag => {
             let newTag = new Tags({
-                text: tag
+                text: tag,
+                id: tag
             })
             newTag.save()
             tagIds.push(newTag.id);
