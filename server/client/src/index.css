@@ -21,7 +21,8 @@ body {
   border: 1px solid #aaa;
   height: 50vh;
   overflow: scroll;
-  width: 50%;
+  width: 95%;
+  margin: auto;
 }
 
 .add-referral-header {
@@ -57,9 +58,9 @@ body {
 }
 
 .wrapper > div {
-  /* border: 2px solid rgb(233,171,88); */
+  border: 2px solid rgb(233,171,88);
   border-radius: 5px;
-  /* background-color: rgba(233,171,88,.2); */
+  background-color: rgba(233,171,88,.2);
 }
 
 .wrapper {
@@ -92,6 +93,28 @@ body {
 .pending-details{
   grid-column: 1 / 13;
   grid-row: 1;
+}
+
+.accepted-grid-client{
+  grid-column: 10 / 13;
+  grid-row: 3;
+}
+
+.accepted-grid-member{
+  grid-column: 10 / 13;
+  grid-row: 2;
+}
+
+.accepted-grid-details{
+  grid-column: 10 / 13;
+  grid-row: 4;
+  height: 100px;
+  overflow:scroll;
+}
+
+.accepted-grid-notes{
+  grid-column: 2 / 10;
+  grid-row: 2 / 5;
 }
 
 .grid-left{

@@ -6,7 +6,6 @@ class PendingDetails extends Component {
   }
 
   render() {
-    console.log(this.props)
     if(this.props.referral.status=="pending"){
     let referral = this.props.referral;
 

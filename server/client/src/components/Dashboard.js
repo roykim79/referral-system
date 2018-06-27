@@ -24,7 +24,7 @@ class Dashboard extends Component {
         if(!this.props.auth) {
           this.props.history.push('/')
         }
-    } 
+    }
 
     componentWillUnmount() {
       clearInterval(this.interval);
