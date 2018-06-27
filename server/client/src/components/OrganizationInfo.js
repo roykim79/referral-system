@@ -5,6 +5,12 @@ import { fetchMyOrg, fetchTags } from '../actions';
 import {WithContext as ReactTags} from 'react-tag-input';
 
 // import Tags from './Tags';
+const KeyCodes = {
+  comma: 188,
+  enter: 13,
+};
+ 
+const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class OrganizationInfo extends Component {
   constructor(props) {
@@ -23,7 +29,6 @@ class OrganizationInfo extends Component {
         this.setState({suggestions: this.props.tags});
     });
   }
-
 
   handleDelete = (i) => {
     const { tags } = this.state;
@@ -47,14 +52,12 @@ class OrganizationInfo extends Component {
     this.setState({ tags: newTags });
   }
 
-
   render() {
     const { tags, suggestions } = this.state;
-    console.log(this.props.myOrg);
+
     if (!this.state.suggestions|| !this.state.tags) {
       return (<div>Loading...</div>)
     } else {
-
       return (
         <div>
           <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
@@ -72,15 +75,14 @@ class OrganizationInfo extends Component {
                   suggestions={suggestions}
                   handleDelete={this.handleDelete}
                   handleAddition={this.handleAddition}
-                  handleDrag={this.handleDrag} />
+                  handleDrag={this.handleDrag}
+                  delimiters={delimiters} />
               </div>
             </form>
           </div>
         </div>
       )
     }
-
-
   }
 }
 
