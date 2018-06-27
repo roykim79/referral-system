@@ -12,11 +12,11 @@ class NewReferral extends Component {
     }
 
     // function to verify if inputted organization name is equal to an organization in the system. If true, activate inputs in "section client". If false, disable them.
-    selectedOrganization(){
-      return this.props.organizations.find((item)=>{
-        return this.state.organization == item
-      })
-    }
+    // selectedOrganization(){
+    //   return this.props.organizations.find((item)=>{
+    //     return this.state.organization == item
+    //   })
+    // }
 
     render(){
         return (

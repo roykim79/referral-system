@@ -12,7 +12,7 @@ export default combineReducers({
     referrals: referralsReducer,
     tags: tagsReducer,
     organizationSearchResults: organizationReducer,
-    allOrgNames: allOrgsReducer,
+    allOrgs: allOrgsReducer,
     referralDetail: detailReducer,
     myOrg: myOrgReducer
 });
