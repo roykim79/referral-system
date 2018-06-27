@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import { connect } from 'react-redux';
 import {fetchAllOrgs, fetchTags}from '../actions';
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import Modal from 'react-modal';
