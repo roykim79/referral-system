@@ -1,10 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchReferrals, submitNote, fetchDetail, unMountState} from '../actions'
+import {fetchReferrals, submitNote, fetchDetail, emptyDetails} from '../actions'
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
 import PendingDetails from './PendingDetails';
+import AcceptedDetails from './AcceptedDetails';
 const moment = require('moment');
 
 class Referral extends Component {
@@ -52,7 +53,7 @@ class Referral extends Component {
   }
 
   componentWillUnmount(){
-    this.props.unMountState()
+    this.props.emptyDetails()
   }
 
   handleState = (prop, value) =>{
@@ -79,12 +80,12 @@ class Referral extends Component {
   }
 
   render() {
-    console.log(this.state)
-    // debugger;
+
     console.log(this.props)
+
     if(!this.props.referralDetail) {
       return (
-      <div onClick={() => {this.props.history.push('/dashboard')}}> </div>
+      <div onClick={() => {this.props.history.push('/dashboard')}}> Loading...</div>
       )
     } else {
     let referral = this.props.referralDetail;
@@ -93,28 +94,22 @@ class Referral extends Component {
       <div>
         <div className="wrapper">
 
-        <div className="back-button">
-          <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
-        </div>
+          <div className="back-button">
+            <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
+          </div>
 
           {this.renderStatus(referral)}
 
           <PendingDetails status={this.state.accepted} referral={referral} handleState = {this.handleState}/>
+
+          <AcceptedDetails status={this.state.accepted} referral={referral} handleState = {this.handleState}/>
 
         </div>
 
 
 
         <div className="referral-header">
-          <div className="back-button">
-            <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
-          </div>
 
-          <div className="title">{referral.client_name} Referral<br/>From {referral.referring_organization.organizationName}</div>
-          <div className="referral-status">
-            Status: {referral.status}
-
-          </div>
         </div>
 
 
@@ -148,9 +143,9 @@ class Referral extends Component {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchReferrals, submitNote, fetchDetail, unMountState}, dispatch);
+  return bindActionCreators({fetchReferrals, submitNote, fetchDetail, emptyDetails}, dispatch);
 }
-function mapStateToProps({referrals, referralDetail}) {
-  return {referrals, referralDetail}
+function mapStateToProps({referrals, referralDetail, auth, myOrg, allOrgs}) {
+  return {referrals, referralDetail, auth, myOrg, allOrgs}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Referral));

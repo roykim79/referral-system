@@ -6,7 +6,7 @@ export const fetchUser = () => {
 
     return {type: FETCH_USER, payload: response}
 }
-//fetches all referrals associated with organization sent and recieved. 
+//fetches all referrals associated with organization sent and recieved.
 // When dashboard.js mounts we call this, then we will filter results client side
 export const fetchReferrals = (type) => {
     let response = axios.get(`/api/referrals/${type}`);
@@ -60,6 +60,6 @@ export const fetchMyOrg = () => {
     return {type: MY_ORG, payload: response};
 }
 
-export const unMountState = () => {
+export const emptyDetails = () => {
   return {type: EMPTY_DETAIL};
 }
