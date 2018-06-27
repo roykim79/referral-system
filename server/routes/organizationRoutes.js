@@ -31,16 +31,8 @@ module.exports = app => {
             if(error) {
                 return response.status(400).send("The organization was not found");
             }
-            let customTagArray = [];
-            await organization.tags.forEach(tag => {
-                let customTag = {
-                    text : tag.text,
-                    id : tag.text
-                }
-                customTagArray.push(customTag);
-            })
             
-            response.send({organization,customTagArray})
+            response.send(organization)
         })
     })
 
