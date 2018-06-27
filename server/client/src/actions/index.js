@@ -1,5 +1,5 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME, SUBMIT_NOTE, FETCH_DETAIL, MY_ORG } from './types';
+import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME, SUBMIT_NOTE, FETCH_DETAIL, MY_ORG, EMPTY_DETAIL } from './types';
 //fetch current logged in user
 export const fetchUser = () => {
     let response = axios.get(`/api/current_user`);
@@ -23,12 +23,12 @@ export const fetchTags = () => {
     return {type: FETCH_TAGS, payload: response}
 }
 //Used to query organizations once a tag is selected from the dropdown/autosuggest
-//page might not be needed now but for expansion purposes. 
+//page might not be needed now but for expansion purposes.
 export const searchOrganizations = (tag, page) =>{
     let BASE_URL = `/api/organizations?`;
     if(tag) {
         BASE_URL.concat(`tag=${tag}`);
-    } 
+    }
     if (page) {
         BASE_URL.concat(`page=${page}`);
     }
@@ -60,4 +60,8 @@ export const fetchMyOrg = () => {
     let response = axios.get('/api/my_organization');
 
     return {type: MY_ORG, payload: response};
+}
+
+export const unMountState = () => {
+  return {type: EMPTY_DETAIL};
 }
