@@ -26,6 +26,7 @@ module.exports = app => {
     //The organization ID will be in req.body.user.organization
     app.get('/api/my_organization', requireLogin, (request, response) => {
         Organization.findOne({_id: request.user.organization.toHexString()})
+        .populate('tags')
         .exec((error, organization) => {
             if(error) {
                 return response.status(400).send("The organization was not found");
@@ -57,9 +58,10 @@ module.exports = app => {
         })
     })
 
-    // get organization by user id
+    // get organization by user id- returns the user organization ID- populated
     app.get('/api/:user/organization', (request, response) => {
         User.findById({_id: request.params.user})
+        .populate('organization')
         .exec((error, user) => {
             if(error) {
                 return response.status(400).send("The organization was not found");
@@ -68,6 +70,7 @@ module.exports = app => {
         })
     })
     
+
     // gets all organizations and returns the organization name, id, and logo
     app.get('/api/organizations/all', (request, response) => {
         Organization.find({}, {organizationName: 1, logo: 1, tags: 1} )
@@ -80,6 +83,7 @@ module.exports = app => {
         })
     })
 
+    //I think this is an extension. It will not be implemented yet.
     // First, it finds all the tags id, if doesnt exist, create new tags
     app.post('/api/create_org', requireLogin, async (request, response) => {
         if (request.body) {

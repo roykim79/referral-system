@@ -2597,22 +2597,16 @@ a.mdc-list-item {
   margin: 40px auto; }
 
 .mdc-text-field__input {
-  padding-left: 16px !important; }
+  padding-left: 16px !important;
+ }
 
 .button-container {
-  display: flex;
-  width: 300px; }
-
-.button-container button {
-  margin: 3px; }
-
-.login-button-container {
   display: flex;
   justify-content: flex-end;
   width: 300px;
   margin: auto; }
 
-.login-button-container button {
+.button-container button {
   margin: 3px; }
 
 html, body {
@@ -2628,7 +2622,7 @@ body {
   margin: auto; }
 
 .app-nav-header {
-  height: 70px; }
+  background-color: white; }
 
 .side-drawer {
   width: 200px; }
@@ -2637,7 +2631,7 @@ body {
   margin-right: 5px;
   width: auto;
   display: inline-block;
-  color: white !important; }
+  color: black !important; }
 
 .text-black {
   color: black !important; }

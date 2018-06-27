@@ -74,6 +74,7 @@ module.exports = app => {
                 res.end();
             } else {
                 let name = req.user.firstName + " " + req.user.lastName;
+                referral.dateUpdated = new Date();
                 referral.tasks.push({
                     posting_user: name,
                     text: req.body.text
@@ -98,6 +99,7 @@ module.exports = app => {
                 res.end();
             }
             else {
+                referral.dateUpdated = new Date();
                 referral.status=req.query.status;
                 referral.save((err) => {
                     if(err){
@@ -108,6 +110,20 @@ module.exports = app => {
                     }
                 })
             }
+        })
+    })
+
+    //gets a single referral by id
+    app.get("/api/referrals/:referralId", (req, res) => {
+        Referral.findById(req.params.referralId).populate("referring_organization")
+        .populate("receiving_organization")
+        .populate("referring_user")
+        .exec( (err, data) => {
+            if(err){
+                console.log(err);
+                res.end();
+            }
+            res.send(data);
         })
     })
     

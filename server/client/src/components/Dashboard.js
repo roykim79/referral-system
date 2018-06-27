@@ -14,14 +14,21 @@ class Dashboard extends Component {
 
         //give component a state that holds the filter information for the react table
         this.state = {
-            currentFilter: null
+            currentFilter: null,
+            currentView: RECEIVED
         }
+
+        this.interval = setInterval(() => this.props.fetchReferrals(this.state.currentView), 15000);
     }
     componentDidMount = () => {
         if(!this.props.auth) {
           this.props.history.push('/')
         }
     } 
+
+    componentWillUnmount() {
+      clearInterval(this.interval);
+    }
 
     render(){
         return (
@@ -46,12 +53,12 @@ class Dashboard extends Component {
                             <nav className="mdc-list">
 
                               <a className="mdc-list-item"
-                                onClick={() => this.props.fetchReferrals(RECEIVED)}>
+                                onClick={() => {this.props.fetchReferrals(RECEIVED); this.setState({currentView: RECEIVED})}}>
                                 Received
                               </a>
 
                               <a className="mdc-list-item"
-                                onClick={() => this.props.fetchReferrals(SENT)}>
+                                onClick={() => {this.props.fetchReferrals(SENT); this.setState({currentView: SENT})}}>
                                 Outgoing
                               </a>
 
@@ -88,7 +95,7 @@ class Dashboard extends Component {
                           </button>
                         </div>
                         <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                          <ReferralList status={this.state.currentFilter} />
+                          <ReferralList view={this.state.currentView} status={this.state.currentFilter} />
                         </div>
                       </div>
                       <div className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-2"></div>
