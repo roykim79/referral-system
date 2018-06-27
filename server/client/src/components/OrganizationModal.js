@@ -1,5 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
+import {fetchAllOrgs, fetchTags}from '../actions';
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import Modal from 'react-modal';
 
@@ -7,12 +8,17 @@ import Modal from 'react-modal';
 // Modal.setAppElement('#yourAppElement')
 
 class OrganizationModal extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
 
     this.state = {
       modalIsOpen: false
     };
+  }
+
+  componentDidMount = () => {
+    this.props.fetchAllOrgs();
+    this.props.fetchTags();
   }
 
   openModal = (e) => {
@@ -25,6 +31,9 @@ class OrganizationModal extends React.Component {
   }
 
   render() {
+    if(!this.props.allOrgs || !this.props.tags) {
+      return (<div>Loading.. </div>)
+    }
     return (
       <div>
 
@@ -63,5 +72,10 @@ class OrganizationModal extends React.Component {
     );
   }
 }
-
-export default OrganizationModal
+const mapStateToProps = ({allOrgs, tags}) => {
+  return {allOrgs, tags}
+}
+const mapDispatchToProps = (dispatch) => {
+  return ({fetchAllOrgs, fetchTags}, dispatch)
+}
+export default connect(mapStateToProps, mapDispatchToProps)(OrganizationModal)

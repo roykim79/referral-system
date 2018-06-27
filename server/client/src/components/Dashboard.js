@@ -95,7 +95,7 @@ class Dashboard extends Component {
                           </button>
                         </div>
                         <div className="mdc-layout-grid__cell mdc-layout-grid__cell--span-12">
-                          <ReferralList status={this.state.currentFilter} />
+                          <ReferralList view={this.state.currentView} status={this.state.currentFilter} />
                         </div>
                       </div>
                       <div className="demo-cell mdc-layout-grid__cell mdc-layout-grid__cell--span-2"></div>
