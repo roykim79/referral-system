@@ -1,26 +1,29 @@
 import React, { Component } from 'react';
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import { fetchMyOrg, fetchTags } from '../actions';
+import {WithContext as ReactTags} from 'react-tag-input';
+
+// import Tags from './Tags';
 
 class OrganizationInfo extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {
-      tags: [
-        { id: "Thailand", text: "Thailand" },
-        { id: "India", text: "India" }
-      ],
-      suggestions: [
-        { id: 'USA', text: 'USA' },
-        { id: 'Germany', text: 'Germany' },
-        { id: 'Austria', text: 'Austria' },
-        { id: 'Costa Rica', text: 'Costa Rica' },
-        { id: 'Sri Lanka', text: 'Sri Lanka' },
-        { id: 'Thailand', text: 'Thailand' }
-      ]
-    };
+    this.state = {};
   }
+
+  componentDidMount = async () => {
+    await this.props.fetchMyOrg()
+      .then( async () => {
+        await this.props.fetchTags();
+      })
+      .then(() => {
+        this.setState(this.props.myOrg);
+        this.setState({suggestions: this.props.tags});
+    });
+  }
+
 
   handleDelete = (i) => {
     const { tags } = this.state;
@@ -47,44 +50,46 @@ class OrganizationInfo extends Component {
 
   render() {
     const { tags, suggestions } = this.state;
+    console.log(this.props.myOrg);
+    if (!this.state.suggestions|| !this.state.tags) {
+      return (<div>Loading...</div>)
+    } else {
 
-    return (
-      <div>
-        <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
-        <div className="form-container">
-          <form action="">
-            <input id="organizationName" name="organizationName" type="text" />
-            <input id="description" name="description" type="text" />
-            <input id="website" name="website" type="text" />
-            <input id="email" name="email" type="text" />
-            <input id="phone" name="phone" type="text" />
-            <input id="address" name="address" type="text" />
-            <input id="logo" name="logo" type="text" />
-            <input id="address" name="address" type="text" />
-            <div>
-              <ReactTags tags={tags}
-                suggestions={suggestions}
-                handleDelete={this.handleDelete}
-                handleAddition={this.handleAddition}
-                handleDrag={this.handleDrag}
-                delimiters={delimiters} />
-            </div>
-          </form>
+      return (
+        <div>
+          <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
+          <div className="form-container">
+            <form action="">
+              <input value={this.state.organizationName} onChange={(e) => { this.setState({ organizationName: e.target.value }) }} id="organizationName" name="organizationName" type="text" />
+              <input value={this.state.description} onChange={(e) => { this.setState({ description: e.target.value }) }} id="description" name="description" type="text" />
+              <input value={this.state.website} onChange={(e) => { this.setState({ website: e.target.value }) }} id="website" name="website" type="text" />
+              <input value={this.state.email} onChange={(e) => { this.setState({ email: e.target.value }) }} id="email" name="email" type="text" />
+              <input value={this.state.phone} onChange={(e) => { this.setState({ phone: e.target.value }) }} id="phone" name="phone" type="text" />
+              <input value={this.state.address} onChange={(e) => { this.setState({ address: e.target.value }) }} id="address" name="address" type="text" />
+              <input value={this.state.logo} onChange={(e) => { this.setState({ logo: e.target.value }) }} id="logo" name="logo" type="text" />
+              <div>
+                <ReactTags tags={tags}
+                  suggestions={suggestions}
+                  handleDelete={this.handleDelete}
+                  handleAddition={this.handleAddition}
+                  handleDrag={this.handleDrag} />
+              </div>
+            </form>
+          </div>
         </div>
-      </div>
-    )
+      )
+    }
+
+
   }
 }
 
-const mapStateToProps = ({tags, myOrg}) => {
-  return {
-    tags,
-    myOrg
-  }
+const mapStateToProps = ({ myOrg, tags }) => {
+  return { myOrg, tags }
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({})
+  return bindActionCreators({ fetchMyOrg, fetchTags }, dispatch)
 }
 
 export default connect(mapStateToProps, mapDispatchToProps)(OrganizationInfo);
