@@ -19,7 +19,6 @@ class NewReferral extends Component {
     // }
 
     render(){
-      debugger;
         return (
             <div>
 

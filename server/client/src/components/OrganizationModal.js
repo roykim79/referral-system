@@ -19,8 +19,8 @@ class OrganizationModal extends React.Component {
   }
 
   componentDidMount = () => {
-    // this.props.fetchAllOrgs();
-    // this.props.fetchTags();
+    this.props.fetchAllOrgs();
+    this.props.fetchTags();
   }
 
   openModal = (e) => {
