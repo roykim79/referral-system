@@ -1,8 +1,9 @@
 import React, {Component} from 'react';
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import {Textfield, Icon} from 'react-mdc-web';
-import 'material-components-web/dist/material-components-web.min.css';
-//for browse org button use https://github.com/reactjs/react-modal to load and open a model.
+import Modal from 'react-modal';
+
+import OrganizationModal from './OrganizationModal';
 
 class NewReferral extends Component {
     constructor(props){
@@ -11,11 +12,11 @@ class NewReferral extends Component {
     }
 
     // function to verify if inputted organization name is equal to an organization in the system. If true, activate inputs in "section client". If false, disable them.
-    selectedOrganization(){
-      return this.props.organizations.find((item)=>{
-        return this.state.organization == item
-      })
-    }
+    // selectedOrganization(){
+    //   return this.props.organizations.find((item)=>{
+    //     return this.state.organization == item
+    //   })
+    // }
 
     render(){
         return (
@@ -32,23 +33,23 @@ class NewReferral extends Component {
                     <div className="wrapper">
                       <section className="section-organization">
 
-                        <TextField
-                          id="myId"
-                          label='Organization Name'
-                          floatingLabelClassName='mdc-floating-label'
-                          className="form-input-referral mdc-text-field--box"
-                          style = {{width: 300}}
+                          <TextField
+                            id="myId"
+                            label='Organization Name'
+                            floatingLabelClassName='mdc-floating-label'
+                            className="form-input-referral mdc-text-field--box"
+                            style = {{width: 300}}
 
-                        >
-                          <Input
-                            className="form-input-referral"
-                            value={this.state.organization}
-                            onChange={(e) => this.setState({organization: e.target.value})}
-                            name="form-input-referral"/>
-                        </TextField>
-                        <button types="submit" className="mdc-button mdc-button--raised find">
-                          Find
-                        </button>
+                          >
+                            <Input
+                              className="form-input-referral"
+                              value={this.state.organization}
+                              onChange={(e) => this.setState({organization: e.target.value})}
+                              name="form-input-referral"/>
+                          </TextField>
+
+                          <OrganizationModal/>
+
                       </section>
 
                       <section className="section-client">
@@ -120,7 +121,11 @@ class NewReferral extends Component {
                           </button>
                         </div>
 
+
+
                       </section>
+
+
 
                     </div>
                   </div>

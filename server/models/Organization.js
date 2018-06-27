@@ -34,7 +34,7 @@ const organizationSchema = new Schema({
     },
     dateCreated: { 
         type: Date, 
-        default: new Date()
+        default: Date.now 
     },
     members: [{
         type: Schema.Types.ObjectId, 
