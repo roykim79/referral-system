@@ -18,6 +18,8 @@ export const fetchReferrals = (type) => {
 export const fetchTags = () => {
     let response = axios.get(`/api/tags`);
 
+    console.log(response)
+
     return {type: FETCH_TAGS, payload: response}
 }
 //Used to query organizations once a tag is selected from the dropdown/autosuggest
