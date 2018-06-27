@@ -27,11 +27,20 @@ module.exports = app => {
     app.get('/api/my_organization', requireLogin, (request, response) => {
         Organization.findOne({_id: request.user.organization.toHexString()})
         .populate('tags')
-        .exec((error, organization) => {
+        .exec(async (error, organization) => {
             if(error) {
                 return response.status(400).send("The organization was not found");
             }
-            response.send(organization)
+            let customTagArray = [];
+            await organization.tags.forEach(tag => {
+                let customTag = {
+                    text : tag.text,
+                    id : tag.text
+                }
+                customTagArray.push(customTag);
+            })
+            
+            response.send({organization,customTagArray})
         })
     })
 
