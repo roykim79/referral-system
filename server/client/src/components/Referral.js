@@ -20,23 +20,51 @@ class Referral extends Component {
     await this.props.fetchDetail(this.props.match.params.referralId)
   }
 
-  renderStatus(){
+  renderStatus(referral){
     if(this.state.accepted){
       return(
         <div className="progress-container">
           <ul className="progressbar">
               <li className="complete">Accepted</li>
-              <li className="complete">Contacted</li>
-              <li className="active">Completed</li>
+              <li className="active">Contacted</li>
+              <li className="">Completed</li>
           </ul>
         </div>
       )
     } else {
       return(
-        <div className="progress-container">
-          <button
-            onClick={(e)=>this.setState({accepted:true})}>Accept</button>
-          <button>Reject</button>
+        <div className="wrapper">
+          <div className="grid-1-1">
+            <button
+              onClick={(e)=>this.setState({accepted:true})}>Accept</button>
+            <button>Reject</button>
+          </div>
+          <div className="grid-left">
+            <div className="referral-details">
+              <div className="client-info">
+                <h2>Client</h2>
+                Name: {referral.client_name} <br/>
+                Phone Number: {referral.client_phone} <br/>
+                Email: {referral.client_email} <br/>
+              </div>
+            </div>
+          </div>
+          <div className="grid-right">
+            <div className="member-info">
+              <h2>Member</h2>
+              First Name: {referral.referring_user.firstName} <br/>
+              Last Name: {referral.referring_user.lastName} <br/>
+              Phone Number: {referral.referring_user.phone} <br/>
+              Email: {referral.referring_user.email}
+            </div>
+          </div>
+          <div className="grid-description">
+            <div className="client-info">
+              Description: {referral.description} "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+            </div>
+          </div>
+
+
         </div>
       )
 
@@ -55,11 +83,13 @@ class Referral extends Component {
     return (
       <div>
         <div className="wrapper">
-          <div className="grid-1-1">
-            {this.renderStatus()}
+          <div className="grid-1-1 center-text">
+            {this.renderStatus(referral)}
           </div>
           <div className="body">
+
             <div className="wrapper">
+
             </div>
           </div>
         </div>
@@ -70,6 +100,7 @@ class Referral extends Component {
           <div className="back-button">
             <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
           </div>
+
           <div className="title">{referral.client_name} Referral<br/>From {referral.referring_organization.organizationName}</div>
           <div className="referral-status">
             Status: {referral.status}
