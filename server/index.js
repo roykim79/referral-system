@@ -37,10 +37,10 @@ if (process.env.NODE_ENV === 'production') {
 }
 
 // ------ fake data generator, only works in dev mode ----- //
-if (process.env.NODE_ENV !== 'production'){
+// if (process.env.NODE_ENV !== 'production'){
   require('./routes/fakeLoginRoute')(app);
   require('./routes/fakeReferralsRoute')(app);
-}
+// }
 
 require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);

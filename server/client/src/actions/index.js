@@ -1,12 +1,12 @@
 import axios from 'axios';
-import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME, SUBMIT_NOTE, FETCH_DETAIL, MY_ORG } from './types';
+import { FETCH_USER, FETCH_REFERRALS, FETCH_TAGS, FETCH_ORGANIZATIONS, FETCH_ORGS_NAME, SUBMIT_NOTE, FETCH_DETAIL, MY_ORG, EMPTY_DETAIL } from './types';
 //fetch current logged in user
 export const fetchUser = () => {
     let response = axios.get(`/api/current_user`);
 
     return {type: FETCH_USER, payload: response}
 }
-//fetches all referrals associated with organization sent and recieved. 
+//fetches all referrals associated with organization sent and recieved.
 // When dashboard.js mounts we call this, then we will filter results client side
 export const fetchReferrals = (type) => {
     let response = axios.get(`/api/referrals/${type}`);
@@ -18,15 +18,17 @@ export const fetchReferrals = (type) => {
 export const fetchTags = () => {
     let response = axios.get(`/api/tags`);
 
+    console.log(response)
+
     return {type: FETCH_TAGS, payload: response}
 }
 //Used to query organizations once a tag is selected from the dropdown/autosuggest
-//page might not be needed now but for expansion purposes. 
+//page might not be needed now but for expansion purposes.
 export const searchOrganizations = (tag, page) =>{
     let BASE_URL = `/api/organizations?`;
     if(tag) {
         BASE_URL.concat(`tag=${tag}`);
-    } 
+    }
     if (page) {
         BASE_URL.concat(`page=${page}`);
     }
@@ -58,4 +60,8 @@ export const fetchMyOrg = () => {
     let response = axios.get('/api/my_organization');
 
     return {type: MY_ORG, payload: response};
+}
+
+export const emptyDetails = () => {
+  return {type: EMPTY_DETAIL};
 }
