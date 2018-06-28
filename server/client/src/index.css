@@ -401,10 +401,17 @@ body {
   .rt-table {
     font-family: Arial, Helvetica, sans-serif;
   }
+  .rt-th {
+    font-weight: bold;
+  }
+  .rt-table .rt-tr.-even {
+    background-color: #f6f6f6;
+  }
   .rt-table span[class^="status"] {
+    border: 1px solid #bbb;
     display: inline-block;
     margin-right: 5px;
-    width: 20px;
+    width: 25px;
     height: 10px;
   }
   .rt-table .status-pending {
@@ -417,7 +424,7 @@ body {
     background-color: rgb(0, 132, 255);
   }
   .rt-table .status-completed {
-    background-color: rgb(255, 0, 234);
+    background-color: rgb(238, 255, 0);
   }
   .rt-table .status-rejected {
     background-color: rgb(255, 0, 0);
