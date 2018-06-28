@@ -1,4 +1,5 @@
 const Referral = require("../models/Referral");
+const Organization = require('../models/Organization');
 const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
@@ -38,8 +39,10 @@ module.exports = app => {
     })
 
     //Posts a referral. Sends an error if certain basic information is missing, specifically the client's name, some form of contact information, and a description
-    app.post("/api/referrals", (req, res) => {
-        let referral = new Referral();
+    app.post("/api/referrals", async (req, res) => {
+        if(!req.body.receiving_organization){
+            res.status(400).send("Receiving Organization required");
+        }
         if(!req.body.client_name){
             res.status(400).send("Client name required");
         }
@@ -49,22 +52,32 @@ module.exports = app => {
         if(!req.body.description){
             res.status(400).send("Description required");
         }
-        referral.client_name = req.body.client_name;
-        referral.client_phone = req.body.client_phone;
-        referral.client_email = req.body.client_email;
-        referral.description = req.body.description;
-        referring_organization = req.user.organization;
-        referral.receiving_organization = req.body.receiving_organization;
-        referral.referring_user = req.user._id;
 
-        referral.save((err) => {
-            if(err){
-                console.log(err);
-                res.end()
-            } else {
-                res.send(referral);
-            }
+
+        await Organization.findOne({organizationName:req.body.receiving_organization})
+        .exec((err,result)=> {
+            let organizationId = result.id;
+            let refererId = req.user.organization.toHexString();
+            let referral = new Referral();
+
+            referral.client_name = req.body.client_name;
+            referral.client_phone = req.body.client_phone;
+            referral.client_email = req.body.client_email;
+            referral.description = req.body.description;
+            referral.referring_organization = req.user.organization.toHexString();
+            referral.receiving_organization = organizationId;
+            referral.referring_user = req.user._id;
+    
+            referral.save((err) => {
+                if(err){
+                    console.log(err);
+                    res.end()
+                } else {
+                    res.send(referral);
+                }
+            })
         })
+        
     })
 
     //adds a note to a specified referral
