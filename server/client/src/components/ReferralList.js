@@ -24,7 +24,9 @@ class ReferralList extends Component {
     }
     let columns = [
       {
-        Header: 'Organization', accessor: 'referring_organization.organizationName'
+        Header: 'From', accessor: 'referring_organization.organizationName'
+      },
+      {Header: 'To', accessor: 'receiving_organization.organizationName'
       },
       {
         Header: 'Referrer\'s Name', accessor: 'referring_user.firstName'
@@ -33,7 +35,7 @@ class ReferralList extends Component {
         Header: 'Client Name', accessor: 'client_name'
       },
       {
-        Header: 'Date', accessor: 'dateCreated',
+        Header: 'Date', accessor: 'dateUpdated',
         Cell: props => <span> {moment(props.value).format("lll")} </span>
       },
       {
