@@ -9,7 +9,7 @@ module.exports = app => {
   app.get('/api/fake-referrals', async (request, response) => {
     Referral.collection.drop();
 
-    let organizationNames = ["organizationa", "organizationb", "organizationc"];
+    let organizationNames = ["HewDesign", "JeffHacks", "RoyRuler"];
     let usernames = ["userA", "userB", "userC"];
     let clientNames = ["Roy", "Jeff", "Ilona"];
     let referralArray = [];
