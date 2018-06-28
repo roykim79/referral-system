@@ -12,20 +12,24 @@ module.exports = app => {
         Tags.collection.drop();
         
 
-        let tagsArray = ["School", "Code", "Javascript"];
+        let tagsArray = [["School", "Code", "Javascript"],["School","Code","NotJavaScript"],["NotJavascript","Code","University"]];
         let organizationNamesArray = ["HewDesign", "JeffHacks", "RoyRuler"];
         let userNameArray = ["userA", "userB", "userC"];
         let nameArray = ["Aaron", "Sean", "Morgan"]
-        let tagIds = [];
+        let tagArrayIds = [];
         let sampleOrg;
         let sampleUser;
 
-        tagsArray.forEach(tag => {
-            let newTag = new Tags({
-                text: tag
+        tagsArray.forEach(tagArray => {
+            let tagArrayId = [];
+            tagArray.forEach(tag => {
+                let newTag = new Tags({
+                    text: tag
+                })
+                newTag.save()
+                tagArrayId.push(newTag.id);
             })
-            newTag.save()
-            tagIds.push(newTag.id);
+            tagArrayIds.push(tagArrayId)
         })
 
         for(i = 0; i < 3; i++){
@@ -36,7 +40,7 @@ module.exports = app => {
                 email: "aaron@projectshift.io",
                 phone: "(919)123-4567",
                 address: "112 broad way st",
-                tags: tagIds,
+                tags: tagArrayIds[i],
                 logo: "https://99designs-start-attachments.imgix.net/alchemy-pictures/2016%2F02%2F22%2F04%2F24%2F31%2Fb7bd820a-ecc0-4170-8f4e-3db2e73b0f4a%2F550250_artsigma.png?auto=format&ch=Width%2CDPR&w=250&h=250"
             })
 
