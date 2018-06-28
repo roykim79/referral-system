@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 import {Button, Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarIcon, Content, MenuAnchor, Menu, MenuItem, MenuDivider, List, ListItem} from 'react-mdc-web';
+import { bindActionCreators } from 'redux';
+import {submitNote} from '../actions'
+import { connect } from 'react-redux';
 const moment = require('moment');
 
 class AcceptedDetails extends Component {
@@ -12,7 +15,6 @@ class AcceptedDetails extends Component {
   }
 
   render() {
-    // debugger;
     if(this.props.referral.status!="pending" && this.props.referral.status!="rejected"){
     let referral = this.props.referral;
 
@@ -96,5 +98,7 @@ class AcceptedDetails extends Component {
         }
   }
 }
-
-export default AcceptedDetails
+const mapDispatchToProps = (dispatch) => {
+return bindActionCreators({submitNote}, dispatch)
+}
+export default connect(null, mapDispatchToProps)(AcceptedDetails)
