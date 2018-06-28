@@ -62,9 +62,9 @@ body {
 }
 
 .wrapper > div {
-  border: 2px solid rgb(233,171,88);
+  /* border: 2px solid rgb(233,171,88); */
   border-radius: 5px;
-  background-color: rgba(233,171,88,.2);
+  /* background-color: rgba(233,171,88,.2); */
 }
 
 .wrapper > section {
@@ -72,6 +72,7 @@ body {
   border-radius: 5px;
   /* background-color: rgba(50,171,222,.2); */
 }
+
 
 .wrapper {
   display: grid;
@@ -162,7 +163,7 @@ body {
 }
 
 .modal-list-name{
-  width: 100px; grid-column: 3;
+  grid-column: 3/13;
 }
 
 .accept{
@@ -419,7 +420,25 @@ body {
   }
 
   .m-0{
-    margin:0px;
+    margin-bottom: 5px!important;
+    margin-top: 2px!important;
+  }
+
+  .orgName-title{
+    font-family: 'Roboto', sans-serif;
+    font-size: 1.3em;
+    margin-bottom: 5px;
+  }
+
+  .tag{
+    border: 1px solid gray;
+    background-color: #DDD;
+    border-radius: 20px;
+    padding:2px 5px;
+  }
+
+  .modal.wrapper {
+    margin-bottom: 10px;
   }
 
   h4{
@@ -463,6 +482,8 @@ body {
   .rt-table .status-rejected {
     background-color: rgb(255, 0, 0);
   }
+
+
 
 #cancel-new-referral {
   color: rgb(210, 38, 0);
