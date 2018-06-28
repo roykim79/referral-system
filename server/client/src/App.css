@@ -2596,6 +2596,10 @@ a.mdc-list-item {
   width: 300px;
   margin: 40px auto; }
 
+.organizationName {
+  display: block;
+  width: 400px; }
+
 .mdc-text-field__input {
   padding-left: 16px !important; }
 

@@ -8,10 +8,15 @@
 
 
 .username,
-.password {
+.password, {
   display: block;
   width: 300px;
   margin: 40px auto;
+}
+
+.organizationName {
+  display: block;
+  width: 400px;
 }
 
 

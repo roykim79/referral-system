@@ -5,20 +5,45 @@ import Modal from 'react-modal';
 
 import OrganizationModal from './OrganizationModal';
 
+
+import {organizationNameField} from '../utils/inputField.js'
+
+// import awesomplete from '../awesomplete.js';
+
+
 class NewReferral extends Component {
     constructor(props){
       super(props)
-      this.state={}
+      this.state = {
+        value: '',
+        suggestions: [],
+      };
     }
 
-    // function to verify if inputted organization name is equal to an organization in the system. If true, activate inputs in "section client". If false, disable them.
-    // selectedOrganization(){
-    //   return this.props.organizations.find((item)=>{
-    //     return this.state.organization == item
-    //   })
-    // }
+    componentDidMount(){
+      let organizationName = organizationNameField()
+    }
+
+    autofillList(){
+      var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla"]
+
+      let suggestions = []
+
+      countries.forEach((organization)=>{
+        suggestions.push(
+          <option>{organization}</option>
+        )
+      })
+
+      return (
+        suggestions
+      )
+
+
+    }
 
     render(){
+
         return (
             <div>
 
@@ -33,20 +58,16 @@ class NewReferral extends Component {
                     <div className="wrapper">
                       <section className="section-organization">
 
-                          <TextField
-                            id="myId"
-                            label='Organization Name'
-                            floatingLabelClassName='mdc-floating-label'
-                            className="form-input-referral mdc-text-field--box"
-                            style = {{width: 300}}
-
-                          >
-                            <Input
-                              className="form-input-referral"
-                              value={this.state.organization}
-                              onChange={(e) => this.setState({organization: e.target.value})}
-                              name="form-input-referral"/>
-                          </TextField>
+                      <div className="mdc-text-field mdc-text-field--box organizationName">
+                        <label className="mdc-floating-label" for="organizationName-input">Organization Name</label>
+                        <input onChange={(event) => {this.setState({organization: event.target.value})}}
+                          type="text" className=" awesomplete mdc-text-field__input input-text"  list="mylist"  required/>
+                          <datalist id="mylist">
+                          {this.autofillList()}
+                          </datalist>
+                          <div className="mdc-line-ripple">
+                          </div>
+                          </div>
 
                           <OrganizationModal/>
 
