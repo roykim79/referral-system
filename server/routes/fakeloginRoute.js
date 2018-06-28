@@ -13,7 +13,7 @@ module.exports = app => {
         
 
         let tagsArray = ["School", "Code", "Javascript"];
-        let organizationNamesArray = ["OrganizationA","OrganizationB","OrganizationC"];
+        let organizationNamesArray = ["HewDesign", "JeffHacks", "RoyRuler"];
         let userNameArray = ["userA", "userB", "userC"];
         let nameArray = ["Aaron", "Sean", "Morgan"]
         let tagIds = [];
