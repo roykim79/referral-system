@@ -464,3 +464,13 @@ body {
     background-color: rgb(255, 0, 0);
   }
 
+#cancel-new-referral {
+  color: rgb(210, 38, 0);
+  font-family: 'Roboto', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  margin-right: 10px;
+  position: relative;
+  text-transform: uppercase;
+  top: 15px;
+}
