@@ -2738,3 +2738,15 @@ div.ReactTags__suggestions li mark {
 div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   background: #b7cfe0;
   cursor: pointer; }
+
+.load-icon {
+  width: 200px; }
+
+.loading-img {
+  position: fixed;
+  left: 42%;
+  top: 50%; }
+
+.myorg-logo {
+  height: 75px;
+  width: 75px; }

@@ -28,7 +28,7 @@ class OtherHeader extends React.Component {
             <img className="shrine-logo-drawer ml-1" src={logo}/>
           </section>
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end app-nav-header" role="toolbar">
-            <a href="#" className="mdc-top-app-bar__action-item action-margin">My Organization</a>
+            <a href="/my-org" className="mdc-top-app-bar__action-item action-margin">My Organization</a>
 
             <a onClick={this.logOut} className="mdc-top-app-bar__action-item action-margin">Logout</a>
           </section>
