@@ -45,7 +45,7 @@ class Dashboard extends Component {
                           <h2 className="shrine-title">REFERRAL</h2>
                           <h2 className="shrine-title">SYSTEM</h2>
 
-                          <button className="mdc-button mdc-button--raised next">
+                          <button className="mdc-button mdc-button--raised next" onClick={()=> this.props.history.push('/new-referral')}>
                             Create Referral
                           </button>
 
