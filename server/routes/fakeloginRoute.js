@@ -12,7 +12,7 @@ module.exports = app => {
         Tags.collection.drop();
         
 
-        let tagsArray = [["School", "Code", "Javascript"],["School","Code","NotJavaScript"],["NotJavascript","Code","University"]];
+        let tagsArray = [["School", "Code", "Javascript"],["School","Code","NotJavaScript"],["NotJavaScript","Code","University"]];
         let organizationNamesArray = ["HewDesign", "JeffHacks", "RoyRuler"];
         let userNameArray = ["userA", "userB", "userC"];
         let nameArray = ["Aaron", "Sean", "Morgan"]
