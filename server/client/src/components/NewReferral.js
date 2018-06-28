@@ -2,16 +2,55 @@ import React, {Component} from 'react';
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import {Textfield, Icon} from 'react-mdc-web';
 import Modal from 'react-modal';
+import {connect} from 'react-redux';
 
 import OrganizationModal from './OrganizationModal';
+
+
+import {organizationNameField} from '../utils/inputField.js'
+
+// import awesomplete from '../awesomplete.js';
+
 
 class NewReferral extends Component {
     constructor(props){
       super(props)
-      this.state={}
+      this.state = {
+        value: '',
+        suggestions: [],
+      };
+    }
+
+
+    componentDidMount(){
+      let organizationName = organizationNameField()
+    }
+
+    autofillList(){
+      let suggestions = []
+
+      console.log(this.props)
+      if(this.props.allOrgs){
+        this.props.allOrgs.forEach((organization)=>{
+          // if (suggestions.length < 1){
+            suggestions.push(
+              <option>{organization.organizationName}</option>
+            )
+          // }
+
+        })
+      }
+
+
+      return (
+        suggestions
+      )
+
+
     }
 
     render(){
+
         return (
             <div>
 
@@ -26,22 +65,18 @@ class NewReferral extends Component {
                     <div className="wrapper">
                       <section className="section-organization">
 
-                          <TextField
-                            id="myId"
-                            label='Organization Name'
-                            floatingLabelClassName='mdc-floating-label'
-                            className="form-input-referral mdc-text-field--box"
-                            style = {{width: 300}}
+                      <div className="mdc-text-field mdc-text-field--box organizationName">
+                        <label className="mdc-floating-label" for="organizationName-input">Organization Name</label>
+                        <input onChange={(event) => {this.setState({organization: event.target.value})}}
+                          type="text" className=" awesomplete mdc-text-field__input input-text"  list="orgNames"  required/>
+                          <datalist id="orgNames">
+                          {this.autofillList()}
+                          </datalist>
+                          <div className="mdc-line-ripple">
+                          </div>
+                          </div>
 
-                          >
-                            <Input
-                              className="form-input-referral"
-                              value={this.state.organization}
-                              onChange={(e) => this.setState({organization: e.target.value})}
-                              name="form-input-referral"/>
-                          </TextField>
-
-                          <OrganizationModal/>
+                          <OrganizationModal allOrgs={this.props.allOrgs}/>
 
                       </section>
 
@@ -51,9 +86,7 @@ class NewReferral extends Component {
                           id="myId"
                           label='Name'
                           floatingLabelClassName='mdc-floating-label'
-                          className="form-input-referral mdc-text-field--box"
-                          style = {{width: 300}}
-
+                          className="form-input-referral mdc-text-field--box "
                         >
                           <Input
                             className="form-input-referral"
@@ -62,11 +95,13 @@ class NewReferral extends Component {
                             name="form-input-referral"/>
                         </TextField>
 
+                        <br/>
+
                         <TextField
                           id="myId"
                           label='Phone Number'
                           floatingLabelClassName='mdc-floating-label'
-                          className="form-input-referral mdc-text-field--box"
+                          className="form-input-referral mdc-text-field--box "
                           style = {{width: 300}}
 
                         >
@@ -77,11 +112,13 @@ class NewReferral extends Component {
                             name="form-input-referral"/>
                         </TextField>
 
+                        <br/>
+
                         <TextField
                           id="myId"
                           label='Email'
                           floatingLabelClassName='mdc-floating-label'
-                          className="form-input-referral mdc-text-field--box"
+                          className="form-input-referral mdc-text-field--box "
                           style = {{width: 300}}
 
                         >
@@ -91,6 +128,8 @@ class NewReferral extends Component {
                             onChange={(e) => this.setState({email: e.target.value})}
                             name="form-input-referral"/>
                         </TextField>
+
+                        <br/>
 
                         <Textfield
                           floatingLabel="Description"
@@ -131,4 +170,10 @@ class NewReferral extends Component {
     }
 }
 
-export default NewReferral;
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ fetchReferrals, submitNote, fetchDetail, emptyDetails }, dispatch);
+// }
+function mapStateToProps({ allOrgs }) {
+  return { allOrgs }
+}
+export default connect(mapStateToProps)(NewReferral);

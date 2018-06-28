@@ -4,6 +4,10 @@ body {
   font-family: sans-serif;
 }
 
+#orgNames{
+  max-height: 5px;
+}
+
 
 .mdc-text-field__input.form-input-referral{
   width:400px!important
@@ -58,9 +62,15 @@ body {
 }
 
 .wrapper > div {
-  border: 2px solid rgb(233,171,88);
+  /* border: 2px solid rgb(233,171,88); */
   border-radius: 5px;
-  background-color: rgba(233,171,88,.2);
+  /* background-color: rgba(233,171,88,.2); */
+}
+
+.wrapper > section {
+  /* border: 2px solid rgb(50,171,222); */
+  border-radius: 5px;
+  /* background-color: rgba(50,171,222,.2); */
 }
 
 .wrapper {
@@ -95,6 +105,11 @@ body {
   grid-row: 1;
 }
 
+.block{
+  display: block!important;
+  width: 90%!important;
+}
+
 .accepted-grid-client{
   grid-column: 10 / 13;
   grid-row: 3;
@@ -108,7 +123,7 @@ body {
 .accepted-grid-details{
   grid-column: 10 / 13;
   grid-row: 4;
-  height: 100px;
+
   overflow:scroll;
 }
 
@@ -152,19 +167,17 @@ body {
   display: inline-block;
 }
 
-.wrapper > section {
-  border: 2px solid rgb(50,171,222);
-  border-radius: 5px;
-  background-color: rgba(50,171,222,.2);
-}
+
 
 .section-client {
-  grid-column: 4 / 10;
+  grid-column: 4/13;
   grid-row: 2;
+
 }
 
 .row{
   display: inline-block;
+  clear: both;
 }
 
 .exit-window{
@@ -172,6 +185,10 @@ body {
   top: 2px;
   right: 2px;
   cursor: pointer;
+}
+
+.org-logo{
+  width: 50px;
 }
 
 /* @media (min-width:870px) { */
@@ -184,6 +201,7 @@ body {
     width: 440px;
     height:80%;
     padding:25px;
+    overflow: scroll;
   }
 /* } */
 @media only screen and  (max-width:900px) {
@@ -374,4 +392,12 @@ body {
   h4{
     margin-bottom: 10px;
     margin-top: 0px;
+  }
+
+  .highlight {
+    background: #ddd;
+    font-weight: bolder!important;
+  }
+  .rt-table {
+    font-family: Arial, Helvetica, sans-serif;
   }

@@ -1,9 +1,14 @@
 import React, { Component } from 'react';
+import {Button, Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarIcon, Content, MenuAnchor, Menu, MenuItem, MenuDivider, List, ListItem} from 'react-mdc-web';
 const moment = require('moment');
 
 class AcceptedDetails extends Component {
   constructor(props) {
     super(props)
+
+    this.state = {
+      open: false
+    }
   }
 
   render() {
@@ -36,6 +41,27 @@ class AcceptedDetails extends Component {
                 </div>
               </div>
               <div className="accepted-grid-details pt-2">
+
+
+                  <Toolbar>
+                  <ToolbarIcon/>
+                    <ToolbarRow>
+                      <ToolbarSection align="start">
+                        <ToolbarTitle>Description</ToolbarTitle>
+                      </ToolbarSection>
+                    </ToolbarRow>
+                  </Toolbar>
+                  <div className="block">
+                  <Content>
+                    {referral.description} "Lorem. ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
+                  </Content>
+                  </div>
+
+
+
+
+              {/* Adjust top margin for fixed toolbar */}
+
                 <div className="client-info">
                 <h4>Description:</h4>
                   {referral.description} "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."

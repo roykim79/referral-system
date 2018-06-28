@@ -34,7 +34,7 @@ class Dashboard extends Component {
         return (
             <div>
 
-              <body className="home">
+              <div className="home">
 
                 <section id="layout-grid-in-fluid-container pt-h">
                   <div className="demo-grid mdc-layout-grid">
@@ -52,12 +52,13 @@ class Dashboard extends Component {
                           <div className="mdc-drawer__content">
                             <nav className="mdc-list">
 
-                              <a className="mdc-list-item"
+                              <a className={"mdc-list-item " + (this.state.currentView ===  RECEIVED ? 'highlight' : 'normal')}
+
                                 onClick={() => {this.props.fetchReferrals(RECEIVED); this.setState({currentView: RECEIVED})}}>
                                 Received
                               </a>
 
-                              <a className="mdc-list-item"
+                              <a className={"mdc-list-item " + (this.state.currentView ===  SENT ? 'highlight' : 'normal')}
                                 onClick={() => {this.props.fetchReferrals(SENT); this.setState({currentView: SENT})}}>
                                 Outgoing
                               </a>
@@ -103,7 +104,7 @@ class Dashboard extends Component {
                     </div>
                   </div>
                 </section>
-              </body>
+              </div>
             </div>
 
         )

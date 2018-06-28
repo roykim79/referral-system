@@ -8,3 +8,7 @@ export const usernameField = () => {
 export const  passwordField = () => {
   return new MDCTextField(document.querySelector('.password'));
 }
+
+export const  organizationNameField = () => {
+  return new MDCTextField(document.querySelector('.organizationName'));
+}
