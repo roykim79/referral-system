@@ -15,7 +15,6 @@ class LoginHeader extends React.Component {
 class OtherHeader extends React.Component {
 
   logOut = async() => {
-    debugger;
     await axios.get(`/api/logout`);
     this.props.url.history.push('/')
   }
@@ -31,7 +30,7 @@ class OtherHeader extends React.Component {
             </a>
           </section>
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end app-nav-header" role="toolbar">
-            <a href="#" className="mdc-top-app-bar__action-item action-margin">My Organization</a>
+            <a href="/my-org" className="mdc-top-app-bar__action-item action-margin">My Organization</a>
 
             <a onClick={this.logOut} className="mdc-top-app-bar__action-item action-margin">Logout</a>
           </section>

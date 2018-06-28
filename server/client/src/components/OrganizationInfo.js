@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
+import axios from 'axios'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import { fetchMyOrg, fetchTags } from '../actions';
 import {WithContext as ReactTags} from 'react-tag-input';
+import loader from '../loading-gif.gif'
 
 // import Tags from './Tags';
 const KeyCodes = {
@@ -28,6 +30,10 @@ class OrganizationInfo extends Component {
         this.setState(this.props.myOrg);
         this.setState({suggestions: this.props.tags});
     });
+  }
+  updateOrg = () => {
+    axios.put('/api/my_organization', this.state)
+    alert('Organization Saved!')
   }
 
   handleDelete = (i) => {
@@ -56,7 +62,7 @@ class OrganizationInfo extends Component {
     const { tags, suggestions } = this.state;
 
     if (!this.state.suggestions|| !this.state.tags) {
-      return (<div>Loading...</div>)
+      return (<img className='loading-img load-icon' src={loader} alt='loading'/>)
     } else {
       return (
         <div>
@@ -70,6 +76,7 @@ class OrganizationInfo extends Component {
               <input value={this.state.phone} onChange={(e) => { this.setState({ phone: e.target.value }) }} id="phone" name="phone" type="text" />
               <input value={this.state.address} onChange={(e) => { this.setState({ address: e.target.value }) }} id="address" name="address" type="text" />
               <input value={this.state.logo} onChange={(e) => { this.setState({ logo: e.target.value }) }} id="logo" name="logo" type="text" />
+              <img className='myorg-logo' src={this.state.logo} /> 
               <div>
                 <ReactTags tags={tags}
                   suggestions={suggestions}
@@ -78,6 +85,7 @@ class OrganizationInfo extends Component {
                   handleDrag={this.handleDrag}
                   delimiters={delimiters} />
               </div>
+              <button onClick={() => {this.updateOrg()}} type='button'>Save</button>
             </form>
           </div>
         </div>
