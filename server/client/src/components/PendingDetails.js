@@ -1,4 +1,8 @@
 import React, { Component } from 'react';
+import {updateRefStatus} from '../actions';
+import {connect} from 'react-redux';
+import {Link, withRouter} from 'react-router-dom';
+import { bindActionCreators } from 'redux';
 
 class PendingDetails extends Component {
   constructor(props) {
@@ -48,14 +52,22 @@ class PendingDetails extends Component {
               </div>
             </div>
               <div className="grid-accept-reject">
-                <button types="submit" className="mdc-button mdc-button--raised reject">
+                <button types="submit" className="mdc-button mdc-button--raised reject"
+                onClick={(e)=>{
+                  e.preventDefault()
+                  console.log(this.props)
+                  this.props.handleState('rejected',true)
+                  this.props.updateRefStatus(referral._id,'rejected')}
+                }
+                >
                   Reject
                 </button>
                 <button types="submit" className="mdc-button mdc-button--raised accept"
                 onClick={(e)=>{
                   e.preventDefault()
                   console.log(this.props)
-                  this.props.handleState('accepted',true)}
+                  this.props.handleState('accepted',true)
+                  this.props.updateRefStatus(referral._id,'accepted')}
                 }
                   >
                   Accept
@@ -72,4 +84,8 @@ class PendingDetails extends Component {
   }
 }
 
-export default PendingDetails
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({ updateRefStatus }, dispatch)
+}
+
+export default connect(null, mapDispatchToProps)(withRouter(PendingDetails));
