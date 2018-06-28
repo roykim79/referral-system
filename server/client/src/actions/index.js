@@ -71,3 +71,4 @@ export const updateRefStatus = (referralId,status) => {
 
     return {type: UPDATE_DETAIL, payload: response}
 }
+
