@@ -7,6 +7,8 @@ import Modal from 'react-modal';
 import { bindActionCreators } from 'redux';
 import { Button, Caption } from 'react-mdc-web';
 
+import {tagNameField} from '../utils/inputField.js'
+
 // Make sure to bind modal to your appElement (http://reactcommunity.org/react-modal/accessibility/)
 // Modal.setAppElement('#yourAppElement')
 
@@ -15,13 +17,15 @@ class OrganizationModal extends React.Component {
     super(props);
 
     this.state = {
-      modalIsOpen: false
+      modalIsOpen: false,
+      tag: ''
     };
   }
 
   componentDidMount = () => {
-    this.props.fetchAllOrgs();
-    this.props.fetchTags();
+    let tagName = tagNameField()
+    this.props.fetchAllOrgs()
+    this.props.fetchTags()
   }
 
   openModal = (e) => {
@@ -35,24 +39,55 @@ class OrganizationModal extends React.Component {
 
   autofillList(){
     let suggestions = []
-
-    console.log(this.props)
-    if(this.props.allOrgs){
-      this.props.allOrgs.forEach((organization)=>{
+    // console.log(this.state.tag)
+    if(this.props.tags){
+      this.props.tags.forEach((tag)=>{
         // if (suggestions.length < 1){
           suggestions.push(
-            <option>{organization.organizationName}</option>
+            <option key={tag.id}>{tag.text}</option>
           )
         // }
 
       })
     }
+    return (
+      suggestions
+    )
   }
 
   renderOrgs(){
-    return this.props.allOrgs.map((org) =>{
+    let orgs = this.props.allOrgs.slice()
+
+    let match = this.props.tags.filter((tag)=>{
+        return tag.text == this.state.tag
+      }
+  )[0]
+
+  if (match){
+
+    orgs = orgs.filter((org)=>{
+
+      console.log(match)
       console.log(org)
+
+      let tags = org.tags.filter((tag)=>{
+
+        return tag.text == match.text
+        }
+      )[0]
+
+      return org.tags.includes(tags)
+
+    })
+
+  }
+
+  console.log(orgs)
+
+    return orgs.map((org) =>{
       const orgName = org.organizationName
+
+
       return (
         <div className="wrapper pointer" key={'model'+org._id}
           onClick={(e)=>{
@@ -69,11 +104,11 @@ class OrganizationModal extends React.Component {
 
 
       );
+
     })
   }
 
   render() {
-    console.log(this.props)
 
     if(!this.props.allOrgs || !this.props.tags) {
       return (<div>Loading...</div>)
@@ -97,6 +132,8 @@ class OrganizationModal extends React.Component {
 
           <a className="exit-window" onClick={this.closeModal}>X</a>
 
+
+
           <TextField
             id="myId"
             label='Search Organization'
@@ -107,10 +144,15 @@ class OrganizationModal extends React.Component {
           >
             <Input
               className="form-input-referral"
-              value={this.state.organization}
-              onChange={(e) => this.setState({organization: e.target.value})}
-              name="form-input-referral"/>
+              value={this.state.tag}
+              onChange={(e) => {
+                e.preventDefault()
+                this.setState({tag: e.target.value})}}
+              name="form-input-referral" list="tagNames"/>
           </TextField>
+          <datalist id="tagNames">
+          {this.autofillList()}
+          </datalist>
           <div className="">
               {this.renderOrgs()}
           </div>

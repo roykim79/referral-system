@@ -73,15 +73,19 @@ class NewReferral extends Component {
                       <section className="section-organization">
 
                       <div className="mdc-text-field mdc-text-field--box organizationName">
+
                         <label className="mdc-floating-label" for="organizationName-input">Organization Name</label>
+
                         <input value={this.state.organization} onChange={(event) => {this.setState({organization: event.target.value})}}
-                          type="text" className=" awesomplete mdc-text-field__input input-text"  list="orgNames"  required/>
-                          <datalist id="orgNames">
-                          {this.autofillList()}
-                          </datalist>
-                          <div className="mdc-line-ripple">
-                          </div>
-                          </div>
+                          type="text" className="mdc-text-field__input input-text"  list="orgNames"  required/>
+
+                        <datalist id="orgNames">
+                        {this.autofillList()}
+                        </datalist>
+
+                        <div className="mdc-line-ripple">
+                        </div>
+                      </div>
 
                           <OrganizationModal allOrgs={this.props.allOrgs} setOrganization={this.setOrganization}/>
 
