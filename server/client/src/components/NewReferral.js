@@ -25,11 +25,10 @@ class NewReferral extends Component {
     };
   }
 
-  // setOrganization = (e, id) => {
-  //   console.log("J")
-  //   // e.preventDefault()
-  //   this.setState({ receiving_organization: id })
-  // }
+  setOrganization = (e, id) => {
+    e.preventDefault()
+    this.setState({ receiving_organization: id })
+  }
 
   componentDidMount() {
     let organizationName = organizationNameField()
@@ -96,7 +95,7 @@ class NewReferral extends Component {
                   <OrganizationModal
                     value={this.state.organizationName}
                     allOrgs={this.props.allOrgs}
-                  // setOrganization={this.setOrganization} 
+                  setOrganization={this.setOrganization} 
                   />
                 </section>
 
