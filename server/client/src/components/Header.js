@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 import logo from '../RS-logo-white.png';
 import { bindActionCreators } from 'redux';
-import {fetchUser, fetchAllOrgs, fetchTags} from '../actions'
+import {fetchUser, fetchAllOrgs, fetchTags, fetchMyOrg} from '../actions'
 
 class LoginHeader extends React.Component {
   render() {
@@ -46,6 +46,7 @@ class Header extends Component {
   componentDidMount = async() => {
     this.props.fetchTags()
     this.props.fetchAllOrgs()
+    this.props.fetchMyOrg()
 
     await this.props.fetchUser()
     if(!this.props.auth) {
@@ -58,7 +59,7 @@ class Header extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({fetchUser, fetchAllOrgs, fetchTags}, dispatch)
+  return bindActionCreators({fetchUser, fetchAllOrgs, fetchTags, fetchMyOrg}, dispatch)
   }
 
 const mapStateToProps = ({auth}) => {

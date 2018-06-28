@@ -23,7 +23,7 @@ this.updateStatus()
     }
 
     componentDidUpdate = (prevProps) => {
-      debugger;
+
       if(prevProps.referralDetail){
       if(this.props.referralDetail.status != prevProps.referralDetail.status) {
         this.updateStatus();
