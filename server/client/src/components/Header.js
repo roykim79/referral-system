@@ -15,7 +15,6 @@ class LoginHeader extends React.Component {
 class OtherHeader extends React.Component {
 
   logOut = async() => {
-    debugger;
     await axios.get(`/api/logout`);
     this.props.url.history.push('/')
   }
