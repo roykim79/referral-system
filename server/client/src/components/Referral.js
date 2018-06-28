@@ -92,6 +92,7 @@ changeStatus = (referral) => {
                 <li className={this.state.contacted}>Contacted</li>
                 <li className={this.state.completed}>Completed</li>
             </ul>
+            <button onClick={() => {this.changeStatus(referral)}}> next step </button>
           </div>
         </div>
       )
@@ -119,7 +120,6 @@ changeStatus = (referral) => {
           </div>
 
           {this.renderStatus(referral)}
-          <button onClick={() => {this.changeStatus(referral)}}> next step </button>
 
           <PendingDetails status={this.state.accepted} referral={referral} handleState = {this.handleState}/>
 
