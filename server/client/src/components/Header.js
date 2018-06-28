@@ -44,7 +44,7 @@ class OtherHeader extends React.Component {
 class Header extends Component {
 
   componentDidMount = async() => {
-
+    this.props.fetchTags()
     this.props.fetchAllOrgs()
 
     await this.props.fetchUser()
