@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchReferrals, submitNote, fetchDetail, emptyDetails} from '../actions'
+import {fetchReferrals, submitNote, fetchDetail, emptyDetails, updateRefStatus} from '../actions'
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
@@ -18,39 +18,17 @@ class Referral extends Component {
   componentWillMount = () => {
    this.props.fetchDetail(this.props.match.params.referralId)
     .then(()=>{
+this.updateStatus()
+      })
+    }
 
-      switch(this.props.referralDetail.status){
-        case 'accepted':
-          this.setState({
-            accepted: 'complete',
-            contacted: 'active',
-            completed: '',
-          })
-          break;
-        case 'contacted':
-          this.setState({
-            accepted: 'complete',
-            contacted: 'complete',
-            completed: 'active',
-          })
-          break;
-        case 'completed':
-          this.setState({
-            accepted: 'complete',
-            contacted: 'complete',
-            completed: 'complete',
-          })
-          break;
-        default:
-        this.setState({
-          accepted: '',
-          contacted: '',
-          completed: '',
-        })
+    componentDidUpdate = (prevProps) => {
+      debugger;
+      if(prevProps.referralDetail){
+      if(this.props.referralDetail.status != prevProps.referralDetail.status) {
+        this.updateStatus();
       }
-    })
-
-  }
+    }}
 
   componentWillUnmount(){
     this.props.emptyDetails()
@@ -59,6 +37,48 @@ class Referral extends Component {
   handleState = (prop, value) =>{
     this.setState({[prop]:value})
   }
+ updateStatus = () => {
+  switch(this.props.referralDetail.status){
+    case 'accepted':
+      this.setState({
+        accepted: 'complete',
+        contacted: 'active',
+        completed: '',
+      })
+      break;
+    case 'contacted':
+      this.setState({
+        accepted: 'complete',
+        contacted: 'complete',
+        completed: 'active',
+      })
+      break;
+    case 'completed':
+      this.setState({
+        accepted: 'complete',
+        contacted: 'complete',
+        completed: 'complete',
+      })
+      break;
+    default:
+    this.setState({
+      accepted: '',
+      contacted: '',
+      completed: '',
+    })
+  }
+}
+
+changeStatus = (referral) => {
+  switch(referral.status){
+    case 'accepted':
+    this.props.updateRefStatus(referral._id, 'contacted');
+    break;
+    case 'contacted':
+    this.props.updateRefStatus(referral._id, 'completed');
+    break;
+  }
+}
 
 
   renderStatus(referral){
@@ -99,6 +119,7 @@ class Referral extends Component {
           </div>
 
           {this.renderStatus(referral)}
+          <button onClick={() => {this.changeStatus(referral)}}> next step </button>
 
           <PendingDetails status={this.state.accepted} referral={referral} handleState = {this.handleState}/>
 
@@ -143,7 +164,7 @@ class Referral extends Component {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchReferrals, submitNote, fetchDetail, emptyDetails}, dispatch);
+  return bindActionCreators({fetchReferrals, submitNote, fetchDetail, emptyDetails, updateRefStatus}, dispatch);
 }
 function mapStateToProps({referrals, referralDetail, auth, myOrg, allOrgs}) {
   return {referrals, referralDetail, auth, myOrg, allOrgs}
