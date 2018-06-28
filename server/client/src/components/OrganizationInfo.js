@@ -5,13 +5,14 @@ import { connect } from 'react-redux';
 import { fetchMyOrg, fetchTags } from '../actions';
 import {WithContext as ReactTags} from 'react-tag-input';
 import loader from '../loading-gif.gif'
+import {Textfield, Icon} from 'react-mdc-web';
 
 // import Tags from './Tags';
 const KeyCodes = {
   comma: 188,
   enter: 13,
 };
- 
+
 const delimiters = [KeyCodes.comma, KeyCodes.enter];
 
 class OrganizationInfo extends Component {
@@ -66,6 +67,29 @@ class OrganizationInfo extends Component {
     } else {
       return (
         <div>
+        <div className="wrapper">
+          <div className="grid-1-1">
+            <h1 className='add-referral-header'>My Organization</h1>
+          </div>
+          <div className="body">
+            <h1 className='add-referral-header'>
+            <Textfield
+              floatingLabel="Description"
+              className="mdc-text-field--box"
+
+              rows="1"
+              cols="30"
+              value={this.state.description}
+              onChange={({target : {value : description}}) => {
+                this.setState({ description })
+              }}
+            />
+            </h1>
+          </div>
+        </div>
+
+
+
           <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
           <div className="form-container">
             <form action="">
@@ -76,7 +100,7 @@ class OrganizationInfo extends Component {
               <input value={this.state.phone} onChange={(e) => { this.setState({ phone: e.target.value }) }} id="phone" name="phone" type="text" />
               <input value={this.state.address} onChange={(e) => { this.setState({ address: e.target.value }) }} id="address" name="address" type="text" />
               <input value={this.state.logo} onChange={(e) => { this.setState({ logo: e.target.value }) }} id="logo" name="logo" type="text" />
-              <img className='myorg-logo' src={this.state.logo} /> 
+              <img className='myorg-logo' src={this.state.logo} />
               <div>
                 <ReactTags tags={tags}
                   suggestions={suggestions}
