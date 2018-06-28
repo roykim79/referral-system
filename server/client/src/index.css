@@ -430,3 +430,11 @@ input[type=submit] {
     margin-bottom: 10px;
     margin-top: 0px;
   }
+
+  .highlight {
+    background: #ddd;
+    font-weight: bolder!important;
+  }
+  .rt-table {
+    font-family: Arial, Helvetica, sans-serif;
+  }
