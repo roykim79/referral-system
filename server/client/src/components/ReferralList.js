@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import ReactTable from 'react-table';
+import loader from '../loading-gif.gif';
 import { fetchReferrals } from '../actions'
 import { connect } from 'react-redux';
 import { Link, withRouter } from 'react-router-dom';
@@ -19,17 +20,17 @@ class ReferralList extends Component {
   }
   renderTable = () => {
     if (!this.props.referrals) {
-      return (<div>Loading... </div>)
+      return (<img className='loading-img load-icon' src={loader} alt='loading'/>)
     }
     let columns = [
       {
         Header: 'Organization', accessor: 'referring_organization.organizationName'
       },
       {
-        Header: 'Name', accessor: 'referring_user.firstName'
+        Header: 'Referrer\'s Name', accessor: 'referring_user.firstName'
       },
       {
-        Header: 'Client', accessor: 'client_name'
+        Header: 'Client Name', accessor: 'client_name'
       },
       {
         Header: 'Date', accessor: 'dateCreated',

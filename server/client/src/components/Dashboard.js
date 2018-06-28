@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import { bindActionCreators } from 'redux';
 import ReferralList from './ReferralList';
+import loader from '../loading-gif.gif';
 import {fetchReferrals, fetchUser} from '../actions';
 import {connect} from 'react-redux';
 const RECEIVED = 'received';
@@ -21,9 +22,13 @@ class Dashboard extends Component {
         this.interval = setInterval(() => this.props.fetchReferrals(this.state.currentView), 15000);
     }
     componentDidMount = () => {
+      const kickBack = () => {
         if(!this.props.auth) {
           this.props.history.push('/')
         }
+      }
+     setTimeout(kickBack, 3000);
+        
     }
 
     componentWillUnmount() {
@@ -31,6 +36,9 @@ class Dashboard extends Component {
     }
 
     render(){
+      if(!this.props.auth){
+        return(<img className='loading-img load-icon' src={loader} alt='loading'/>)
+      }
         return (
             <div>
 

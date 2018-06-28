@@ -67,6 +67,7 @@ class OrganizationInfo extends Component {
     } else {
       return (
         <div>
+<<<<<<< HEAD
         <div className="wrapper">
           <div className="grid-1-1">
             <h1 className='add-referral-header'>My Organization</h1>
@@ -91,6 +92,9 @@ class OrganizationInfo extends Component {
 
 
           <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
+=======
+          <h2>Welcome to {this.props.myOrg.organizationName}'s Information Page</h2>
+>>>>>>> 1aeb6ee29c3bc1d22216b4c2cbe21ed2f8fef076
           <div className="form-container">
             <form action="">
               <input value={this.state.organizationName} onChange={(e) => { this.setState({ organizationName: e.target.value }) }} id="organizationName" name="organizationName" type="text" />
