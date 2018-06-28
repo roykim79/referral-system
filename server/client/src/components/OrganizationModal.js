@@ -5,7 +5,7 @@ import {fetchAllOrgs, fetchTags}from '../actions';
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import Modal from 'react-modal';
 import { bindActionCreators } from 'redux';
-import { Button, Caption } from 'react-mdc-web';
+import { Button, Caption, Title } from 'react-mdc-web';
 
 import {tagNameField} from '../utils/inputField.js'
 
@@ -89,15 +89,19 @@ class OrganizationModal extends React.Component {
 
 
       return (
-        <div className="wrapper pointer" key={'model'+org._id}
+        <div className="wrapper modal pointer" key={'model'+org._id}
           onClick={(e)=>{
             this.props.setOrganization(e, orgName)
             this.setState({modalIsOpen:false})}}>
 
           <img className = "org-logo" alt = "<LOGO>" src = {org.logo}/>
           <div className="modal-list-name">
-          <h4 className="m-0">{orgName}</h4>
-          <p className="m-0"> tags </p>
+          <div className="orgName-title">{orgName}</div>
+           {
+            org.tags.map((tag)=>{
+              return <Caption className="tag"> {tag.text} </Caption>
+            })
+          }
           </div>
 
         </div>
