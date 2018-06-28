@@ -34,7 +34,7 @@ class Dashboard extends Component {
         return (
             <div>
 
-              <body className="home">
+              <div className="home">
 
                 <section id="layout-grid-in-fluid-container pt-h">
                   <div className="demo-grid mdc-layout-grid">
@@ -103,7 +103,7 @@ class Dashboard extends Component {
                     </div>
                   </div>
                 </section>
-              </body>
+              </div>
             </div>
 
         )

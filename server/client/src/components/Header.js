@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 import logo from '../RS-logo-white.png';
 import { bindActionCreators } from 'redux';
-import {fetchUser} from '../actions'
+import {fetchUser, fetchAllOrgs} from '../actions'
 
 class LoginHeader extends React.Component {
   render() {
@@ -26,7 +26,13 @@ class OtherHeader extends React.Component {
       <header className="mdc-top-app-bar mdc-top-app-bar--short app-nav-header ">
         <div className="mdc-top-app-bar__row">
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
+<<<<<<< HEAD
             <a href="/"><img className="shrine-logo-drawer ml-1" src={logo}/></a>
+=======
+            <a href="/">
+              <img className="shrine-logo-drawer ml-1" src={logo}/>
+            </a>
+>>>>>>> 5dc03ace055d93d23d1260517cf152d0ee9b4459
           </section>
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-end app-nav-header" role="toolbar">
             <a href="#" className="mdc-top-app-bar__action-item action-margin">My Organization</a>
@@ -43,6 +49,9 @@ class OtherHeader extends React.Component {
 class Header extends Component {
 
   componentDidMount = async() => {
+
+    this.props.fetchAllOrgs()
+
     await this.props.fetchUser()
     if(!this.props.auth) {
       this.props.history.push('/')
@@ -54,7 +63,7 @@ class Header extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({fetchUser}, dispatch)
+  return bindActionCreators({fetchUser, fetchAllOrgs}, dispatch)
   }
 
 const mapStateToProps = ({auth}) => {

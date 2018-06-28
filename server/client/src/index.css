@@ -4,54 +4,8 @@ body {
   font-family: sans-serif;
 }
 
-* { box-sizing: border-box; }
-body {
-  font: 16px Arial;
-}
-.autocomplete {
-  /*the container must be positioned relative:*/
-  position: relative;
-  display: inline-block;
-}
-input {
-  border: 1px solid transparent;
-  background-color: #f1f1f1;
-  padding: 10px;
-  font-size: 16px;
-}
-input[type=text] {
-  background-color: #f1f1f1;
-  width: 100%;
-}
-input[type=submit] {
-  background-color: DodgerBlue;
-  color: #fff;
-}
-.autocomplete-items {
-  position: absolute;
-  border: 1px solid #d4d4d4;
-  border-bottom: none;
-  border-top: none;
-  z-index: 99;
-  /*position the autocomplete items to be the same width as the container:*/
-  top: 100%;
-  left: 0;
-  right: 0;
-}
-.autocomplete-items div {
-  padding: 10px;
-  cursor: pointer;
-  background-color: #fff;
-  border-bottom: 1px solid #d4d4d4;
-}
-.autocomplete-items div:hover {
-  /*when hovering an item:*/
-  background-color: #e9e9e9;
-}
-.autocomplete-active {
-  /*when navigating through the items using the arrow keys:*/
-  background-color: DodgerBlue !important;
-  color: #ffffff;
+#orgNames{
+  max-height: 5px;
 }
 
 
@@ -108,9 +62,15 @@ input[type=submit] {
 }
 
 .wrapper > div {
-  border: 2px solid rgb(233,171,88);
+  /* border: 2px solid rgb(233,171,88); */
   border-radius: 5px;
-  background-color: rgba(233,171,88,.2);
+  /* background-color: rgba(233,171,88,.2); */
+}
+
+.wrapper > section {
+  /* border: 2px solid rgb(50,171,222); */
+  border-radius: 5px;
+  /* background-color: rgba(50,171,222,.2); */
 }
 
 .wrapper {
@@ -207,19 +167,17 @@ input[type=submit] {
   display: inline-block;
 }
 
-.wrapper > section {
-  border: 2px solid rgb(50,171,222);
-  border-radius: 5px;
-  background-color: rgba(50,171,222,.2);
-}
+
 
 .section-client {
-  grid-column: 4 / 10;
+  grid-column: 4/13;
   grid-row: 2;
+
 }
 
 .row{
   display: inline-block;
+  clear: both;
 }
 
 .exit-window{
@@ -227,6 +185,10 @@ input[type=submit] {
   top: 2px;
   right: 2px;
   cursor: pointer;
+}
+
+.org-logo{
+  width: 50px;
 }
 
 /* @media (min-width:870px) { */
@@ -239,6 +201,7 @@ input[type=submit] {
     width: 440px;
     height:80%;
     padding:25px;
+    overflow: scroll;
   }
 /* } */
 @media only screen and  (max-width:900px) {
