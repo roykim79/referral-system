@@ -66,7 +66,7 @@ class OrganizationInfo extends Component {
     } else {
       return (
         <div>
-          <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
+          <h2>Welcome to {this.props.myOrg.organizationName}'s Information Page</h2>
           <div className="form-container">
             <form action="">
               <input value={this.state.organizationName} onChange={(e) => { this.setState({ organizationName: e.target.value }) }} id="organizationName" name="organizationName" type="text" />

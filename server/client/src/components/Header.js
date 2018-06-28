@@ -25,7 +25,7 @@ class OtherHeader extends React.Component {
       <header className="mdc-top-app-bar mdc-top-app-bar--short app-nav-header ">
         <div className="mdc-top-app-bar__row">
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <a href="/">
+            <a href="/dashboard">
               <img className="shrine-logo-drawer ml-1" src={logo}/>
             </a>
           </section>
