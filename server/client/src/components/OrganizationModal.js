@@ -56,9 +56,8 @@ class OrganizationModal extends React.Component {
         <div className="row" key={'model'+org._id}>
 
           <img className = "org-logo" alt = "<LOGO>" src = {org.logo}/>
-          <p>{org.organizationName}</p>
+          <span className="modal-list-name">{org.organizationName}</span>
 
-          <br/>
         </div>
 
 
@@ -105,9 +104,11 @@ class OrganizationModal extends React.Component {
               onChange={(e) => this.setState({organization: e.target.value})}
               name="form-input-referral"/>
           </TextField>
-
-          {this.renderOrgs()}
-
+          <div className="wrapper">
+            <div className="modal-grid">
+              {this.renderOrgs()}
+            </div>
+          </div>
         </Modal>
       </div>
     );

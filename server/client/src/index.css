@@ -62,9 +62,9 @@ body {
 }
 
 .wrapper > div {
-  /* border: 2px solid rgb(233,171,88); */
+  border: 2px solid rgb(233,171,88);
   border-radius: 5px;
-  /* background-color: rgba(233,171,88,.2); */
+  background-color: rgba(233,171,88,.2);
 }
 
 .wrapper > section {
@@ -96,6 +96,11 @@ body {
 }
 
 .body {
+  grid-column: 1 / 13;
+  grid-row: 2;
+}
+
+.modal-grid{
   grid-column: 1 / 13;
   grid-row: 2;
 }
@@ -150,6 +155,16 @@ body {
   grid-row: 4;
 }
 
+.org-logo{
+  width: 50px;
+  grid-column: 1;
+  grid-row: 1;
+}
+
+.modal-list-name{
+  grid-column: 1/2;
+}
+
 .accept{
   margin:5px;
 }
@@ -175,9 +190,21 @@ body {
 
 }
 
-.row{
-  display: inline-block;
-  clear: both;
+
+.row:before,
+ .row:after,
+ {
+
+  }
+
+  .row{
+    display: block;
+  }
+
+
+.row:after
+{
+ clear: both;
 }
 
 .exit-window{
@@ -187,9 +214,7 @@ body {
   cursor: pointer;
 }
 
-.org-logo{
-  width: 50px;
-}
+
 
 /* @media (min-width:870px) { */
   .organization-modal {
