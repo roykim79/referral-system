@@ -7,7 +7,15 @@ const requireLogin = require('../middlewares/requireLogin');
 module.exports = app => {
     app.get('/api/tags', (request, response) => {
         Tags.find({}).exec((err, results) => {
-            response.send(results);
+            let customTagArray = [];
+            results.forEach(result => {
+                let tag = {
+                    text: result.text,
+                    id : result.text
+                }
+                customTagArray.push(tag);
+            })
+            response.send(customTagArray);
         })
     })
 }

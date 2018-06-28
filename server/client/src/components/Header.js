@@ -2,7 +2,9 @@ import React, { Component } from 'react';
 import {connect} from 'react-redux';
 import {withRouter} from 'react-router-dom';
 import axios from 'axios';
-import logo from '../RS-logo-white.png'
+import logo from '../RS-logo-white.png';
+import { bindActionCreators } from 'redux';
+import {fetchUser} from '../actions'
 
 class LoginHeader extends React.Component {
   render() {
@@ -40,13 +42,23 @@ class OtherHeader extends React.Component {
 
 class Header extends Component {
 
+  componentDidMount = async() => {
+    await this.props.fetchUser()
+    if(!this.props.auth) {
+      this.props.history.push('/')
+    }}
+
   render() {
     return this.props.auth ? <OtherHeader url={this.props}/> : <LoginHeader />
   }
 }
 
+const mapDispatchToProps = (dispatch) => {
+  return bindActionCreators({fetchUser}, dispatch)
+  }
+
 const mapStateToProps = ({auth}) => {
   return {auth};
 }
 
-export default connect(mapStateToProps)(withRouter(Header));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Header));
