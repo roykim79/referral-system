@@ -38,18 +38,43 @@ module.exports = app => {
 
     // Takes in information from req.body and updates the organization info.
     //NOTE!!! Update tage hasn't been implemented yet. Everything else can be updated
-    app.put('/api/my_organization', requireLogin, (request, response) => {
+    app.put('/api/my_organization', requireLogin, async (request, response) => {
+
+        let tagList = [];
+        if(request.body.tags){
+            tagList = await Promise.all(request.body.tags.map( tag => {
+                return Tags.findOne({text: tag.text}).then(result => {
+                    
+                    if(result){
+                        return result.id
+                    } else {
+                        let newTag = new Tags({
+                            text: tag.text
+                        })
+                        newTag.save()
+                        return newTag.id
+                    }
+                })
+            }));
+        } 
+
+
         Organization.findOne({_id: request.user.organization.toHexString()})
-        .exec((error, organization) => {
+        .exec(async (error, organization) => {
             
             if (request.body) {
 
                 let keys = Object.keys(request.body)
 
-                keys.forEach(key => {
+                await keys.forEach(key => {
                     if(organization[key] != null){
-                        organization[key] = request.body[key]
+                        if(key == "tags"){
+                            organization[key] = tagList;
+                        } else{
+                            organization[key] = request.body[key]
+                        }
                     }
+
                 })
                 organization.save()
                 return response.send(organization);
@@ -73,7 +98,7 @@ module.exports = app => {
     
     // gets all organizations and returns the organization name, ID, tags, logos
     app.get('/api/organizations/all', (request, response) => {
-        Organization.find({}, {organizationName: 1, tags: 1, logo: 1} ).exec((error, organization) => {
+        Organization.find({}, {organizationName: 1, tags: 1, logo: 1} ).populate('tags').exec((error, organization) => {
             if (error) {
                 return response.status(400).send("Organization not found, please try again");
             }
@@ -91,13 +116,13 @@ module.exports = app => {
             }
 
             let tagList = await Promise.all(request.body.tags.map( tag => {
-                return Tags.findOne({name: tag}).then(result => {
+                return Tags.findOne({name: tag.text}).then(result => {
                     
                     if(result){
                         return result.id
                     } else {
                         let newTag = new Tags({
-                            name: tag
+                            text: tag.text
                         })
                         newTag.save()
                         return newTag.id
