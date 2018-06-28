@@ -2,6 +2,7 @@ import React, {Component} from 'react';
 import TextField, {HelperText, Input} from '@material/react-text-field';
 import {Textfield, Icon} from 'react-mdc-web';
 import Modal from 'react-modal';
+import {connect} from 'react-redux';
 
 import OrganizationModal from './OrganizationModal';
 
@@ -26,15 +27,20 @@ class NewReferral extends Component {
     }
 
     autofillList(){
-      var countries = ["Afghanistan","Albania","Algeria","Andorra","Angola","Anguilla"]
-
       let suggestions = []
 
-      countries.forEach((organization)=>{
-        suggestions.push(
-          <option>{organization}</option>
-        )
-      })
+      console.log(this.props)
+      if(this.props.allOrgs){
+        this.props.allOrgs.forEach((organization)=>{
+          // if (suggestions.length < 1){
+            suggestions.push(
+              <option>{organization.organizationName}</option>
+            )
+          // }
+
+        })
+      }
+
 
       return (
         suggestions
@@ -62,15 +68,15 @@ class NewReferral extends Component {
                       <div className="mdc-text-field mdc-text-field--box organizationName">
                         <label className="mdc-floating-label" for="organizationName-input">Organization Name</label>
                         <input onChange={(event) => {this.setState({organization: event.target.value})}}
-                          type="text" className=" awesomplete mdc-text-field__input input-text"  list="mylist"  required/>
-                          <datalist id="mylist">
+                          type="text" className=" awesomplete mdc-text-field__input input-text"  list="orgNames"  required/>
+                          <datalist id="orgNames">
                           {this.autofillList()}
                           </datalist>
                           <div className="mdc-line-ripple">
                           </div>
                           </div>
 
-                          <OrganizationModal/>
+                          <OrganizationModal allOrgs={this.props.allOrgs}/>
 
                       </section>
 
@@ -80,9 +86,7 @@ class NewReferral extends Component {
                           id="myId"
                           label='Name'
                           floatingLabelClassName='mdc-floating-label'
-                          className="form-input-referral mdc-text-field--box"
-                          style = {{width: 300}}
-
+                          className="form-input-referral mdc-text-field--box "
                         >
                           <Input
                             className="form-input-referral"
@@ -91,11 +95,13 @@ class NewReferral extends Component {
                             name="form-input-referral"/>
                         </TextField>
 
+                        <br/>
+
                         <TextField
                           id="myId"
                           label='Phone Number'
                           floatingLabelClassName='mdc-floating-label'
-                          className="form-input-referral mdc-text-field--box"
+                          className="form-input-referral mdc-text-field--box "
                           style = {{width: 300}}
 
                         >
@@ -106,11 +112,13 @@ class NewReferral extends Component {
                             name="form-input-referral"/>
                         </TextField>
 
+                        <br/>
+
                         <TextField
                           id="myId"
                           label='Email'
                           floatingLabelClassName='mdc-floating-label'
-                          className="form-input-referral mdc-text-field--box"
+                          className="form-input-referral mdc-text-field--box "
                           style = {{width: 300}}
 
                         >
@@ -120,6 +128,8 @@ class NewReferral extends Component {
                             onChange={(e) => this.setState({email: e.target.value})}
                             name="form-input-referral"/>
                         </TextField>
+
+                        <br/>
 
                         <Textfield
                           floatingLabel="Description"
@@ -160,4 +170,10 @@ class NewReferral extends Component {
     }
 }
 
-export default NewReferral;
+// function mapDispatchToProps(dispatch) {
+//   return bindActionCreators({ fetchReferrals, submitNote, fetchDetail, emptyDetails }, dispatch);
+// }
+function mapStateToProps({ allOrgs }) {
+  return { allOrgs }
+}
+export default connect(mapStateToProps)(NewReferral);

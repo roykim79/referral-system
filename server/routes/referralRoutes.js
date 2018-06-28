@@ -1,4 +1,5 @@
 const Referral = require("../models/Referral");
+const requireLogin = require('../middlewares/requireLogin');
 
 module.exports = app => {
     //Called by the dashboard. Gets all the referrals sent by the user's organization. The organization ID is sent in the request. Grouping by status will happen on the front end.
@@ -92,7 +93,7 @@ module.exports = app => {
     })
 
     //updates the status of a given referral. The new status should come in the query url
-    app.put("/api/referrals/:referralId", (req, res) => {
+    app.put("/api/referrals/:referralId", requireLogin, (req, res) => {
         Referral.findById(req.params.referralId, (err, referral) => {
             if(err){
                 console.log(err);

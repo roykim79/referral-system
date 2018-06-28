@@ -9,13 +9,9 @@ import NewReferral from './NewReferral';
 import Referral from './Referral';
 import Header from './Header';
 
-import {fetchAllOrgs} from '../actions';
 
 class App extends Component {
 
-    componentDidMount(){
-      this.props.fetchAllOrgs()
-    }
 
     render(){
     return (
@@ -34,9 +30,4 @@ class App extends Component {
   )}
 };
 
-
-const mapDispatchToProps = (dispatch) => {
-    return bindActionCreators({fetchAllOrgs}, dispatch)
-}
-
-export default connect(null, mapDispatchToProps)(App);
+export default App

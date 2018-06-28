@@ -94,9 +94,9 @@ class Referral extends Component {
 
             {this.renderStatus(referral)}
 
-            <PendingDetails status={this.state.accepted} referral={referral} handleState={this.handleState} />
+            <PendingDetails status={this.state.accepted} referral={referral} handleState={this.handleState}/>
 
-            <AcceptedDetails status={this.state.accepted} referral={referral} handleState={this.handleState} />
+            <AcceptedDetails status={this.state.accepted} referral={referral} handleState={this.handleState}/>
 
           </div>
 
