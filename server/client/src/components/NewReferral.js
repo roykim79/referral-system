@@ -21,6 +21,13 @@ class NewReferral extends Component {
       };
     }
 
+    setOrganization=(e, orgName)=>{
+
+      e.preventDefault()
+      this.setState({organization:orgName})
+
+    }
+
 
     componentDidMount(){
       let organizationName = organizationNameField()
@@ -67,7 +74,7 @@ class NewReferral extends Component {
 
                       <div className="mdc-text-field mdc-text-field--box organizationName">
                         <label className="mdc-floating-label" for="organizationName-input">Organization Name</label>
-                        <input onChange={(event) => {this.setState({organization: event.target.value})}}
+                        <input value={this.state.organization} onChange={(event) => {this.setState({organization: event.target.value})}}
                           type="text" className=" awesomplete mdc-text-field__input input-text"  list="orgNames"  required/>
                           <datalist id="orgNames">
                           {this.autofillList()}
@@ -76,7 +83,7 @@ class NewReferral extends Component {
                           </div>
                           </div>
 
-                          <OrganizationModal allOrgs={this.props.allOrgs}/>
+                          <OrganizationModal allOrgs={this.props.allOrgs} setOrganization={this.setOrganization}/>
 
                       </section>
 
