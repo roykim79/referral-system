@@ -4,7 +4,7 @@ import {withRouter} from 'react-router-dom';
 import axios from 'axios';
 import logo from '../RS-logo-white.png';
 import { bindActionCreators } from 'redux';
-import {fetchUser, fetchAllOrgs} from '../actions'
+import {fetchUser, fetchAllOrgs, fetchTags} from '../actions'
 
 class LoginHeader extends React.Component {
   render() {
@@ -25,7 +25,7 @@ class OtherHeader extends React.Component {
       <header className="mdc-top-app-bar mdc-top-app-bar--short app-nav-header ">
         <div className="mdc-top-app-bar__row">
           <section className="mdc-top-app-bar__section mdc-top-app-bar__section--align-start">
-            <a href="/">
+            <a href="/dashboard">
               <img className="shrine-logo-drawer ml-1" src={logo}/>
             </a>
           </section>
@@ -44,7 +44,7 @@ class OtherHeader extends React.Component {
 class Header extends Component {
 
   componentDidMount = async() => {
-
+    this.props.fetchTags()
     this.props.fetchAllOrgs()
 
     await this.props.fetchUser()
@@ -58,7 +58,7 @@ class Header extends Component {
 }
 
 const mapDispatchToProps = (dispatch) => {
-  return bindActionCreators({fetchUser, fetchAllOrgs}, dispatch)
+  return bindActionCreators({fetchUser, fetchAllOrgs, fetchTags}, dispatch)
   }
 
 const mapStateToProps = ({auth}) => {
