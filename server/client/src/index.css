@@ -62,9 +62,9 @@ body {
 }
 
 .wrapper > div {
-  /* border: 2px solid rgb(233,171,88); */
+  border: 2px solid rgb(233,171,88);
   border-radius: 5px;
-  /* background-color: rgba(233,171,88,.2); */
+  background-color: rgba(233,171,88,.2);
 }
 
 .wrapper > section {
@@ -77,7 +77,7 @@ body {
   display: grid;
   grid-template-columns: repeat(12, 1fr);
   grid-gap: 0px;
-  grid-auto-rows: minmax(80px, auto);
+  grid-auto-rows: minmax(40px, auto);
 }
 .grid-header {
   grid-column: 1/13;
@@ -150,11 +150,30 @@ body {
   grid-row: 4;
 }
 
+.modal-grid{
+  grid-column: 1 / 13;
+  grid-row: 1/10;
+  height: 50px!important;
+}
+
+.org-logo{
+  width: 50px;
+  grid-column: 1;
+}
+
+.modal-list-name{
+  width: 100px; grid-column: 3;
+}
+
 .accept{
   margin:5px;
 }
 .reject{
   margin:5px;
+}
+
+.pointer{
+  cursor: pointer;
 }
 
 .section-organization {
@@ -175,9 +194,21 @@ body {
 
 }
 
-.row{
-  display: inline-block;
-  clear: both;
+
+.row:before,
+ .row:after,
+ {
+
+  }
+
+  .row{
+    display: block;
+  }
+
+
+.row:after
+{
+ clear: both;
 }
 
 .exit-window{
@@ -187,9 +218,7 @@ body {
   cursor: pointer;
 }
 
-.org-logo{
-  width: 50px;
-}
+
 
 /* @media (min-width:870px) { */
   .organization-modal {
@@ -389,6 +418,10 @@ body {
     padding-top: 20px;
   }
 
+  .m-0{
+    margin:0px;
+  }
+
   h4{
     margin-bottom: 10px;
     margin-top: 0px;
@@ -401,6 +434,7 @@ body {
   .rt-table {
     font-family: Arial, Helvetica, sans-serif;
   }
+
   .rt-th {
     font-weight: bold;
   }
@@ -429,3 +463,4 @@ body {
   .rt-table .status-rejected {
     background-color: rgb(255, 0, 0);
   }
+

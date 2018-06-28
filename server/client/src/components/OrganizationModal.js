@@ -52,13 +52,19 @@ class OrganizationModal extends React.Component {
   renderOrgs(){
     return this.props.allOrgs.map((org) =>{
       console.log(org)
+      const orgName = org.organizationName
       return (
-        <div className="row" key={'model'+org._id}>
+        <div className="wrapper pointer" key={'model'+org._id}
+          onClick={(e)=>{
+            this.props.setOrganization(e, orgName)
+            this.setState({modalIsOpen:false})}}>
 
           <img className = "org-logo" alt = "<LOGO>" src = {org.logo}/>
-          <p>{org.organizationName}</p>
+          <div className="modal-list-name">
+          <h4 className="m-0">{orgName}</h4>
+          <p className="m-0"> tags </p>
+          </div>
 
-          <br/>
         </div>
 
 
@@ -105,9 +111,9 @@ class OrganizationModal extends React.Component {
               onChange={(e) => this.setState({organization: e.target.value})}
               name="form-input-referral"/>
           </TextField>
-
-          {this.renderOrgs()}
-
+          <div className="">
+              {this.renderOrgs()}
+          </div>
         </Modal>
       </div>
     );
