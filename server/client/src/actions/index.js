@@ -70,3 +70,4 @@ export const updateRefStatus = (referralId,status) => {
     let response = axios.put(`/api/referrals/${referralId}?status=${status}`);
     return {type: UPDATE_DETAIL, payload: response}
 }
+
