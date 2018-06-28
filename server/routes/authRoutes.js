@@ -11,7 +11,7 @@ module.exports = app => {
 
   // just to check if cookie is working.
   app.get('/api/current_user', (req, res) => {
-    res.send(req.user.id)
+    res.send(req.user)
   })
 
   // log out request, nullify cookie session, requires user to present credential next time.
