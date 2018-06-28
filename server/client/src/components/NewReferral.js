@@ -61,7 +61,7 @@ class NewReferral extends Component {
         return (
             <div>
 
-              <body className="new-referral">
+              <div className="new-referral">
 
                 <div className="wrapper">
                   <div className="grid-1-1">
@@ -170,7 +170,7 @@ class NewReferral extends Component {
                   </div>
                 </div>
 
-              </body>
+              </div>
 
             </div>
         )
