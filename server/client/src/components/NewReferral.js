@@ -25,11 +25,10 @@ class NewReferral extends Component {
     };
   }
 
-  // setOrganization = (e, id) => {
-  //   console.log("J")
-  //   // e.preventDefault()
-  //   this.setState({ receiving_organization: id })
-  // }
+  setOrganization = (e, id) => {
+    e.preventDefault()
+    this.setState({ receiving_organization: id })
+  }
 
   componentDidMount() {
     let organizationName = organizationNameField()
@@ -49,7 +48,7 @@ class NewReferral extends Component {
 
   handleSubmit = () => {
     const { receiving_organization, client_name, client_phone, client_email, description } = this.state;
-    
+
     let newReferral = {
       receiving_organization,
       client_name,
@@ -60,7 +59,7 @@ class NewReferral extends Component {
 
     // send post request with newReferral
     axios.post('/api/referrals', newReferral);
-    
+
     // send user back to dashboard
     this.props.history.push('/dashboard');
   }
@@ -96,7 +95,7 @@ class NewReferral extends Component {
                   <OrganizationModal
                     value={this.state.organizationName}
                     allOrgs={this.props.allOrgs}
-                  // setOrganization={this.setOrganization} 
+                  setOrganization={this.setOrganization}
                   />
                 </section>
 
@@ -104,7 +103,7 @@ class NewReferral extends Component {
 
                   <TextField
                     id="myId"
-                    label='Name'
+                    label='Client Name'
                     floatingLabelClassName='mdc-floating-label'
                     className="form-input-referral mdc-text-field--box "
                   >
@@ -119,7 +118,7 @@ class NewReferral extends Component {
 
                   <TextField
                     id="myId"
-                    label='Phone Number'
+                    label='Client Phone Number'
                     floatingLabelClassName='mdc-floating-label'
                     className="form-input-referral mdc-text-field--box "
                     style={{ width: 300 }}
@@ -136,7 +135,7 @@ class NewReferral extends Component {
 
                   <TextField
                     id="myId"
-                    label='Email'
+                    label='Client Email'
                     floatingLabelClassName='mdc-floating-label'
                     className="form-input-referral mdc-text-field--box "
                     style={{ width: 300 }}
@@ -167,7 +166,7 @@ class NewReferral extends Component {
 
                   <div className="button-container">
                     <a href="/dashboard"
-                      // type="button" 
+                      // type="button"
                       // className="mdc-button mdc-button--raised cancel"
                       id="cancel-new-referral"
                     >

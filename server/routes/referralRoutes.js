@@ -82,7 +82,10 @@ module.exports = app => {
 
     //adds a note to a specified referral
     app.post("/api/referrals/:referralId/notes", (req, res) => {
-        Referral.findById(req.params.referralId, (err, referral) => {
+        Referral.findById(req.params.referralId).populate('referring_organization')
+        .populate('receiving_organization')
+        .populate('referring_user')
+        .exec((err, referral) => {
             if(err) {
                 console.log(err)
                 res.end();
@@ -93,12 +96,12 @@ module.exports = app => {
                     posting_user: name,
                     text: req.body.text
                 });
-                referral.save((err) => {
+                referral.save((err, data) => {
                     if(err) {
                         console.log(err);
                         res.end();
                     } else {
-                        res.send(referral);
+                        res.send(data);
                     }
                 })
             }
@@ -107,7 +110,10 @@ module.exports = app => {
 
     //updates the status of a given referral. The new status should come in the query url
     app.put("/api/referrals/:referralId", requireLogin, (req, res) => {
-        Referral.findById(req.params.referralId, (err, referral) => {
+        Referral.findById(req.params.referralId).populate('referring_organization')
+        .populate('receiving_organization')
+        .populate('referring_user')
+        .exec((err, referral) => {
             if(err){
                 console.log(err);
                 res.end();
@@ -115,12 +121,12 @@ module.exports = app => {
             else {
                 referral.dateUpdated = new Date();
                 referral.status=req.query.status;
-                referral.save((err) => {
+                referral.save((err, data) => {
                     if(err){
                         console.log(err);
                         res.end();
                     } else {
-                        res.send(referral);
+                        res.send(data);
                     }
                 })
             }

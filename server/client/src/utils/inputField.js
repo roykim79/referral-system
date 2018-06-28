@@ -12,3 +12,7 @@ export const  passwordField = () => {
 export const  organizationNameField = () => {
   return new MDCTextField(document.querySelector('.organizationName'));
 }
+
+export const  tagNameField = () => {
+  return new MDCTextField(document.querySelector('.organizationName'));
+}

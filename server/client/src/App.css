@@ -2596,7 +2596,8 @@ a.mdc-list-item {
   width: 300px;
   margin: 40px auto; }
 
-.organizationName {
+.organizationName,
+.tagName {
   display: block;
   width: 400px; }
 
