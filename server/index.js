@@ -13,11 +13,8 @@ mongoose.connect(keys.mongoURI)
 
 const app = express()
 if (process.env.NODE_ENV === 'production') {
-  // app.use(express.static(path.join(__dirname, 'client/build')));
-  app.get('*', function (req, res) {
-    const index = path.join(__dirname, 'build', 'index.html');
-    res.sendFile(index);
-  });
+app.use(express.static(path.join(__dirname, 'client/build')));
+
 }
 app.use(cors());
 app.use(bodyParser.json());
@@ -43,9 +40,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // ------ fake data generator, only works in dev mode ----- //
 // if (process.env.NODE_ENV !== 'production'){
-require('./routes/fakeloginRoute')(app);
-require('./routes/fakeReferralsRoute')(app);
-// }
+  require('./routes/fakeloginRoute')(app);
+  require('./routes/fakeReferralsRoute')(app);
+// }//
 
 require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);
