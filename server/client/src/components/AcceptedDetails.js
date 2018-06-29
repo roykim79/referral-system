@@ -34,11 +34,11 @@ class AcceptedDetails extends Component {
                     </ToolbarSection>
                   </ToolbarRow>
                 </Toolbar>
-                  <div className="client-info py-2 px-1">
+                  <div className="client-info py-2">
 
-                    {referral.client_name} <br/>
-                    {referral.client_phone} <br/>
-                    {referral.client_email} <br/>
+                    Name: {referral.client_name} <br/>
+                    Phone Number: {referral.client_phone} <br/>
+                    Email: {referral.client_email} <br/>
                   </div>
                 </div>
               </div>
@@ -50,11 +50,11 @@ class AcceptedDetails extends Component {
                   </ToolbarSection>
                 </ToolbarRow>
               </Toolbar>
-                <div className="member-info py-2 px-1">
+                <div className="member-info py-2">
 
-                  {referral.referring_user.firstName} {referral.referring_user.lastName} <br/>
-                  {referral.referring_user.phone} <br/>
-                  {referral.referring_user.email}
+                  Name: {referral.referring_user.firstName} {referral.referring_user.lastName} <br/>
+                  Phone Number: {referral.referring_user.phone} <br/>
+                  Email: {referral.referring_user.email}
                 </div>
               </div>
               <div className="accepted-grid-details">
@@ -68,7 +68,7 @@ class AcceptedDetails extends Component {
                     </ToolbarRow>
                   </Toolbar>
                   <div className="block">
-                  <Content className="py-2 px-1">
+                  <Content className="py-2">
                     {referral.description}
                   </Content>
                   </div>
@@ -81,20 +81,39 @@ class AcceptedDetails extends Component {
               </div>
 
               <div className="accepted-grid-notes">
+                <div className="toolbar-notes">
+                  <Toolbar>
+                    <ToolbarRow>
+                      <ToolbarSection align="start">
+                        <ToolbarTitle>Notes</ToolbarTitle>
+                      </ToolbarSection>
+                    </ToolbarRow>
+                  </Toolbar>
+                </div>
+
                 <div className="referral-notes">
-                  <h2 className="label">Notes:</h2>
+
                   <div className="referral-notes-content">
                   {referral.tasks.map((note) => {
+                    console.log(note)
                     return (
-                      <div>
-                    <div> {note.text} <span className='text-muted'> <br />{note.posting_user} at {moment(note.date).format("lll")}</span> </div>
-                      <hr/>
-                      </div>
-                      )
 
-                  })}</div>
-                  <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
-                  <div className="referral-notes-save"><button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button></div>
+                    <div>
+                      <div> <span> {note.text} </span>
+                      <span className='text-muted right'> posted by: {note.posting_user} at {moment(note.date).format("LLLL")}</span> </div>
+                      <hr/>
+                    </div>
+                    )
+
+                  })}
+                  </div>
+
+                  <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/>
+                  </div>
+
+                  <div className="referral-notes-save">
+                    <button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button>
+                  </div>
 
                 </div>
               </div>
