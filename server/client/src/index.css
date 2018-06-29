@@ -12,6 +12,10 @@ h1, h2, h3, h4, h5, h6, a {
   font-family: "Roboto", sans-serif;
 }
 
+h2.label {
+  padding: 0 25px;
+}
+
 #orgNames{
   max-height: 5px;
 }
@@ -103,6 +107,11 @@ h1, h2, h3, h4, h5, h6, a {
 .back-button{
   grid-column: 1;
   grid-row: 1;
+  padding: 10px;
+}
+
+.back-button span {
+  /* margin-left: 10px; */
 }
 
 .back-button a {
@@ -195,6 +204,14 @@ h1, h2, h3, h4, h5, h6, a {
 
 .pointer{
   cursor: pointer;
+}
+
+.referral-notes-input {
+  padding: 10px 20px;
+}
+
+.referral-notes-save {
+  padding-left: 20px;
 }
 
 .section-organization {
