@@ -92,16 +92,24 @@ changeStatus = (referral) => {
                 <li className={this.state.contacted}>Contacted</li>
                 <li className={this.state.completed}>Completed</li>
             </ul>
-            {this.renderStep(referral)}
+
+
           </div>
+          {this.renderStep(referral)}
         </div>
       )
     }
 
   }
+
   renderStep = (referral) => {
+
     if(referral.status != 'completed' && this.props.auth.organization != referral.referring_organization._id){
-      return <button onClick={() => {this.changeStatus(referral)}}> next step </button>
+      return (<button  className="mdc-button mdc-button--raised"
+      onClick={() => {this.changeStatus(referral)}}>
+        Next Step
+      </button>)
+
     }
   }
 
