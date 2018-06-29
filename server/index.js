@@ -28,15 +28,15 @@ app.use(
 app.use(passport.initialize())
 app.use(passport.session())
 
-if (process.env.NODE_ENV === 'production') {
+// if (process.env.NODE_ENV === 'production') {
 
-  // Express will serve up the index.html file
-  // if it doesn't recognize the route
-  const path = require('path');
-  app.get('*', (req, res) => {
-    res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
-  });
-}
+//   // Express will serve up the index.html file
+//   // if it doesn't recognize the route
+//   const path = require('path');
+//   app.get('*', (req, res) => {
+//     res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'));
+//   });
+// }
 
 // ------ fake data generator, only works in dev mode ----- //
 // if (process.env.NODE_ENV !== 'production'){
