@@ -5,6 +5,7 @@ const passport = require('passport')
 const keys = require('./config/keys')
 const bodyParser = require('body-parser');
 const cors = require("cors");
+const path = require('path');
 
 require('./services/passport')
 
@@ -13,6 +14,7 @@ mongoose.connect(keys.mongoURI)
 const app = express()
 if (process.env.NODE_ENV === 'production') {
 app.use(express.static(path.join(__dirname, 'client/build')));
+
 }
 app.use(cors());
 app.use(bodyParser.json());
@@ -38,9 +40,9 @@ if (process.env.NODE_ENV === 'production') {
 
 // ------ fake data generator, only works in dev mode ----- //
 // if (process.env.NODE_ENV !== 'production'){
-  require('./routes/fakeLoginRoute')(app);
+  require('./routes/fakeloginRoute')(app);
   require('./routes/fakeReferralsRoute')(app);
-// }
+// }//
 
 require('./routes/authRoutes')(app);
 require('./routes/userRoutes')(app);
