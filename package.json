@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd server && npm install",
+    "postinstall": "cd server && npm install && cd client/react-scripts && npm install",
     "heroku-postbuild": "cd server && NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client",
     "start": "node server/index.js"
   },
