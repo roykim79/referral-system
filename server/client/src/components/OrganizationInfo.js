@@ -6,6 +6,11 @@ import { fetchMyOrg, fetchTags } from '../actions';
 import {WithContext as ReactTags} from 'react-tag-input';
 import loader from '../loading-gif.gif'
 import {Textfield, Icon} from 'react-mdc-web';
+import TextField, { HelperText, Input } from '@material/react-text-field';
+import { Display2 } from 'react-mdc-web';
+
+import {styleReactTagInput} from '../utils/inputField.js'
+
 
 // import Tags from './Tags';
 const KeyCodes = {
@@ -19,7 +24,9 @@ class OrganizationInfo extends Component {
   constructor(props) {
     super(props);
 
-    this.state = {};
+    this.state = {
+      editing: true,
+    };
   }
 
   componentDidMount = async () => {
@@ -31,7 +38,10 @@ class OrganizationInfo extends Component {
         this.setState(this.props.myOrg);
         this.setState({suggestions: this.props.tags});
     });
+    styleReactTagInput()
   }
+
+
   updateOrg = () => {
     axios.put('/api/my_organization', this.state)
     alert('Organization Saved!')
@@ -59,56 +69,147 @@ class OrganizationInfo extends Component {
     this.setState({ tags: newTags });
   }
 
-  render() {
+  toggleRenderDetails = () =>{
+
     const { tags, suggestions } = this.state;
+
+    if (this.state.editing) {
+      return(
+        <div className="body">
+
+          <TextField
+            id="myId"
+            label='Organization Name'
+            floatingLabelClassName='mdc-floating-label'
+            className="form-input-referral mdc-text-field--box mx-2"
+            style={{ width: 300 }}
+          >
+            <Input
+              className="form-input-referral"
+              value={this.state.organizationName}
+              onChange={(e) => this.setState({ organizationName: e.target.value })}
+              name="form-input-referral"
+            />
+          </TextField>
+
+          <TextField
+            id="myId"
+            label='Website'
+            floatingLabelClassName='mdc-floating-label'
+            className="form-input-referral mdc-text-field--box mx-2"
+            style={{ width: 300 }}
+          >
+            <Input
+              className="form-input-referral"
+              value={this.state.website}
+              onChange={(e) => this.setState({ website: e.target.value })}
+              name="form-input-referral"
+            />
+          </TextField>
+
+          <TextField
+            id="myId"
+            label='Address'
+            floatingLabelClassName='mdc-floating-label'
+            className="form-input-referral mdc-text-field--box mx-2"
+            style={{ width: 300 }}
+          >
+            <Input
+              className="form-input-referral"
+              value={this.state.address}
+              onChange={(e) => this.setState({ address: e.target.value })}
+              name="form-input-referral"
+            />
+          </TextField>
+
+          <TextField
+            id="myId"
+            label='Logo url'
+            floatingLabelClassName='mdc-floating-label'
+            className="form-input-referral mdc-text-field--box mx-2"
+            style={{ width: 300 }}
+          >
+            <Input
+              className="form-input-referral"
+              value={this.state.logo}
+              onChange={(e) => this.setState({ logo: e.target.value })}
+              name="form-input-referral"
+            />
+          </TextField>
+
+
+          <div className={''/*"mdc-text-field mdc-text-field--upgraded form-input-referral mdc-text-field--box mx-2"*/}>
+            <ReactTags tags={tags}
+            let placeholder = ""
+              className={{
+                tags: 'tagsClass',
+                tagInput: 'tagInputClass',
+                tagInputField: 'tagInputFieldClass',
+                selected: 'selectedClass',
+                tag: 'tagClass',
+              }}
+              inline={false}
+              suggestions={suggestions}
+              handleDelete={this.handleDelete}
+              handleAddition={this.handleAddition}
+              handleDrag={this.handleDrag}
+              delimiters={delimiters} />
+              {console.log(<ReactTags/>)}
+              {
+
+              }
+
+          </div>
+
+
+        </div>
+      )
+
+    }
+  }
+
+  render() {
 
     if (!this.state.suggestions|| !this.state.tags) {
       return (<img className='loading-img load-icon' src={loader} alt='loading'/>)
     } else {
       return (
         <div>
-        <div className="wrapper">
-          <div className="grid-1-1">
-            <h1 className='add-referral-header'>My Organization</h1>
-          </div>
-          <div className="body">
-            <h1 className='add-referral-header'>
-            <Textfield
-              floatingLabel="Description"
-              className="mdc-text-field--box"
+          <div className="wrapper">
+            <div className="grid-1-1">
 
-              rows="1"
-              cols="30"
-              value={this.state.description}
-              onChange={({target : {value : description}}) => {
-                this.setState({ description })
-              }}
-            />
-            </h1>
+              <div className='row mx-2'>
+                <img className='myorg-logo' src={this.state.logo} />
+                <Display2 className='row mx-2' >{this.state.organizationName}</Display2>
+              </div>
+
+            </div>
+            {this.toggleRenderDetails()}
+
           </div>
-        </div>
 
 
 
           <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
           <div className="form-container">
+
             <form action="">
-              <input value={this.state.organizationName} onChange={(e) => { this.setState({ organizationName: e.target.value }) }} id="organizationName" name="organizationName" type="text" />
+
+
+
               <input value={this.state.description} onChange={(e) => { this.setState({ description: e.target.value }) }} id="description" name="description" type="text" />
-              <input value={this.state.website} onChange={(e) => { this.setState({ website: e.target.value }) }} id="website" name="website" type="text" />
+
+
               <input value={this.state.email} onChange={(e) => { this.setState({ email: e.target.value }) }} id="email" name="email" type="text" />
+
               <input value={this.state.phone} onChange={(e) => { this.setState({ phone: e.target.value }) }} id="phone" name="phone" type="text" />
-              <input value={this.state.address} onChange={(e) => { this.setState({ address: e.target.value }) }} id="address" name="address" type="text" />
-              <input value={this.state.logo} onChange={(e) => { this.setState({ logo: e.target.value }) }} id="logo" name="logo" type="text" />
-              <img className='myorg-logo' src={this.state.logo} />
-              <div>
-                <ReactTags tags={tags}
-                  suggestions={suggestions}
-                  handleDelete={this.handleDelete}
-                  handleAddition={this.handleAddition}
-                  handleDrag={this.handleDrag}
-                  delimiters={delimiters} />
-              </div>
+
+
+
+
+
+
+
               <button onClick={() => {this.updateOrg()}} type='button'>Save</button>
             </form>
           </div>

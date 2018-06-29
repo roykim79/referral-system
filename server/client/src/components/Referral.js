@@ -121,6 +121,7 @@ changeStatus = (referral) => {
 
           {this.renderStatus(referral)}
 
+          {/* TODO: this.renderDetails()*/}
           <PendingDetails status={this.state.accepted} referral={referral} handleState = {this.handleState}/>
 
           <AcceptedDetails status={this.state.accepted} referral={referral} handleState = {this.handleState}/>

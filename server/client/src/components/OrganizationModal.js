@@ -21,7 +21,6 @@ class OrganizationModal extends React.Component {
       tag: ''
     };
 
-    console.log(this.props)
   }
 
   componentDidMount = () => {
