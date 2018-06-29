@@ -52,7 +52,7 @@ class PendingDetails extends Component {
               </div>
             </div>
               <div className="grid-accept-reject">
-                <button types="submit" className="mdc-button mdc-button--raised reject"
+                <button type="submit" className="mdc-button mdc-button--raised reject"
                 onClick={(e)=>{
                   e.preventDefault()
                   console.log(this.props)
