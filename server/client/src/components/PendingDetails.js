@@ -9,6 +9,7 @@ class PendingDetails extends Component {
     super(props)
   }
   renderButtons = (referral) => {
+    if(this.props.auth){
     if(this.props.auth.organization != referral.referring_organization._id){
       return(
       <div className="grid-accept-reject">
@@ -33,7 +34,7 @@ class PendingDetails extends Component {
                   Accept
                 </button>
               </div>
-    )}
+    )}}
   }
   render() {
     if(this.props.referral.status=="pending"){
@@ -78,26 +79,7 @@ class PendingDetails extends Component {
               </div>
             </div>
               <div className="grid-accept-reject">
-                <button type="submit" className="mdc-button mdc-button--raised reject"
-                onClick={(e)=>{
-                  e.preventDefault()
-                  console.log(this.props)
-                  this.props.handleState('rejected',true)
-                  this.props.updateRefStatus(referral._id,'rejected')}
-                }
-                >
-                  Reject
-                </button>
-                <button types="submit" className="mdc-button mdc-button--raised accept"
-                onClick={(e)=>{
-                  e.preventDefault()
-                  console.log(this.props)
-                  this.props.handleState('accepted',true)
-                  this.props.updateRefStatus(referral._id,'accepted')}
-                }
-                  >
-                  Accept
-                </button>
+              {this.renderButtons(referral)}
               </div>
 
             </div>
