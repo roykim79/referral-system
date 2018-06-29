@@ -15,7 +15,7 @@ class AcceptedDetails extends Component {
   }
 
   render() {
-    // debugger;
+
     if(this.props.referral.status!="pending" && this.props.referral.status!="rejected"){
     let referral = this.props.referral;
 
