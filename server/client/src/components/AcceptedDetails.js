@@ -79,7 +79,7 @@ class AcceptedDetails extends Component {
 
               <div className="accepted-grid-notes">
                 <div className="referral-notes">
-                  <h2>Notes:</h2>
+                  <h2 className="label">Notes:</h2>
                   <div className="referral-notes-content">
                   {referral.tasks.map((note) => {
                     return (
