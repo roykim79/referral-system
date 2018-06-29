@@ -642,6 +642,13 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   width: 75px;
 }
 
+.mdc-top-app-bar__action-item::before, 
+.mdc-top-app-bar__action-item::after, 
+.mdc-top-app-bar__navigation-icon::before, 
+.mdc-top-app-bar__navigation-icon::after{
+  border-radius: 0%!important;
+}
+
 @media only screen and  (max-width:900px) {
   .organization-modal {
     border: solid 1px black;
