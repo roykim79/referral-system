@@ -12,7 +12,7 @@
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
   },
   "engines": {
-    "node": "8.1.1",
+    "node": "8.11.1",
     "npm": "5.0.3"
   },
   "author": "",
@@ -29,5 +29,9 @@
     "passport-local": "^1.0.0",
     "path-parser": "^4.1.1",
     "sendgrid": "^5.2.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }

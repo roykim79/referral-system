@@ -5,7 +5,12 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "postinstall": "cd client && npm install"
+    "postinstall": " cd server && npm install && cd server/client && npm install",
+    "start": "node server/index.js"
+  },
+  "engines": {
+    "node": "8.11.1",
+    "npm": "5.0.3"
   },
   "repository": {
     "type": "git",

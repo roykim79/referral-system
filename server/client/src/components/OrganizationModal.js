@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { connect } from 'react-redux';
 import {fetchAllOrgs, fetchTags}from '../actions';
-import TextField, {HelperText, Input} from '@material/react-text-field';
+import TextField, {HelperText, Input} from '@material/react-text-field/dist/';
 import Modal from 'react-modal';
 import { bindActionCreators } from 'redux';
 import { Button, Caption, Title } from 'react-mdc-web';
