@@ -75,7 +75,37 @@ class OrganizationInfo extends Component {
 
     if (this.state.editing) {
       return(
-        <div className="body">
+        <div className="body responsive-center">
+
+        <TextField
+          id="myId"
+          label='Email'
+          floatingLabelClassName='mdc-floating-label'
+          className="form-input-referral mdc-text-field--box mx-2"
+          style={{ width: 300 }}
+        >
+          <Input
+            className="form-input-referral"
+            value={this.state.email}
+            onChange={(e) => this.setState({ email: e.target.value })}
+            name="form-input-referral"
+          />
+        </TextField>
+
+        <TextField
+          id="myId"
+          label='Phone Number'
+          floatingLabelClassName='mdc-floating-label'
+          className="form-input-referral mdc-text-field--box mx-2"
+          style={{ width: 300 }}
+        >
+          <Input
+            className="form-input-referral"
+            value={this.state.phone}
+            onChange={(e) => this.setState({ phone: e.target.value })}
+            name="form-input-referral"
+          />
+        </TextField>
 
           <TextField
             id="myId"
@@ -137,29 +167,47 @@ class OrganizationInfo extends Component {
             />
           </TextField>
 
+          <div className="testingout">
+          <Textfield
+            floatingLabel="Description"
+            className="mdc-text-field--box org-description"
+            textarea
+            rows="8"
+            cols="44"
+            value={this.state.description}
 
-          <div className={''/*"mdc-text-field mdc-text-field--upgraded form-input-referral mdc-text-field--box mx-2"*/}>
-            <ReactTags tags={tags}
-            let placeholder = ""
-              className={{
-                tags: 'tagsClass',
-                tagInput: 'tagInputClass',
-                tagInputField: 'tagInputFieldClass',
-                selected: 'selectedClass',
-                tag: 'tagClass',
-              }}
-              inline={false}
-              suggestions={suggestions}
-              handleDelete={this.handleDelete}
-              handleAddition={this.handleAddition}
-              handleDrag={this.handleDrag}
-              delimiters={delimiters} />
-              {console.log(<ReactTags/>)}
-              {
+            onChange={({ target: { value: description } }) => {
+              this.setState({ description })
+            }}
+          />
 
-              }
+            <div className="org-tags">
+              <ReactTags tags={tags}
+              let placeholder = ""
+                className={{
+                  tags: 'tagsClass',
+                  tagInput: 'tagInputClass',
+                  tagInputField: 'tagInputFieldClass',
+                  selected: 'selectedClass',
+                  tag: 'tagClass',
+                }}
+                inline={false}
+                suggestions={suggestions}
+                handleDelete={this.handleDelete}
+                handleAddition={this.handleAddition}
+                handleDrag={this.handleDrag}
+                delimiters={delimiters} />
+
+                <button  className="mdc-button mdc-button--raised reject save-org"
+                onClick={this.updateOrg}>
+                  Save
+                </button>
+
+            </div>
 
           </div>
+
+
 
 
         </div>
@@ -175,7 +223,7 @@ class OrganizationInfo extends Component {
     } else {
       return (
         <div>
-          <div className="wrapper">
+          <div className="wrapper pb-2">
             <div className="grid-1-1">
 
               <div className='row mx-2'>
@@ -184,35 +232,10 @@ class OrganizationInfo extends Component {
               </div>
 
             </div>
-            {this.toggleRenderDetails()}
 
+              {this.toggleRenderDetails()}
           </div>
 
-
-
-          <h2>This will be where ones own organization is shown, editable, tags made with react tag input</h2>
-          <div className="form-container">
-
-            <form action="">
-
-
-
-              <input value={this.state.description} onChange={(e) => { this.setState({ description: e.target.value }) }} id="description" name="description" type="text" />
-
-
-              <input value={this.state.email} onChange={(e) => { this.setState({ email: e.target.value }) }} id="email" name="email" type="text" />
-
-              <input value={this.state.phone} onChange={(e) => { this.setState({ phone: e.target.value }) }} id="phone" name="phone" type="text" />
-
-
-
-
-
-
-
-              <button onClick={() => {this.updateOrg()}} type='button'>Save</button>
-            </form>
-          </div>
         </div>
       )
     }
