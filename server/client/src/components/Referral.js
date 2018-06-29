@@ -121,7 +121,10 @@ changeStatus = (referral) => {
         <div className="wrapper">
 
           <div className="back-button">
-            <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
+            <a onClick={() => {this.props.history.push('/dashboard')}}>
+              <span className="material-icons">arrow_back_ios</span>
+              <span>Back</span>
+            </a>
           </div>
 
           {this.renderStatus(referral)}
