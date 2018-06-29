@@ -3,7 +3,6 @@ import axios from 'axios';
 import logo from '../RS-logo.png'
 import {withRouter} from 'react-router-dom';
 import {fetchUser} from '../actions'
-import {usernameField, passwordField} from '../utils/inputField.js'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
 import TextField, { HelperText, Input } from '@material/react-text-field';

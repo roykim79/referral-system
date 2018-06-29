@@ -14,10 +14,10 @@ const SENT = 'sent';
 class ReferralList extends Component {
   constructor(props) {
     super(props)
-  }
+  };
   componentWillMount = () => {
     this.props.fetchReferrals(RECEIVED);
-  }
+  };
   renderTable = () => {
     if (!this.props.referrals) {
       return (<img className='loading-img load-icon' src={loader} alt='loading'/>)
