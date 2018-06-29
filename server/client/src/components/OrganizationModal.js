@@ -20,6 +20,7 @@ class OrganizationModal extends React.Component {
       modalIsOpen: false,
       tag: ''
     };
+
   }
 
   componentDidMount = () => {
@@ -67,9 +68,6 @@ class OrganizationModal extends React.Component {
 
     orgs = orgs.filter((org)=>{
 
-      console.log(match)
-      console.log(org)
-
       let tags = org.tags.filter((tag)=>{
 
         return tag.text == match.text
@@ -81,8 +79,6 @@ class OrganizationModal extends React.Component {
     })
 
   }
-
-  console.log(orgs)
 
     return orgs.map((org) =>{
       const orgName = org.organizationName

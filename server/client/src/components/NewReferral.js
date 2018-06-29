@@ -3,9 +3,9 @@ import TextField, { HelperText, Input } from '@material/react-text-field';
 import { Textfield, Icon } from 'react-mdc-web';
 import Modal from 'react-modal';
 import axios from 'axios';
-import { bindActionCreators } from 'react-modal';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import { fetchMyOrg } from '../actions'
 import OrganizationModal from './OrganizationModal';
 
 import { organizationNameField } from '../utils/inputField.js'
@@ -23,6 +23,9 @@ class NewReferral extends Component {
       client_email: null,
       description: null
     };
+
+    this.props.fetchMyOrg()
+
   }
 
   setOrganization = (e, id) => {
@@ -34,11 +37,11 @@ class NewReferral extends Component {
     let organizationName = organizationNameField()
   }
 
-  autofillList() {
+  autofillList(notMyOrgs) {
     let suggestions = []
 
-    if (this.props.allOrgs) {
-      this.props.allOrgs.forEach((organization) => {
+    if (notMyOrgs) {
+      notMyOrgs.forEach((organization) => {
         suggestions.push(<option key={organization._id}>{organization.organizationName}</option>)
       })
     }
@@ -65,6 +68,15 @@ class NewReferral extends Component {
   }
 
   render() {
+    let notMyOrgs;
+    if(this.props.allOrgs && this.props.myOrg){
+      notMyOrgs = this.props.allOrgs.filter((org)=>{
+        return org.organizationName != this.props.myOrg.organizationName
+      })
+    }
+
+
+    console.log(notMyOrgs)
 
     return (
       <div>
@@ -86,7 +98,7 @@ class NewReferral extends Component {
                       type="text" className=" awesomplete mdc-text-field__input input-text" list="orgNames" required
                     />
                     <datalist id="orgNames">
-                      {this.autofillList()}
+                      {this.autofillList(notMyOrgs)}
                     </datalist>
                     <div className="mdc-line-ripple">
                     </div>
@@ -94,7 +106,7 @@ class NewReferral extends Component {
 
                   <OrganizationModal
                     value={this.state.organizationName}
-                    allOrgs={this.props.allOrgs}
+                    allOrgs={notMyOrgs}
                   setOrganization={this.setOrganization}
                   />
                 </section>
@@ -189,12 +201,12 @@ class NewReferral extends Component {
   }
 }
 
-function mapStateToProps({ allOrgs }) {
-  return { allOrgs }
+function mapStateToProps({ allOrgs, myOrg }) {
+  return { allOrgs, myOrg }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ submitNewReferral }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchMyOrg }, dispatch);
+}
 
-export default connect(mapStateToProps)(NewReferral);
+export default connect(mapStateToProps, mapDispatchToProps)(NewReferral);
