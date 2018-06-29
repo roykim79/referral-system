@@ -21,5 +21,8 @@
   "bugs": {
     "url": "https://github.com/roykim79/referral-system/issues"
   },
-  "homepage": "https://github.com/roykim79/referral-system#readme"
+  "homepage": "https://github.com/roykim79/referral-system#readme",
+  "dependencies": {
+    "path": "^0.12.7"
+  }
 }
