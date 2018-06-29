@@ -6,6 +6,7 @@ import {fetchUser} from '../actions'
 import {usernameField, passwordField} from '../utils/inputField.js'
 import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
+import TextField, { HelperText, Input } from '@material/react-text-field';
 
 
 
@@ -24,8 +25,8 @@ class Landing extends Component{
       if(this.props.auth) {
         this.props.history.push('/dashboard')
       } else {
-        let  username = usernameField()
-        let  password = passwordField()
+        // let  username = usernameField()
+        // let  password = passwordField()
     }}
 
     submitLogin = async(e) => {
@@ -52,24 +53,34 @@ class Landing extends Component{
 
                 <form onSubmit={this.submitLogin}>
 
-                  <div className="mdc-text-field mdc-text-field--box username">
-                    <label className="mdc-floating-label" for="username-input">Username</label>
-                    <input onChange={(event) => {this.setState({username: event.target.value})}}
-                      type="text" className="mdc-text-field__input input-text" id="username-input" name="username" required/>
+                <TextField
+                  id="myId"
+                  label='Username'
+                  floatingLabelClassName='mdc-floating-label'
+                  className="form-input-referral mdc-text-field--box username"
+                >
+                  <Input
+                    required
+                    className="form-input-referral"
+                    value={this.state.username}
+                    onChange={(event) => {this.setState({username: event.target.value})}}
+                    name="form-input-referral" />
+                </TextField>
 
-                    <div className="mdc-line-ripple">
-                    </div>
-                  </div>
-
-                  <div className="mdc-text-field mdc-text-field--box password">
-                    <label className="mdc-floating-label" for="password-input">Password</label>
-                    <input onChange={(event) => {this.setState({password: event.target.value})}}
-                      type="password" className="mdc-text-field__input" id="password-input" name="password" required minLength="8"/>
-                    <div className="mdc-line-ripple"></div>
-                  </div>
-
-
-
+                <TextField
+                  id="myId"
+                  label='Password'
+                  floatingLabelClassName='mdc-floating-label'
+                  className="form-input-referral mdc-text-field--box password"
+                >
+                  <Input
+                    required
+                    type="password"
+                    className="form-input-referral"
+                    value={this.state.password}
+                    onChange={(event) => {this.setState({password: event.target.value})}}
+                    name="form-input-referral" />
+                </TextField>
 
                   <div className="login-button-container">
                     <button types="submit" className="mdc-button mdc-button--raised next">
@@ -92,4 +103,3 @@ const mapStateToProps = ({auth}) => {
   return {auth}
 }
 export default connect(mapStateToProps, mapDispatchToProps)(withRouter(Landing));
-
