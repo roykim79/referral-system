@@ -15,7 +15,16 @@ h1, h2, h3, h4, h5, h6, a {
 h2.label {
   padding: 0 25px;
 }
-
+h2.landing-title {
+  background-color: rgb(63, 81, 181);
+  color: #eee;
+  font-weight: 500;
+  margin: 0%;
+  padding: 20px 10px;
+  text-align: center;
+  text-shadow: .5px .5px .5px #333,
+               -.5px -.5px .5px #333;
+}
 #orgNames{
   max-height: 5px;
 }
@@ -651,6 +660,7 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   width: 75px;
 }
 
+
 @media only screen and  (max-width:1675px) {
   .my-org-header{
     width: 1240px;
@@ -661,6 +671,13 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   .my-org-header{
     width: 825px;
   }
+}
+
+.mdc-top-app-bar__action-item::before, 
+.mdc-top-app-bar__action-item::after, 
+.mdc-top-app-bar__navigation-icon::before, 
+.mdc-top-app-bar__navigation-icon::after{
+  border-radius: 0%!important;
 }
 
 @media only screen and  (max-width:900px) {

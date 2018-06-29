@@ -1,4 +1,4 @@
-import {MDCTextField} from '@material/textfield';
+import {MDCTextField} from '@material/textfield/dist/mdc.textfield';
 
 
 export const usernameField = () => {

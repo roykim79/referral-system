@@ -9,10 +9,10 @@
     "server": "nodemon index.js",
     "client": "npm run start --prefix client",
     "dev": "concurrently \"npm run server\" \"npm run client\" \"npm run webhook\"",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix server/client && npm run build --prefix server/client"
   },
   "engines": {
-    "node": "8.1.1",
+    "node": "8.11.1",
     "npm": "5.0.3"
   },
   "author": "",
@@ -27,7 +27,12 @@
     "mongoose": "^5.1.6",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
+    "path": "^0.12.7",
     "path-parser": "^4.1.1",
     "sendgrid": "^5.2.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }
