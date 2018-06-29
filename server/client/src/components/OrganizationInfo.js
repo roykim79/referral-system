@@ -69,7 +69,7 @@ class OrganizationInfo extends Component {
     this.setState({ tags: newTags });
   }
 
-  toggleRenderDetails = () =>{
+  renderOrgForm = () =>{
 
     const { tags, suggestions } = this.state;
 
@@ -167,19 +167,8 @@ class OrganizationInfo extends Component {
             />
           </TextField>
 
-          <div className="testingout">
-          <Textfield
-            floatingLabel="Description"
-            className="mdc-text-field--box org-description"
-            textarea
-            rows="8"
-            cols="44"
-            value={this.state.description}
+          <div className="tags-description">
 
-            onChange={({ target: { value: description } }) => {
-              this.setState({ description })
-            }}
-          />
 
             <div className="org-tags">
               <ReactTags tags={tags}
@@ -198,12 +187,22 @@ class OrganizationInfo extends Component {
                 handleDrag={this.handleDrag}
                 delimiters={delimiters} />
 
-                <button  className="mdc-button mdc-button--raised reject save-org"
-                onClick={this.updateOrg}>
-                  Save
-                </button>
+
 
             </div>
+
+            <Textfield
+              floatingLabel="Description"
+              className="mdc-text-field--box org-description"
+              textarea
+              rows="8"
+              cols="44"
+              value={this.state.description}
+
+              onChange={({ target: { value: description } }) => {
+                this.setState({ description })
+              }}
+            />
 
           </div>
 
@@ -226,14 +225,22 @@ class OrganizationInfo extends Component {
           <div className="wrapper pb-2">
             <div className="grid-1-1">
 
-              <div className='row mx-2'>
+              <div className='row mx-2 my-org-header'>
                 <img className='myorg-logo' src={this.state.logo} />
                 <Display2 className='row mx-2' >{this.state.organizationName}</Display2>
+
+                <button  className="mdc-button mdc-button--raised reject save-org"
+                onClick={this.updateOrg}>
+                  Save
+                </button>
+
+
               </div>
+
 
             </div>
 
-              {this.toggleRenderDetails()}
+              {this.renderOrgForm()}
           </div>
 
         </div>

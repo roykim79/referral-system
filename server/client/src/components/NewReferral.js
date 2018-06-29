@@ -48,6 +48,20 @@ class NewReferral extends Component {
 
     return suggestions;
   }
+//checks if the send to organization matches and sets field as disabled
+  disabledStatus = (sendTo) => {
+    debugger;
+    if(this.props.allOrgs){
+    let matchChecker = this.props.allOrgs.filter((org) => {
+      return org.organizationName == sendTo;
+    })
+    if(matchChecker === undefined || matchChecker.length == 0 || this.state.client_name == null || this.state.client_name == '' ||
+      this.state.client_phone == null || this.state.client_phone == '' || this.state.description == null || this.state.description == ''){
+      return true;
+    } else {
+      return false;
+    }}
+  }
 
   handleSubmit = () => {
     const { receiving_organization, client_name, client_phone, client_email, description } = this.state;
@@ -83,7 +97,7 @@ class NewReferral extends Component {
         <div className="new-referral">
           <div className="wrapper">
             <div className="grid-1-1">
-              <h1 className='add-referral-header'>Add Referral</h1>
+              <h1 className='add-referral-header'>Send Referral</h1>
             </div>
             <div className="body">
               <div className="wrapper">
@@ -91,6 +105,7 @@ class NewReferral extends Component {
                   <div className="mdc-text-field mdc-text-field--box organizationName">
                     <label className="mdc-floating-label" for="organizationName-input">Organization Name</label>
                     <input
+                      required
                       value={this.state.receiving_organization}
                       onChange={async (event) => {
                         await this.setState({ receiving_organization: event.target.value })
@@ -120,6 +135,7 @@ class NewReferral extends Component {
                     className="form-input-referral mdc-text-field--box "
                   >
                     <Input
+                      required
                       className="form-input-referral"
                       value={this.state.client_name}
                       onChange={(e) => this.setState({ client_name: e.target.value })}
@@ -136,6 +152,7 @@ class NewReferral extends Component {
                     style={{ width: 300 }}
                   >
                     <Input
+                      required
                       className="form-input-referral"
                       value={this.state.client_phone}
                       onChange={(e) => this.setState({ client_phone: e.target.value })}
@@ -185,6 +202,7 @@ class NewReferral extends Component {
                       Cancel
                     </a>
                     <button
+                      disabled = {this.disabledStatus(this.state.receiving_organization)}
                       onClick={this.handleSubmit}
                       type="button"
                       className="mdc-button mdc-button--raised submit">

@@ -15,7 +15,16 @@ h1, h2, h3, h4, h5, h6, a {
 h2.label {
   padding: 0 25px;
 }
-
+h2.landing-title {
+  background-color: rgb(63, 81, 181);
+  color: #eee;
+  font-weight: 500;
+  margin: 0%;
+  padding: 20px 10px;
+  text-align: center;
+  text-shadow: .5px .5px .5px #333,
+               -.5px -.5px .5px #333;
+}
 #orgNames{
   max-height: 5px;
 }
@@ -218,7 +227,7 @@ h2.label {
 }
 
 .referral-notes-save {
-  padding-left: 20px;
+  padding-left: 5px;
 }
 
 .section-organization {
@@ -231,14 +240,11 @@ h2.label {
   display: inline-block;
 }
 
-
-
 .section-client {
   grid-column: 4/13;
   grid-row: 2;
 
 }
-
 
 .myorg-logo{
   margin-top: 10px;
@@ -510,7 +516,7 @@ div.ReactTags__tags {
   right:0;
 }
 
-.testingout{
+.tags-description{
   display: inline-block;
   width:100%;
   position: relative;
@@ -524,19 +530,26 @@ div.org-tags{
   top: 0;
   display: inline-block;
   width: 415px;
-  margin-left: 10px;
-  margin-top: 5px;
+  margin-left: 5px;
+
+}
+
+.my-org-header{
+  width: 1665px;
 }
 
 .save-org{
-  margin-top: 10px;
-  margin-left: 10px;
+  float:right;
+  margin-top: 56px;
 }
 
 .org-description{
+  position: absolute;
+  top: 0;
   display: inline-block!important;
-  margin-left: 10px;
+  margin-left: 430px;
   width: 400px!important;
+  height: 100px!important;
 }
 
 
@@ -574,7 +587,7 @@ div.ReactTags__tagInput {
 
 div.ReactTags__tagInput input.ReactTags__tagInputField,
 div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
-
+  /* margin-top: -30px!important; */
   height: 56px;
   margin: 0;
   font-size: 12px;
@@ -586,6 +599,11 @@ div.ReactTags__tagInput input.ReactTags__tagInputField:focus {
   padding: 15px 0 0 15px;
   background-color: whitesmoke;
 }
+
+/* .ReactTags__tagInput{
+  position: absolute;
+  top: 0;
+} */
 
 /* Styles for selected tags */
 div.ReactTags__selected span.ReactTags__tag {
@@ -642,6 +660,34 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   width: 75px;
 }
 
+.mdc-text-field__input.input-new-note{
+  width: 500px!important;
+}
+
+.next-step{
+  margin-bottom: 25px;
+}
+
+
+@media only screen and  (max-width:1675px) {
+  .my-org-header{
+    width: 1240px;
+  }
+}
+
+@media only screen and  (max-width:1259px) {
+  .my-org-header{
+    width: 825px;
+  }
+}
+
+.mdc-top-app-bar__action-item::before,
+.mdc-top-app-bar__action-item::after,
+.mdc-top-app-bar__navigation-icon::before,
+.mdc-top-app-bar__navigation-icon::after{
+  border-radius: 0%!important;
+}
+
 @media only screen and  (max-width:900px) {
   .organization-modal {
     border: solid 1px black;
@@ -670,6 +716,8 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     grid-column: 1 / 13;
     grid-row: 3;
   }
+  .mdc-text-field__input.input-new-note{
+    width: 400px!important; }
 }
 
 @media only screen and  (max-width:839px) {
@@ -679,14 +727,62 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   .responsive-center label{
     text-align: left;
   }
-
-  div.org-tags{
+  .save-org{
+    float:none;
+    margin: auto auto 20px;
+    text-align: center;
+  }
+  .tags-description{
+    height: 400px;
     position: relative;
+  }
+  .org-tags{
+    position: absolute;
+    bottom: 0;
     display: inline-block;
     width: 415px;
-    margin-left: 10px;
-    margin-top: 5px;
   }
+  .ReactTags__tags{
+    position: absolute;
+    margin-top: 125px;
+  }
+  .org-description{
+    width: 400px!important;
+    height: 100px!important;
+    position: static;
+    margin-left: auto;
+  }
+  .my-org-header{
+    width: 100%;
+    text-align: center;
+  }
+  .accepted-grid-client{
+    margin-top: 0px;
+    grid-column: 2/6;
+    grid-row: 12;
+    margin-right: 5px;
+  }
+
+  .accepted-grid-member{
+    margin-left: 5px;
+    grid-column: 6/10;
+    grid-row: 12;
+  }
+
+  .accepted-grid-details{
+    padding-top: 30px;
+    grid-column: 2/10;
+    grid-row: 10/11;
+    overflow: scroll;
+  }
+  .referral-notes-save{
+    grid-column: 2/10;
+    grid-row: 10/11;
+  }
+  .mdc-text-field__input.input-new-note{
+    width: 300px!important;
+  }
+
 }
 
 @media only screen and  (max-width:480px) {
@@ -713,6 +809,8 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   .mdc-text-field__input.form-input-referral{
     width:260px!important;
   }
+
+
   .grid-left{
     grid-column: 2 / 12;
     grid-row: 1;
@@ -737,5 +835,43 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   .progressbar {
     margin-left: -25px!important;
     counter-reset: step;
+  }
+
+  .accepted-grid-notes{
+    grid-column: 2/12;
+
+  }
+  .accepted-grid-client{
+    margin-right: 10px;
+    grid-column: 2/6;
+    grid-row: 12;
+    margin-right: 5px;
+    width: 130px;
+  }
+
+  .accepted-grid-member{
+    margin-left: 10px;
+    grid-column: 6/13;
+    grid-row: 12;
+    width: 130px;
+  }
+
+  .accepted-grid-details{
+    padding-top: 30px;
+    grid-column: 2/10;
+    grid-row: 10/11;
+    width: 250px;
+    overflow: scroll;
+  }
+  .referral-notes-save{
+    grid-column: 2/11;
+    grid-row: 10/11;
+  }
+  .mdc-text-field__input.input-new-note{
+    width: 250px;
+  }
+  .referral-notes-content{
+    width: 250px;
+    /* margin: auto; */
   }
 }
