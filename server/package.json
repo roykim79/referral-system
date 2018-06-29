@@ -29,5 +29,9 @@
     "passport-local": "^1.0.0",
     "path-parser": "^4.1.1",
     "sendgrid": "^5.2.3"
+  },
+  "devDependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-env": "^1.7.0"
   }
 }
