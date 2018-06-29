@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import {submitNote} from '../actions';
+import {connect} from 'react-redux'
 import {Button, Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarIcon, Content, MenuAnchor, Menu, MenuItem, MenuDivider, List, ListItem} from 'react-mdc-web';
+import { bindActionCreators } from 'redux';
 const moment = require('moment');
 
 class AcceptedDetails extends Component {
@@ -104,6 +107,8 @@ class AcceptedDetails extends Component {
           return (<a/>)
         }
   }
-}
-
-export default AcceptedDetails
+} 
+  const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({submitNote}, dispatch)
+  }
+export default connect(null, mapDispatchToProps)(AcceptedDetails)
