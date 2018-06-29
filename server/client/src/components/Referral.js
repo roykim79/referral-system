@@ -106,7 +106,12 @@ changeStatus = (referral) => {
 
     if(this.props.auth && referral){
     if(referral.status != 'completed' && this.props.auth.organization != referral.referring_organization._id){
-      return <button onClick={() => {this.changeStatus(referral)}}> next step </button>
+      return (
+        <button  className="mdc-button mdc-button--raised next-step"
+        onClick={() => {this.changeStatus(referral)}}>
+          Next Step
+        </button>
+      )
     }}
   }
 

@@ -660,6 +660,14 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   width: 75px;
 }
 
+.mdc-text-field__input.input-new-note{
+  width: 500px!important;
+}
+
+.next-step{
+  margin-bottom: 25px;
+}
+
 
 @media only screen and  (max-width:1675px) {
   .my-org-header{
@@ -673,9 +681,9 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   }
 }
 
-.mdc-top-app-bar__action-item::before, 
-.mdc-top-app-bar__action-item::after, 
-.mdc-top-app-bar__navigation-icon::before, 
+.mdc-top-app-bar__action-item::before,
+.mdc-top-app-bar__action-item::after,
+.mdc-top-app-bar__navigation-icon::before,
 .mdc-top-app-bar__navigation-icon::after{
   border-radius: 0%!important;
 }
@@ -708,6 +716,8 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     grid-column: 1 / 13;
     grid-row: 3;
   }
+  .mdc-text-field__input.input-new-note{
+    width: 400px!important; }
 }
 
 @media only screen and  (max-width:839px) {
