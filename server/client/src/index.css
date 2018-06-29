@@ -8,6 +8,10 @@ body {
   font-family: sans-serif;
 }
 
+h1, h2, h3, h4, h5, h6, a {
+  font-family: "Roboto", sans-serif;
+}
+
 #orgNames{
   max-height: 5px;
 }
@@ -29,6 +33,7 @@ body {
   border: 1px solid #aaa;
   height: 50vh;
   overflow: scroll;
+  padding: 5px;
   width: 95%;
   margin: auto;
 }
@@ -100,6 +105,15 @@ body {
   grid-row: 1;
 }
 
+.back-button a {
+  color: rgb(63, 81, 181);
+}
+
+.back-button a:hover {
+  color: rgb(83, 111, 201);
+  cursor: pointer;
+}
+
 .body {
   grid-column: 1 / 13;
   grid-row: 2;
@@ -137,6 +151,7 @@ body {
   grid-column: 2 / 10;
   grid-row: 2 / 5;
 }
+
 
 .grid-left{
   grid-column: 4 / 7;
@@ -280,6 +295,11 @@ body {
   text-align: center;
 }
 
+.text-muted {
+  color: #777;
+  font-size: .9em;
+}
+
 .progress-container {
   display: inline-block;
   width: 480px;
@@ -364,9 +384,16 @@ body {
     padding-bottom: 20px;
   }
 
+
   .pb-2{
     padding-bottom: 20px;
   }
+
+  .px-1 {
+    padding-left: 10px;
+    padding-right: 10px;
+  } 
+
 
   .m-0{
     margin-bottom: 5px!important;
