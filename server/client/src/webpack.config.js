@@ -1,3 +1,4 @@
+var MDC_DIR = path.resolve(__dirname, '../../../../node_modules', '@Material');
 module.exports = [
   {
     entry: './app.scss',
@@ -8,6 +9,13 @@ module.exports = [
     },
     module: {
       rules: [{
+        test: /.js$/,
+        loader: 'babel-loader',
+        exclude: helpers.root('node_modules'),
+        include: [
+        MDC_DIR
+        ]
+        },{
         test: /\.scss$/,
         use: [
           {

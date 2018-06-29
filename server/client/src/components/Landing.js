@@ -40,7 +40,7 @@ class Landing extends Component{
     render() {
         return (
             <div>
-                <h2> Welcome to Referral System. Please change this text to something meaningful.</h2>
+                <h2 className="landing-title"> Best Referral System. Referrals made easy.</h2>
 
                 <section className="landing-logo">
 

@@ -693,10 +693,6 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   }
 }
 
-.mdc-text-field__input.input-new-note{
-  width: 500px;
-}
-
 @media only screen and  (max-width:839px) {
   .responsive-center{
     text-align: center;
@@ -757,7 +753,7 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
     grid-row: 10/11;
   }
   .mdc-text-field__input.input-new-note{
-    width: 300px;
+    width: 300px!important;
   }
 
 }
@@ -827,7 +823,7 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   }
 
   .accepted-grid-member{
-    margin-left: 20px;
+    margin-left: 10px;
     grid-column: 6/13;
     grid-row: 12;
     width: 130px;
