@@ -48,6 +48,19 @@ class NewReferral extends Component {
 
     return suggestions;
   }
+//checks if the send to organization matches and sets field as disabled
+  disabledStatus = (sendTo) => {
+    debugger;
+    if(this.props.allOrgs){
+    let disabledChecker = this.props.allOrgs.filter((org) => {
+      return org.organizationName == sendTo;
+    })
+    if(disabledChecker === undefined || disabledChecker.length == 0){
+      return true;
+    } else {
+      return false;
+    }}
+  }
 
   handleSubmit = () => {
     const { receiving_organization, client_name, client_phone, client_email, description } = this.state;
@@ -83,7 +96,7 @@ class NewReferral extends Component {
         <div className="new-referral">
           <div className="wrapper">
             <div className="grid-1-1">
-              <h1 className='add-referral-header'>Add Referral</h1>
+              <h1 className='add-referral-header'>Send Referral</h1>
             </div>
             <div className="body">
               <div className="wrapper">
@@ -185,6 +198,7 @@ class NewReferral extends Component {
                       Cancel
                     </a>
                     <button
+                      disabled = {this.disabledStatus(this.state.receiving_organization)}
                       onClick={this.handleSubmit}
                       type="button"
                       className="mdc-button mdc-button--raised submit">
