@@ -22,13 +22,14 @@ class Dashboard extends Component {
         this.interval = setInterval(() => this.props.fetchReferrals(this.state.currentView), 15000);
     }
     componentDidMount = () => {
+
       const kickBack = () => {
         if(!this.props.auth) {
           this.props.history.push('/')
         }
       }
      setTimeout(kickBack, 3000);
-        
+
     }
 
     componentWillUnmount() {

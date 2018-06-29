@@ -3,9 +3,9 @@ import TextField, { HelperText, Input } from '@material/react-text-field';
 import { Textfield, Icon } from 'react-mdc-web';
 import Modal from 'react-modal';
 import axios from 'axios';
-import { bindActionCreators } from 'react-modal';
+import { bindActionCreators } from 'redux';
 import { connect } from 'react-redux';
-
+import { fetchMyOrg } from '../actions'
 import OrganizationModal from './OrganizationModal';
 
 import { organizationNameField } from '../utils/inputField.js'
@@ -24,6 +24,7 @@ class NewReferral extends Component {
       description: null
     };
 
+    this.props.fetchMyOrg()
 
   }
 
@@ -204,8 +205,8 @@ function mapStateToProps({ allOrgs, myOrg }) {
   return { allOrgs, myOrg }
 }
 
-// function mapDispatchToProps(dispatch) {
-//   return bindActionCreators({ submitNewReferral }, dispatch);
-// }
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ fetchMyOrg }, dispatch);
+}
 
-export default connect(mapStateToProps)(NewReferral);
+export default connect(mapStateToProps, mapDispatchToProps)(NewReferral);
