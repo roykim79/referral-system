@@ -77,8 +77,28 @@ class PendingDetails extends Component {
                 {referral.description} "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
               </div>
             </div>
-            {this.renderButtons(referral)}
-              
+              <div className="grid-accept-reject">
+                <button type="submit" className="mdc-button mdc-button--raised reject"
+                onClick={(e)=>{
+                  e.preventDefault()
+                  console.log(this.props)
+                  this.props.handleState('rejected',true)
+                  this.props.updateRefStatus(referral._id,'rejected')}
+                }
+                >
+                  Reject
+                </button>
+                <button types="submit" className="mdc-button mdc-button--raised accept"
+                onClick={(e)=>{
+                  e.preventDefault()
+                  console.log(this.props)
+                  this.props.handleState('accepted',true)
+                  this.props.updateRefStatus(referral._id,'accepted')}
+                }
+                  >
+                  Accept
+                </button>
+              </div>
 
             </div>
           </div>
