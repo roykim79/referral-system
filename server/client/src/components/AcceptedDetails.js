@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import {submitNote} from '../actions';
 import {connect} from 'react-redux'
-import {Button, Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarIcon, Content, MenuAnchor, Menu, MenuItem, MenuDivider, List, ListItem} from 'react-mdc-web';
+import {Button, Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarIcon, Content} from 'react-mdc-web';
+import TextField, { HelperText, Input } from '@material/react-text-field';
 import { bindActionCreators } from 'redux';
 const moment = require('moment');
 
@@ -36,9 +37,9 @@ class AcceptedDetails extends Component {
                 </Toolbar>
                   <div className="client-info py-2">
 
-                    Name: {referral.client_name} <br/>
-                    Phone Number: {referral.client_phone} <br/>
-                    Email: {referral.client_email} <br/>
+                    {referral.client_name} <br/>
+                    {referral.client_phone} <br/>
+                    {referral.client_email} <br/>
                   </div>
                 </div>
               </div>
@@ -52,9 +53,9 @@ class AcceptedDetails extends Component {
               </Toolbar>
                 <div className="member-info py-2">
 
-                  Name: {referral.referring_user.firstName} {referral.referring_user.lastName} <br/>
-                  Phone Number: {referral.referring_user.phone} <br/>
-                  Email: {referral.referring_user.email}
+                  {referral.referring_user.firstName} {referral.referring_user.lastName} <br/>
+                  {referral.referring_user.phone} <br/>
+                  {referral.referring_user.email}
                 </div>
               </div>
               <div className="accepted-grid-details">
@@ -107,12 +108,28 @@ class AcceptedDetails extends Component {
 
                   })}
                   </div>
-
-                  <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/>
-                  </div>
-
                   <div className="referral-notes-save">
-                    <button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button>
+                  <TextField
+                    label='Add New Note'
+                    floatingLabelClassName='mdc-floating-label'
+                    className="input-new-note mdc-text-field--box mx-2"
+                    style={{ width: 300 }}
+                  >
+                    <Input
+                      className="input-new-note"
+                      value={this.state.text}
+                      onChange={(event) => {this.setState({text: event.target.value})}}
+                      name="input-new-note"
+                    />
+                  </TextField>
+
+
+
+                    <button  className="mdc-button mdc-button--raised"
+                    onClick={() => {this.props.submitNote(referral._id, this.state)}}>
+                      Add Note
+                    </button>
+
                   </div>
 
                 </div>
@@ -126,7 +143,7 @@ class AcceptedDetails extends Component {
           return (<a/>)
         }
   }
-} 
+}
   const mapDispatchToProps = (dispatch) => {
     return bindActionCreators({submitNote}, dispatch)
   }
