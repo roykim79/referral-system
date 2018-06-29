@@ -15,7 +15,16 @@ h1, h2, h3, h4, h5, h6, a {
 h2.label {
   padding: 0 25px;
 }
-
+h2.landing-title {
+  background-color: rgba(98, 0, 238, 1);
+  color: #eee;
+  font-weight: 400;
+  margin: 0%;
+  padding: 20px 10px;
+  text-align: center;
+  text-shadow: .5px .5px .5px #333,
+               -.5px -.5px .5px #333;
+}
 #orgNames{
   max-height: 5px;
 }
