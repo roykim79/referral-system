@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import {fetchReferrals, submitNote, fetchDetail, emptyDetails, updateRefStatus} from '../actions'
+import {fetchReferrals, submitNote, fetchDetail, emptyDetails, updateRefStatus, fetchUser} from '../actions'
 import { bindActionCreators } from 'redux';
 import axios from 'axios';
 import {withRouter} from 'react-router-dom';
@@ -23,14 +23,15 @@ this.updateStatus()
     }
 
     componentDidUpdate = (prevProps) => {
-
+      this.props.fetchUser()
       if(prevProps.referralDetail){
       if(this.props.referralDetail.status != prevProps.referralDetail.status) {
         this.updateStatus();
+
       }
     }}
 
-  componentWillUnmount(){
+  componentWillUnmount = () =>{
     this.props.emptyDetails()
   }
 
@@ -80,8 +81,7 @@ changeStatus = (referral) => {
   }
 }
 
-
-  renderStatus(referral){
+  renderStatus = (referral) =>{
     if(referral.status != 'pending' && referral.status != 'rejected'){
 
       return(
@@ -92,17 +92,22 @@ changeStatus = (referral) => {
                 <li className={this.state.contacted}>Contacted</li>
                 <li className={this.state.completed}>Completed</li>
             </ul>
-            <button onClick={() => {this.changeStatus(referral)}}> next step </button>
+            {this.renderStep(referral)}
           </div>
         </div>
       )
     }
 
   }
+  renderStep = (referral) => {
+    if(this.props.auth && referral){
+    if(referral.status != 'completed' && this.props.auth.organization != referral.referring_organization._id){
+      return <button onClick={() => {this.changeStatus(referral)}}> next step </button>
+    }}
+  }
 
-  render() {
+  render = () => {
 
-    console.log(this.props)
 
     if(!this.props.referralDetail) {
       return (
@@ -116,7 +121,10 @@ changeStatus = (referral) => {
         <div className="wrapper">
 
           <div className="back-button">
-            <a onClick={() => {this.props.history.push('/dashboard')}}>Back</a>
+            <a onClick={() => {this.props.history.push('/dashboard')}}>
+              <span className="material-icons">arrow_back_ios</span>
+              <span>Back</span>
+            </a>
           </div>
 
           {this.renderStatus(referral)}
@@ -127,37 +135,7 @@ changeStatus = (referral) => {
           <AcceptedDetails status={this.state.accepted} referral={referral} handleState = {this.handleState}/>
 
         </div>
-
-
-
-        <div className="referral-header">
-
-        </div>
-
-
-        <div className="referral-details">
-
-          <div className="referral-notes">
-            <h2>tasks</h2>
-            <div className="referral-notes-content">
-            {referral.tasks.map((note) => {
-              return (
-                <div>
-              <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.date).format("LLLL")}</span> </div>
-                <hr/>
-                </div>
-                )
-
-            })}</div>
-            <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
-            <div className="referral-notes-save"><button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button></div>
-
-          </div>
-
-        </div>
-
-
-      </div>
+     </div>
     )}
   }
 }
@@ -165,7 +143,7 @@ changeStatus = (referral) => {
 
 
 function mapDispatchToProps(dispatch) {
-  return bindActionCreators({fetchReferrals, submitNote, fetchDetail, emptyDetails, updateRefStatus}, dispatch);
+  return bindActionCreators({fetchReferrals, submitNote, fetchDetail, emptyDetails, updateRefStatus, fetchUser}, dispatch);
 }
 function mapStateToProps({referrals, referralDetail, auth, myOrg, allOrgs}) {
   return {referrals, referralDetail, auth, myOrg, allOrgs}

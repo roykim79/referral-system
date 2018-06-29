@@ -18,9 +18,6 @@ export const  tagNameField = () => {
 }
 
 export const styleReactTagInput = () => {
-  // const tagInput = document.querySelector('.ReactTags__tagInput');
-  // tagInput.classList.add("mdc-text-field")
-  // tagInput.classList.add("mdc-text-field--box")
 
   const tagInputField = document.querySelector('.ReactTags__tagInputField');
   tagInputField.classList.add("tagInputField")

@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
+import {submitNote} from '../actions';
+import {connect} from 'react-redux'
 import {Button, Toolbar, ToolbarRow, ToolbarSection, ToolbarTitle, ToolbarIcon, Content, MenuAnchor, Menu, MenuItem, MenuDivider, List, ListItem} from 'react-mdc-web';
+import { bindActionCreators } from 'redux';
 const moment = require('moment');
 
 class AcceptedDetails extends Component {
@@ -12,7 +15,7 @@ class AcceptedDetails extends Component {
   }
 
   render() {
-    // debugger;
+
     if(this.props.referral.status!="pending" && this.props.referral.status!="rejected"){
     let referral = this.props.referral;
 
@@ -78,20 +81,39 @@ class AcceptedDetails extends Component {
               </div>
 
               <div className="accepted-grid-notes">
+                <div className="toolbar-notes">
+                  <Toolbar>
+                    <ToolbarRow>
+                      <ToolbarSection align="start">
+                        <ToolbarTitle>Notes</ToolbarTitle>
+                      </ToolbarSection>
+                    </ToolbarRow>
+                  </Toolbar>
+                </div>
+
                 <div className="referral-notes">
-                  <h2>Notes:</h2>
+
                   <div className="referral-notes-content">
                   {referral.tasks.map((note) => {
+                    console.log(note)
                     return (
-                      <div>
-                    <div> {note.text} <span className='text-muted'> posted by: {note.posting_user} at {moment(note.date).format("LLLL")}</span> </div>
-                      <hr/>
-                      </div>
-                      )
 
-                  })}</div>
-                  <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/></div>
-                  <div className="referral-notes-save"><button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button></div>
+                    <div>
+                      <div> <span> {note.text} </span>
+                      <span className='text-muted right'> posted by: {note.posting_user} at {moment(note.date).format("LLLL")}</span> </div>
+                      <hr/>
+                    </div>
+                    )
+
+                  })}
+                  </div>
+
+                  <div className="referral-notes-input"><input onChange={(event) => {this.setState({text: event.target.value})}}/>
+                  </div>
+
+                  <div className="referral-notes-save">
+                    <button onClick={() => {this.props.submitNote(referral._id, this.state)}}>Save</button>
+                  </div>
 
                 </div>
               </div>
@@ -104,6 +126,8 @@ class AcceptedDetails extends Component {
           return (<a/>)
         }
   }
-}
-
-export default AcceptedDetails
+} 
+  const mapDispatchToProps = (dispatch) => {
+    return bindActionCreators({submitNote}, dispatch)
+  }
+export default connect(null, mapDispatchToProps)(AcceptedDetails)
