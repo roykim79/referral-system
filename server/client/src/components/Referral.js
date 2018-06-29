@@ -103,10 +103,18 @@ changeStatus = (referral) => {
   }
 
   renderStep = (referral) => {
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6e71b22233fc9def98031153cf8ca242a8be0e2a
     if(this.props.auth && referral){
     if(referral.status != 'completed' && this.props.auth.organization != referral.referring_organization._id){
       return <button onClick={() => {this.changeStatus(referral)}}> next step </button>
     }}
+<<<<<<< HEAD
+=======
+
+>>>>>>> 6e71b22233fc9def98031153cf8ca242a8be0e2a
   }
 
   render = () => {
