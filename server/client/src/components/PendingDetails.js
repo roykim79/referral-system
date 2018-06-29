@@ -8,7 +8,33 @@ class PendingDetails extends Component {
   constructor(props) {
     super(props)
   }
-
+  renderButtons = (referral) => {
+    if(this.props.auth.organization != referral.referring_organization._id){
+      return(
+      <div className="grid-accept-reject">
+                <button types="submit" className="mdc-button mdc-button--raised reject"
+                onClick={(e)=>{
+                  e.preventDefault()
+                  console.log(this.props)
+                  this.props.handleState('rejected',true)
+                  this.props.updateRefStatus(referral._id,'rejected')}
+                }
+                >
+                  Reject
+                </button>
+                <button types="submit" className="mdc-button mdc-button--raised accept"
+                onClick={(e)=>{
+                  e.preventDefault()
+                  console.log(this.props)
+                  this.props.handleState('accepted',true)
+                  this.props.updateRefStatus(referral._id,'accepted')}
+                }
+                  >
+                  Accept
+                </button>
+              </div>
+    )}
+  }
   render() {
     if(this.props.referral.status=="pending"){
     let referral = this.props.referral;
@@ -51,28 +77,8 @@ class PendingDetails extends Component {
                 {referral.description} "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
               </div>
             </div>
-              <div className="grid-accept-reject">
-                <button types="submit" className="mdc-button mdc-button--raised reject"
-                onClick={(e)=>{
-                  e.preventDefault()
-                  console.log(this.props)
-                  this.props.handleState('rejected',true)
-                  this.props.updateRefStatus(referral._id,'rejected')}
-                }
-                >
-                  Reject
-                </button>
-                <button types="submit" className="mdc-button mdc-button--raised accept"
-                onClick={(e)=>{
-                  e.preventDefault()
-                  console.log(this.props)
-                  this.props.handleState('accepted',true)
-                  this.props.updateRefStatus(referral._id,'accepted')}
-                }
-                  >
-                  Accept
-                </button>
-              </div>
+            {this.renderButtons(referral)}
+              
 
             </div>
           </div>
@@ -87,5 +93,8 @@ class PendingDetails extends Component {
 const mapDispatchToProps = (dispatch) => {
   return bindActionCreators({ updateRefStatus }, dispatch)
 }
+const mapStateToProps = ({auth}) => {
+  return {auth}
+}
 
-export default connect(null, mapDispatchToProps)(withRouter(PendingDetails));
+export default connect(mapStateToProps, mapDispatchToProps)(withRouter(PendingDetails));
