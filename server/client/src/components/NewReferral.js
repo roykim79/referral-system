@@ -52,10 +52,11 @@ class NewReferral extends Component {
   disabledStatus = (sendTo) => {
     debugger;
     if(this.props.allOrgs){
-    let disabledChecker = this.props.allOrgs.filter((org) => {
+    let matchChecker = this.props.allOrgs.filter((org) => {
       return org.organizationName == sendTo;
     })
-    if(disabledChecker === undefined || disabledChecker.length == 0){
+    if(matchChecker === undefined || matchChecker.length == 0 || this.state.client_name == null || this.state.client_name == '' ||
+      this.state.client_phone == null || this.state.client_phone == '' || this.state.description == null || this.state.description == ''){
       return true;
     } else {
       return false;
@@ -104,6 +105,7 @@ class NewReferral extends Component {
                   <div className="mdc-text-field mdc-text-field--box organizationName">
                     <label className="mdc-floating-label" for="organizationName-input">Organization Name</label>
                     <input
+                      required
                       value={this.state.receiving_organization}
                       onChange={async (event) => {
                         await this.setState({ receiving_organization: event.target.value })
@@ -133,6 +135,7 @@ class NewReferral extends Component {
                     className="form-input-referral mdc-text-field--box "
                   >
                     <Input
+                      required
                       className="form-input-referral"
                       value={this.state.client_name}
                       onChange={(e) => this.setState({ client_name: e.target.value })}
@@ -149,6 +152,7 @@ class NewReferral extends Component {
                     style={{ width: 300 }}
                   >
                     <Input
+                      required
                       className="form-input-referral"
                       value={this.state.client_phone}
                       onChange={(e) => this.setState({ client_phone: e.target.value })}
