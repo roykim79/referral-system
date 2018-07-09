@@ -36,7 +36,7 @@ class ReferralList extends Component {
       },
       {
         Header: 'Date Updated', accessor: 'dateUpdated',
-        Cell: props => <span> {moment(props.value).format("lll")} </span>
+        Cell: props => <span> {moment(props.value).format("M/D/YYYY, hh:mm a")} </span>
       },
       {
         Header: 'Status', accessor: 'status',
