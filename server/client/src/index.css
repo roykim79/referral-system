@@ -318,7 +318,7 @@ h2.landing-title {
 }
 
 .center{
-  margin:auto
+  margin:auto!important;
 }
 
 .center-text{
@@ -668,6 +668,9 @@ div.ReactTags__suggestions ul li.ReactTags__activeSuggestion {
   margin-bottom: 25px;
 }
 
+.login-input{
+  margin-left: calc(50%-200px);
+}
 
 @media only screen and  (max-width:1675px) {
   .my-org-header{
