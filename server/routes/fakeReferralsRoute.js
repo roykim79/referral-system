@@ -34,7 +34,7 @@ module.exports = app => {
         }
       })
 
-    for (x = 0; x < 100; x++) {
+    for (x = 0; x < 300; x++) {
       let sendingUser = userObject[Math.floor(Math.random() * Math.floor(20))];
       let receivingUser = userObject[Math.floor(Math.random() * Math.floor(20))];
       let sendingOrg = organizationObject[Math.floor(Math.random() * Math.floor(20))]

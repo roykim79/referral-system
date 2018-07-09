@@ -3,11 +3,11 @@ const User = require('../models/User')
 
 module.exports = app => {
   // if login success redirect to /dashboard, if fail redirect to /landing
-  app.post('/api/auth/google', passport.authenticate('google-token', { session: false }),
-    function(req, res) {
-      console.log(req)
+  app.post('/api/login', passport.authenticate('login', { session: true }),
+    function (req, res) {
       res.json({ id: req.user.id, username: req.user.username });
-  });
+    }
+  )
 
 
   // just to check if cookie is working.
