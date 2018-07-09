@@ -178,7 +178,7 @@ class OrganizationInfo extends Component {
                   tagInput: 'tagInputClass',
                   tagInputField: 'tagInputFieldClass',
                   selected: 'selectedClass',
-                  tag: 'tagClass',
+                  tag: 'tag'
                 }}
                 inline={false}
                 suggestions={suggestions}
