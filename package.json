@@ -24,6 +24,9 @@
   },
   "homepage": "https://github.com/roykim79/referral-system#readme",
   "dependencies": {
+    "faker": "^4.1.0",
+    "mongoose": "^5.2.2",
+    "moongoose": "0.0.5",
     "path": "^0.12.7"
   }
 }
