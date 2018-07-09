@@ -96,7 +96,6 @@ class AcceptedDetails extends Component {
 
                   <div className="referral-notes-content">
                   {referral.tasks.map((note) => {
-                    console.log(note)
                     return (
 
                     <div>

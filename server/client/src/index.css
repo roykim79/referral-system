@@ -472,6 +472,10 @@ h2.landing-title {
   .rt-th {
     font-weight: bold;
   }
+
+  .rt-td {
+    text-transform: capitalize;
+  }
   .rt-table .rt-tr.-even {
     background-color: #f6f6f6;
   }
