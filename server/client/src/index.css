@@ -272,7 +272,11 @@ h2.landing-title {
   right: 2px;
   cursor: pointer;
 }
-
+.ReactTags__tagsClass {
+  /* position: absolute; */
+  /* background-color: black!important; */
+  width: 900px!important;
+}
 
 
 /* @media (min-width:870px) { */
@@ -482,16 +486,16 @@ h2.landing-title {
     background-color: rgb(255, 153, 0);
   }
   .rt-table .status-accepted {
-    background-color: rgb(0, 255, 0);
+    background-color: rgb(250, 189, 13);
   }
   .rt-table .status-contacted {
-    background-color: rgb(0, 132, 255);
+    background-color: rgb(68, 128, 244);
   }
   .rt-table .status-completed {
-    background-color: rgb(238, 255, 0);
+    background-color: rgb(59, 171, 83);
   }
   .rt-table .status-rejected {
-    background-color: rgb(255, 0, 0);
+    background-color: rgb(232, 57, 54);
   }
 
 
